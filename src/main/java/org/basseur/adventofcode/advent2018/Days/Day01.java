@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018;
+package org.basseur.adventofcode.advent2018.Days;
 
 import java.io.File;
 import java.io.FileNotFoundException;
