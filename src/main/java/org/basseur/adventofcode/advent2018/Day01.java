@@ -42,8 +42,8 @@ public class Day01 {
             System.out.println("File not found!");
         }
         List<Integer> frequencies = new ArrayList<>();
-        while (scanner.hasNext()) frequencies.add(Integer.parseInt(scanner.next()));
+        while (Objects.requireNonNull(scanner).hasNext()) frequencies.add(Integer.parseInt(scanner.next()));
         scanner.close();
-        return frequencies.toArray(new Integer[frequencies.size()]);
+        return frequencies.toArray(new Integer[0]);
     }
 }
