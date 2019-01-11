@@ -10,9 +10,12 @@ public class Day01 extends Days {
 
     private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day01Input.txt";
 
+    @Override
     public String firstPart(){
         return "Part 1 - Frequency: " + calculateFrequency();
     }
+
+    @Override
     public String secondPart(){
         return "Part 2 - Frequency reached twice: " + calculateDoubleFrequency();
     }
@@ -37,5 +40,4 @@ public class Day01 extends Days {
         Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
         return Arrays.stream(frequencies).mapToInt(a -> a).sum();
     }
-
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AdventOfCodeController {
 
-    @RequestMapping("/day")
+    @RequestMapping("/adventOfCode")
     public String result(@RequestParam(value="day", defaultValue="1") String day, @RequestParam(value="part", defaultValue="1") String part) {
         String result = "";
         String dayString = "";
