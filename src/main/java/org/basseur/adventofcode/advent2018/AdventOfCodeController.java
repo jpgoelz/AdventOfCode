@@ -1,15 +1,13 @@
 package org.basseur.adventofcode.advent2018;
 
 import org.basseur.adventofcode.advent2018.Days.Days;
+import org.basseur.adventofcode.advent2018.Exceptions.PuzzleNotSolvedYetException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AdventOfCodeController {
-
-    private Class adventOfCodeClass;
-
 
     @RequestMapping("/day")
     public String result(@RequestParam(value="day", defaultValue="1") String day, @RequestParam(value="part", defaultValue="1") String part) {
@@ -23,19 +21,21 @@ public class AdventOfCodeController {
 
         ClassLoader classLoader = Application.class.getClassLoader();
         try {
-            adventOfCodeClass = classLoader.loadClass("org.basseur.adventofcode.advent2018.Days.Day" + dayString);
+            Class adventOfCodeClass = classLoader.loadClass("org.basseur.adventofcode.advent2018.Days.Day" + dayString);
             try {
                 Days thisDaysClass = (Days) adventOfCodeClass.newInstance();
                 if (part.equals("1")) {
                     result = thisDaysClass.firstPart();
                 } else if (part.equals("2")) {
                     result = thisDaysClass.secondPart();
+                } else {
+                    throw new PuzzleNotSolvedYetException(new Throwable());
                 }
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new PuzzleNotSolvedYetException(e);
         }
 
         return result;
