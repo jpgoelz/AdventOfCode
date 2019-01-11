@@ -14,7 +14,7 @@ public class Day01 {
     private static int calculateDoubleFrequency() {
         /* Gets array of integers from file. Uses HashSet (which can only contain unique values) to see if new calculated
         integer is unique. If not, it is returned. If end of array is reached, we go back to i=0. */
-        Integer[] frequencies = readFileIntoArrayListOfIntegers("src/main/java/org/basseur/adventofcode/advent2018/Day01Input.txt");
+        Integer[] frequencies = readFileIntoArrayOfIntegers("src/main/java/org/basseur/adventofcode/advent2018/Day01Input.txt");
         Set<Integer> uniqueFrequencies = new HashSet<>();
         int frequency = 0;
         int i = 0;
@@ -28,11 +28,11 @@ public class Day01 {
 
     private static int calculateFrequency() {
         // Gets array of integers from file and uses stream to calculate and return the sum.
-        Integer[] frequencies = readFileIntoArrayListOfIntegers("src/main/java/org/basseur/adventofcode/advent2018/Day01Input.txt");
+        Integer[] frequencies = readFileIntoArrayOfIntegers("src/main/java/org/basseur/adventofcode/advent2018/Day01Input.txt");
         return Arrays.stream(frequencies).mapToInt(a -> a).sum();
     }
 
-    private static Integer[] readFileIntoArrayListOfIntegers(String filename) {
+    private static Integer[] readFileIntoArrayOfIntegers(String filename) {
         // Opens file specified and returns lines as array of integers.
         File file = new File(filename);
         Scanner scanner = null;
