@@ -1,5 +1,7 @@
 package org.basseur.adventofcode.advent2018.Days;
 
+import org.basseur.adventofcode.advent2018.Utils.FileReaders;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -18,7 +20,7 @@ public class Day01 extends Days {
     private static int calculateDoubleFrequency() {
         /* Gets array of integers from file. Uses HashSet (which can only contain unique values) to see if new calculated
         integer is unique. If not, it is returned. If end of array is reached, we go back to i=0. */
-        Integer[] frequencies = readFileIntoArrayOfIntegers(fileLocation);
+        Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
         Set<Integer> uniqueFrequencies = new HashSet<>();
         int frequency = 0;
         int i = 0;
@@ -32,22 +34,8 @@ public class Day01 extends Days {
 
     private static int calculateFrequency() {
         // Gets array of integers from file and uses stream to calculate and return the sum.
-        Integer[] frequencies = readFileIntoArrayOfIntegers(fileLocation);
+        Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
         return Arrays.stream(frequencies).mapToInt(a -> a).sum();
     }
 
-    private static Integer[] readFileIntoArrayOfIntegers(String filename) {
-        // Opens file specified and returns lines as array of integers.
-        File file = new File(filename);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-        }
-        List<Integer> frequencies = new ArrayList<>();
-        while (Objects.requireNonNull(scanner).hasNext()) frequencies.add(Integer.parseInt(scanner.next()));
-        scanner.close();
-        return frequencies.toArray(new Integer[0]);
-    }
 }
