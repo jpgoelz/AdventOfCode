@@ -1,12 +1,10 @@
 package org.basseur.adventofcode.advent2018.Days;
 
-public abstract class Days {
+public interface Days {
 
-    public String firstPart(){
-        return "";
-    }
+    String firstPart();
 
-    public String secondPart(){
-        return "";
-    }
+    String secondPart();
+
+    int getDay();
 }

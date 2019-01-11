@@ -6,38 +6,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Objects;
+
 @RestController
 public class AdventOfCodeController {
 
+    private final List<Days> daysSolutions;
+
+    public AdventOfCodeController(List<Days> daysSolutions) {
+        this.daysSolutions = Objects.requireNonNull(daysSolutions);
+    }
+
     @RequestMapping("/adventOfCode")
-    public String result(@RequestParam(value="day", defaultValue="1") String day, @RequestParam(value="part", defaultValue="1") String part) {
-        String result = "";
-        String dayString = "";
-        if (day.length() == 1) {
-            dayString = "0" + day;
+    public String result(@RequestParam(value="day", defaultValue="") String day, @RequestParam(value="part", defaultValue="") String part) {
+        Days thisDaysClass = findDayForDay(Integer.parseInt(day));
+        if (("1").equals(part)) {
+            return thisDaysClass.firstPart();
+        } else if (("2").equals(part)) {
+            return thisDaysClass.secondPart();
         } else {
-            dayString = day;
+            throw new PuzzleNotSolvedYetException(new Throwable());
         }
+    }
 
-        ClassLoader classLoader = Application.class.getClassLoader();
-        try {
-            Class adventOfCodeClass = classLoader.loadClass("org.basseur.adventofcode.advent2018.Days.Day" + dayString);
-            try {
-                Days thisDaysClass = (Days) adventOfCodeClass.newInstance();
-                if (part.equals("1")) {
-                    result = thisDaysClass.firstPart();
-                } else if (part.equals("2")) {
-                    result = thisDaysClass.secondPart();
-                } else {
-                    throw new PuzzleNotSolvedYetException(new Throwable());
-                }
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        } catch (ClassNotFoundException e) {
-            throw new PuzzleNotSolvedYetException(e);
-        }
-
-        return result;
+    private Days findDayForDay(int day) {
+        return daysSolutions.stream()
+                .filter(solution -> solution.getDay() == day)
+                .findFirst()
+                .orElseThrow(() -> new PuzzleNotSolvedYetException(new Throwable()));
     }
 }

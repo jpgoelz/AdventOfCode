@@ -1,14 +1,19 @@
 package org.basseur.adventofcode.advent2018.Days;
 
 import org.basseur.adventofcode.advent2018.Utils.FileReaders;
+import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Day01 extends Days {
+@Component
+public class Day01 implements Days {
 
     private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day01Input.txt";
+
+    @Override
+    public int getDay() {
+        return 1;
+    }
 
     @Override
     public String firstPart(){
