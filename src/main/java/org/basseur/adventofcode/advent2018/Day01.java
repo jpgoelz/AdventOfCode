@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-
 public class Day01 {
 
     public static void main(String[] args) {
@@ -43,8 +42,8 @@ public class Day01 {
             System.out.println("File not found!");
         }
         List<Integer> frequencies = new ArrayList<>();
-        while (Objects.requireNonNull(scanner).hasNext()) frequencies.add(Integer.parseInt(scanner.next()));
+        while (scanner.hasNext()) frequencies.add(Integer.parseInt(scanner.next()));
         scanner.close();
-        return frequencies.toArray(new Integer[0]);
+        return frequencies.toArray(new Integer[frequencies.size()]);
     }
 }
