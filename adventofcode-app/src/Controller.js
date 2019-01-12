@@ -1,23 +1,31 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "inline",
+    flexWrap: "wrap"
   },
   formControl: {
-    margin: theme.spacing.unit * 3
+    margin: theme.spacing.unit * 3,
+    minWidth: 120
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
   }
 });
 
@@ -25,16 +33,22 @@ class Controller extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      day: "",
       part: "",
-      result: "hh",
-      value: ""
+      result: "",
+      value: "",
+      day: "",
+      name: "hai",
+      labelWidth: 0
     };
     this.callController = this.callController.bind(this);
   }
 
   handleChange = event => {
     this.setState({ value: event.target.value });
+  };
+
+  handleSelect = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
@@ -60,8 +74,28 @@ class Controller extends Component {
           <div className="header">This is the result!</div>
           <p>{this.state.result}</p>
         </div>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Puzzle Part</FormLabel>
+        <FormControl
+          component="fieldset"
+          className={classes.formControl}
+          style={{ display: "inline" }}
+        >
+          <InputLabel htmlFor="day-simple">Day</InputLabel>
+          <Select
+            value={this.state.age}
+            onChange={this.handleSelect}
+            inputProps={{
+              name: "day",
+              id: "day-simple"
+            }}
+            style={{ width: "150px" }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={1}>December 1st</MenuItem>
+            <MenuItem value={2}>December 2nd</MenuItem>
+            <MenuItem value={3}>December 3rd</MenuItem>
+          </Select>
           <RadioGroup
             aria-label="part"
             name="part"
@@ -75,12 +109,14 @@ class Controller extends Component {
               control={<Radio color="primary" />}
               label="Part 1"
               labelPlacement="start"
+              style={{ width: "150px" }}
             />
             <FormControlLabel
               value="2"
               control={<Radio color="primary" />}
               label="Part 2"
               labelPlacement="start"
+              style={{ width: "150px" }}
             />
           </RadioGroup>
         </FormControl>
