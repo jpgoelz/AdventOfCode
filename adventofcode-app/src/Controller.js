@@ -68,6 +68,7 @@ class Controller extends Component {
             className={classes.group}
             value={this.state.value}
             onChange={this.handleChange}
+            style={{ display: "inline" }}
           >
             <FormControlLabel
               value="1"
@@ -82,7 +83,6 @@ class Controller extends Component {
               labelPlacement="start"
             />
           </RadioGroup>
-          <FormHelperText>labelPlacement start</FormHelperText>
         </FormControl>
       </div>
     );
