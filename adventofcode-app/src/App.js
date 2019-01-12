@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
 import Controller from "./Controller";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Button component={Link} to="/adventOfCode">
+        <Typography variant="h5" component="h2" style={{ marginTop: 20 }}>
           Advent of Code
-        </Button>
+        </Typography>
         <Controller />
       </div>
     );
