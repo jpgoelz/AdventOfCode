@@ -163,7 +163,7 @@ public class Day01Test {
     }
 
     @Test
-    public void calculateFrequencyAddsFrequenciesCorrectlyForThirdxample() {
+    public void calculateFrequencyAddsFrequenciesCorrectlyForThirdExample() {
         //arrange
         frequencies = new Integer[3];
         frequencies[0] = 1;
@@ -182,7 +182,7 @@ public class Day01Test {
     }
 
     @Test
-    public void calculateFrequencyAddsFrequenciesCorrectlyForFourthxample() {
+    public void calculateFrequencyAddsFrequenciesCorrectlyForFourthExample() {
         //arrange
         frequencies = new Integer[3];
         frequencies[0] = -1;
