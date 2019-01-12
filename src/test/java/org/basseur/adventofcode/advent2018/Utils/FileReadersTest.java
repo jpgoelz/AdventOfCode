@@ -13,4 +13,8 @@ public class FileReadersTest {
     public void readFileIntoArrayOfIntegersThrowsExceptionIfFileIsNotFound() {
     }
 
+    @Test
+    public void readFileIntoArrayListThrowsExceptionIfFileIsNotFound() {
+    }
+
 }
