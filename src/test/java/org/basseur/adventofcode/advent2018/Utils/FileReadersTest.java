@@ -8,13 +8,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class FileReadersTest {
 
+    //TODO: Meaningful tests for readFileIntoArrayOfIntegers and readFileIntoArrayList
+
     //TODO: not easy to test, but we should!
     @Test
-    public void readFileIntoArrayOfIntegersThrowsExceptionIfFileIsNotFound() {
-    }
-
-    @Test
-    public void readFileIntoArrayListThrowsExceptionIfFileIsNotFound() {
+    public void openFileReturnScannerThrowsExceptionIfFileIsNotFound() {
     }
 
 }
