@@ -1,5 +1,25 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+
+const styles = theme => ({
+  root: {
+    display: "flex"
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3
+  },
+  group: {
+    margin: `${theme.spacing.unit}px 0`
+  }
+});
 
 class Controller extends Component {
   constructor(props) {
@@ -7,12 +27,18 @@ class Controller extends Component {
     this.state = {
       day: "",
       part: "",
-      result: "hh"
+      result: "hh",
+      value: ""
     };
     this.callController = this.callController.bind(this);
   }
 
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
+
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <div className="ui input">
@@ -34,13 +60,37 @@ class Controller extends Component {
           <div className="header">This is the result!</div>
           <p>{this.state.result}</p>
         </div>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Puzzle Part</FormLabel>
+          <RadioGroup
+            aria-label="part"
+            name="part"
+            className={classes.group}
+            value={this.state.value}
+            onChange={this.handleChange}
+          >
+            <FormControlLabel
+              value="1"
+              control={<Radio color="primary" />}
+              label="Part 1"
+              labelPlacement="start"
+            />
+            <FormControlLabel
+              value="2"
+              control={<Radio color="primary" />}
+              label="Part 2"
+              labelPlacement="start"
+            />
+          </RadioGroup>
+          <FormHelperText>labelPlacement start</FormHelperText>
+        </FormControl>
       </div>
     );
   }
 
   async callController() {
     const response = await fetch(
-      "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.part
+      "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.value
     );
     try {
       const data = await response.json();
@@ -57,4 +107,8 @@ class Controller extends Component {
   }
 }
 
-export default Controller;
+Controller.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(Controller);
