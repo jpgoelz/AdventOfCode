@@ -10,7 +10,26 @@ import java.util.Scanner;
 public class FileReaders {
 
     public static Integer[] readFileIntoArrayOfIntegers(String filename) {
-        // Opens file specified and returns lines as array of integers.
+        Scanner scanner = openFileReturnScanner(filename);
+        List<Integer> integerList = new ArrayList<>();
+        while (Objects.requireNonNull(scanner).hasNext()) {
+            integerList.add(Integer.parseInt(scanner.next()));
+        }
+        scanner.close();
+        return integerList.toArray(new Integer[0]);
+    }
+
+    public static List<String> readFileIntoStringList(String filename) {
+        Scanner scanner = openFileReturnScanner(filename);
+        List<String> stringList = new ArrayList<>();
+        while (Objects.requireNonNull(scanner).hasNext()) {
+            stringList.add(scanner.next());
+        }
+        scanner.close();
+        return stringList;
+    }
+
+    private static Scanner openFileReturnScanner(String filename) {
         File file = new File(filename);
         Scanner scanner = null;
         try {
@@ -18,12 +37,7 @@ public class FileReaders {
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         }
-        List<Integer> frequencies = new ArrayList<>();
-        while (Objects.requireNonNull(scanner).hasNext()) {
-            frequencies.add(Integer.parseInt(scanner.next()));
-        }
-        scanner.close();
-        return frequencies.toArray(new Integer[0]);
+        return scanner;
     }
 
 }
