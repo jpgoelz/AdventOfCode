@@ -1,15 +1,19 @@
 package org.basseur.adventofcode.advent2018.Days;
 
+import org.basseur.adventofcode.advent2018.Utils.FileReaders;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({FileReaders.class})
 public class Day02Test {
 
     /*
@@ -27,11 +31,11 @@ public class Day02Test {
      */
 
     private Day02 subjectToTest = new Day02();
-
     private List<String> boxIDs = new ArrayList<>();
 
-    @Before
-    public void initialize() {
+    @Test
+    public void calculateChecksumCorrectly() {
+        //arrange
         boxIDs.add("abcdef");
         boxIDs.add("bababc");
         boxIDs.add("abbcde");
@@ -39,12 +43,10 @@ public class Day02Test {
         boxIDs.add("aabcdd");
         boxIDs.add("abcdee");
         boxIDs.add("ababab");
-    }
 
-    @Test
-    public void calculateChecksumCorrectly() {
-        //arrange
-        subjectToTest.boxIDs = boxIDs;
+        PowerMockito.mockStatic(FileReaders.class);
+        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIDs);
+
         String expectedResult = "Part 1 - Checksum: " + 12;
 
         //act

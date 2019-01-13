@@ -1,14 +1,14 @@
 package org.basseur.adventofcode.advent2018.Days;
 
+import org.basseur.adventofcode.advent2018.Utils.FileReaders;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class Day02 implements Days {
 
-    List<String> boxIDs = new ArrayList<>();
+    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day02Input.txt";
 
     @Override
     public int getDay() {
@@ -17,7 +17,7 @@ public class Day02 implements Days {
 
     @Override
     public String firstPart() {
-        return "Part 1 - Checksum: " + calculateChecksum(boxIDs);
+        return "Part 1 - Checksum: " + calculateChecksum();
     }
 
     @Override
@@ -25,23 +25,33 @@ public class Day02 implements Days {
         return "Part 2: ";
     }
 
-    private int calculateChecksum(List<String> boxIDs) {
-        return 0;
-    }
+    private int calculateChecksum() {
+        List<String> boxIDs = FileReaders.readFileIntoStringList(fileLocation);
 
-    private int countDoubleLetterIDs(List<String> boxIDs) {
-        return 0;
-    }
+        int tripleLetters = 0;
+        int doubleLetters = 0;
 
-    private int countTripleLetterIDs(List<String> boxIDs) {
-        return 0;
-    }
+        for (String boxID : boxIDs) {
+            boolean containsDoubleLetters = false;
+            boolean containsTripleLetters = false;
 
-    private boolean containsDoubleLetters(String boxID) {
-        return false;
-    }
+            for (int i = 0; i < boxID.length(); i++) {
+                String currentLetter = boxID.substring(i, i + 1);
 
-    private boolean containsTripleLetters(String boxID) {
-        return false;
+                if (boxID.replace(currentLetter, "").length() == boxID.length() - 2) containsDoubleLetters = true;
+                else if (boxID.replace(currentLetter, "").length() == boxID.length() - 3)
+                    containsTripleLetters = true;
+            }
+
+            if (containsDoubleLetters) doubleLetters++;
+            if (containsTripleLetters) tripleLetters++;
+        }
+
+        return doubleLetters * tripleLetters;
     }
 }
+
+
+
+
+
