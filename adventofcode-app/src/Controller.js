@@ -12,6 +12,7 @@ import Select from "@material-ui/core/Select";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = theme => ({
   root: {
@@ -31,7 +32,7 @@ const styles = theme => ({
   card: {
     minWidth: 300,
     maxWidth: 300,
-    minHeight: 300,
+    minHeight: 250,
     margin: "auto",
     marginTop: 20
   },
@@ -45,6 +46,13 @@ const styles = theme => ({
   },
   pos: {
     marginBottom: 12
+  },
+  buttonProgress: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
   }
 });
 
@@ -55,7 +63,8 @@ class Controller extends Component {
       part: "",
       result: "",
       value: "",
-      day: ""
+      day: "",
+      loading: false
     };
     this.callController = this.callController.bind(this);
   }
@@ -129,6 +138,9 @@ class Controller extends Component {
         >
           Go!
         </Button>
+        {this.state.loading && (
+          <CircularProgress className={classes.buttonProgress} />
+        )}
         <Card className={classes.card}>
           <CardContent>
             <Typography variant="h5" component="h2">
@@ -144,7 +156,11 @@ class Controller extends Component {
     );
   }
 
+  delay = duration => new Promise(resolve => setTimeout(resolve, duration));
+
   async callController() {
+    this.setState({ loading: true });
+    await this.delay(2000);
     const response = await fetch(
       "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.value
     );
@@ -153,12 +169,13 @@ class Controller extends Component {
       const content = data.content;
       const message = data.message;
       if (response.ok) {
-        this.setState({ result: content });
+        this.setState({ result: content, loading: false });
       } else {
-        this.setState({ result: message });
+        this.setState({ result: message, loading: false });
       }
     } catch (e) {
       this.setState({ result: "There has been a technical error." });
+      this.setState({ loading: false });
     }
   }
 }
