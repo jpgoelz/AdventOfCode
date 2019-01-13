@@ -75,3 +75,5 @@ task npmRunScriptBuild( type: NpmTask, dependsOn: 'npmInstall' ) {
 }
 
 build.dependsOn nodeSetup, npmSetup, npmInstall, npmRunScriptBuild
+
+jar.dependsOn npmRunScriptBuild
