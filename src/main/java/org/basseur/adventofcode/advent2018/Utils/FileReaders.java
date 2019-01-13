@@ -19,7 +19,7 @@ public class FileReaders {
         return integerList.toArray(new Integer[0]);
     }
 
-    public static List<String> readFileIntoArrayList(String filename) {
+    public static List<String> readFileIntoStringList(String filename) {
         Scanner scanner = openFileReturnScanner(filename);
         List<String> stringList = new ArrayList<>();
         while (Objects.requireNonNull(scanner).hasNext()) {
