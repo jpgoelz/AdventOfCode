@@ -33,6 +33,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile("org.springframework.boot:spring-boot-starter-test")
@@ -40,5 +43,3 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
     testCompile "org.powermock:powermock-mockito-release-full:1.6.1"
 }
-
-apply plugin: 'java'
