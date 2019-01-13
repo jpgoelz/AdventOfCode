@@ -2,10 +2,13 @@ package org.basseur.adventofcode.advent2018.Days;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class Day02 implements Days {
 
-    String testBoxIDs;
+    List<String> boxIDs = new ArrayList<>();
 
     @Override
     public int getDay() {
@@ -13,16 +16,32 @@ public class Day02 implements Days {
     }
 
     @Override
-    public String firstPart(){
-        return "Part 1 - Checksum: " + calculateChecksum(testBoxIDs);
+    public String firstPart() {
+        return "Part 1 - Checksum: " + calculateChecksum(boxIDs);
     }
 
     @Override
-    public String secondPart(){
+    public String secondPart() {
         return "Part 2: ";
     }
 
-    public int calculateChecksum(String testBoxIDs) {
+    private int calculateChecksum(List<String> boxIDs) {
         return 0;
+    }
+
+    private int countDoubleLetterIDs(List<String> boxIDs) {
+        return 0;
+    }
+
+    private int countTripleLetterIDs(List<String> boxIDs) {
+        return 0;
+    }
+
+    private boolean containsDoubleLetters(String boxID) {
+        return false;
+    }
+
+    private boolean containsTripleLetters(String boxID) {
+        return false;
     }
 }

@@ -1,15 +1,18 @@
 package org.basseur.adventofcode.advent2018.Days;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 public class Day02Test {
 
-    /**
+    /*
      * abcdef contains no letters that appear exactly two or three times.
      * bababc contains two a and three b, so it counts for both.
      * abbcde contains two b, but no letter appears exactly three times.
@@ -23,40 +26,25 @@ public class Day02Test {
      * times. Multiplying these together produces a checksum of 4 * 3 = 12.
      */
 
-    String testBoxIDs = "abcdef\n" +
-            "bababc\n" +
-            "abbcde\n" +
-            "abcccd\n" +
-            "aabcdd\n" +
-            "abcdee\n" +
-            "ababab";
+    private Day02 subjectToTest = new Day02();
 
-    Day02 subjectToTest = new Day02();
+    private List<String> boxIDs = new ArrayList<>();
 
-    @Test
-    public void countsLettersPerBoxIdThatAppearTwiceAndThreeTimes() {
-        //arrange
-
-        //act
-
-        //assert
+    @Before
+    public void initialize() {
+        boxIDs.add("abcdef");
+        boxIDs.add("bababc");
+        boxIDs.add("abbcde");
+        boxIDs.add("abcccd");
+        boxIDs.add("aabcdd");
+        boxIDs.add("abcdee");
+        boxIDs.add("ababab");
     }
 
     @Test
-    public void calculateChecksumForBoxIds() {
+    public void calculateChecksumCorrectly() {
         //arrange
-
-        //act
-        int actualResult = subjectToTest.calculateChecksum(testBoxIDs);
-
-        //assert
-        Assert.assertEquals(12, actualResult);
-    }
-
-    @Test
-    public void producesTheCorrectOutput() {
-        //arrange
-        subjectToTest.testBoxIDs = testBoxIDs;
+        subjectToTest.boxIDs = boxIDs;
         String expectedResult = "Part 1 - Checksum: " + 12;
 
         //act
