@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <Typography variant="h5" component="h2" style={{ marginTop: 20 }}>
-          Advent of Code
+          Advent of Code 2018
         </Typography>
         <Controller />
       </div>
