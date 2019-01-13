@@ -7,3 +7,6 @@
 .idea
 out/
 *.iml
+
+# Generated frontend build is automatically added here.
+src/main/resources/static
