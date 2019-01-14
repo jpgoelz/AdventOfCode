@@ -38,13 +38,22 @@ public class Day02 implements Days {
             for (int i = 0; i < boxID.length(); i++) {
                 String currentLetter = boxID.substring(i, i + 1);
 
-                if (boxID.replace(currentLetter, "").length() == boxID.length() - 2) containsDoubleLetters = true;
-                else if (boxID.replace(currentLetter, "").length() == boxID.length() - 3)
-                    containsTripleLetters = true;
+                switch (boxID.length() - boxID.replace(currentLetter, "").length()) {
+                    case 2:
+                        containsDoubleLetters = true;
+                        break;
+                    case 3:
+                        containsTripleLetters = true;
+                        break;
+                }
             }
 
-            if (containsDoubleLetters) doubleLetters++;
-            if (containsTripleLetters) tripleLetters++;
+            if (containsDoubleLetters) {
+                doubleLetters++;
+            }
+            if (containsTripleLetters) {
+                tripleLetters++;
+            }
         }
 
         return doubleLetters * tripleLetters;

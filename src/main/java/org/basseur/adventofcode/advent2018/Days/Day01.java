@@ -33,8 +33,12 @@ public class Day01 implements Days {
         int frequency = 0;
         int i = 0;
         while (true) {
-            if (!uniqueFrequencies.add(frequency)) return frequency;
-            if (i == (frequencies.length)) i = 0;
+            if (!uniqueFrequencies.add(frequency)) {
+                return frequency;
+            }
+            if (i == (frequencies.length)) {
+                i = 0;
+            }
             frequency += frequencies[i];
             i++;
         }
