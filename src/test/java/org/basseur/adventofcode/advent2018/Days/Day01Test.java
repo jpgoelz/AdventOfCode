@@ -14,8 +14,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest({ FileReaders.class })
 public class Day01Test {
 
-    Day01 subjectToTest = new Day01();
-    Integer[] frequencies;
+    private Day01 subjectToTest = new Day01();
+    private Integer[] frequencies;
 
     @Test
     public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() {
