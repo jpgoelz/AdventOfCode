@@ -22,7 +22,7 @@ public class Day02 implements Days {
 
     @Override
     public String secondPart() {
-        return "Part 2: ";
+        return null;
     }
 
     private int calculateChecksum() {
