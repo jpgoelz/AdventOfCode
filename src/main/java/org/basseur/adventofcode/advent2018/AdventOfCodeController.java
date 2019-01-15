@@ -42,20 +42,19 @@ public class AdventOfCodeController {
 
     private String getResultsForASpecificDayAndPuzzlePart(String day, String part) {
         Days thisDaysClass = findDayForDay(Integer.parseInt(day));
-        switch (part) {
-            case "1":
-                if (thisDaysClass.firstPart() == null) {
-                    throw new PuzzleNotSolvedYetException(new Throwable());
-                }
-                return thisDaysClass.firstPart();
-            case "2":
-                if (thisDaysClass.secondPart() == null) {
-                    throw new PuzzleNotSolvedYetException(new Throwable());
-                }
-                return thisDaysClass.secondPart();
-            default:
-                throw new PuzzleNotSolvedYetException(new Throwable());
+        if (!isProblemSolvedForPart(thisDaysClass, part)) {
+            throw new PuzzleNotSolvedYetException(new Throwable());
+        } else if (("1").equals(part)) {
+            return thisDaysClass.firstPart();
+        } else if (("2").equals(part)) {
+            return thisDaysClass.secondPart();
+        } else {
+            return "This puzzle has not been solved yet.";
         }
+    }
+
+    private boolean isProblemSolvedForPart(Days thisDaysClass, String part) {
+        return thisDaysClass.getProblemStatus().containsKey(part) && thisDaysClass.getProblemStatus().get(part) == ProblemStatusEnum.SOLVED;
     }
 
     private Days findDayForDay(int day) {
