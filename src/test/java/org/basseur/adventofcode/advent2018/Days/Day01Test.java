@@ -2,7 +2,6 @@ package org.basseur.adventofcode.advent2018.Days;
 
 import org.basseur.adventofcode.advent2018.Utils.FileReaders;
 import org.junit.Assert;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -11,7 +10,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ FileReaders.class })
+@PrepareForTest({FileReaders.class})
 public class Day01Test {
 
     private Day01 subjectToTest = new Day01();
