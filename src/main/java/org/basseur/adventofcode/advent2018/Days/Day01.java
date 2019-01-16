@@ -42,7 +42,12 @@ public class Day01 implements Days {
         return problemStatus;
     }
 
-    private static int calculateDoubleFrequency() {
+    private int calculateFrequency() {
+        Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
+        return Arrays.stream(frequencies).mapToInt(a -> a).sum();
+    }
+
+    private int calculateDoubleFrequency() {
         Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
         Set<Integer> uniqueFrequencies = new HashSet<>();
         int frequency = 0;
@@ -56,10 +61,5 @@ public class Day01 implements Days {
             }
             frequency += frequencies[i];
         }
-    }
-
-    private static int calculateFrequency() {
-        Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
-        return Arrays.stream(frequencies).mapToInt(a -> a).sum();
     }
 }
