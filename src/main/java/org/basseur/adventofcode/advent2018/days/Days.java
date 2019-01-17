@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018.Days;
+package org.basseur.adventofcode.advent2018.days;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
 
