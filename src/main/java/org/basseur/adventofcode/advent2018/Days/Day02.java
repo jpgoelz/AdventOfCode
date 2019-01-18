@@ -11,10 +11,12 @@ import java.util.List;
 public class Day02 implements Days {
 
     private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day02Input.txt";
+    private List<String> boxIds;
 
     private HashMap<String, ProblemStatusEnum> problemStatus;
 
     public Day02() {
+        this.boxIds = FileReaders.readFileIntoStringList(fileLocation);
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
@@ -42,7 +44,6 @@ public class Day02 implements Days {
     }
 
     private int calculateChecksum() {
-        List<String> boxIds = FileReaders.readFileIntoStringList(fileLocation);
         int tripleLetters = 0;
         int doubleLetters = 0;
 
@@ -73,7 +74,6 @@ public class Day02 implements Days {
     }
 
     private String findCommonLettersBetweenCorrectBoxIds() {
-        List<String> boxIds = FileReaders.readFileIntoStringList(fileLocation);
         StringBuilder commonLetters = new StringBuilder();
         int lengthOfListElements = boxIds.size();
 
