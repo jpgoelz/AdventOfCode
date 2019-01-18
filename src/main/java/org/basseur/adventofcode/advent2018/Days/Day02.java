@@ -30,10 +30,10 @@ public class Day02 implements Days {
         return "Part 1 - Checksum: " + calculateChecksum();
     }
 
-    //TODO: implement solution and remove null
+    //TODO: implement solution
     @Override
     public String secondPart() {
-        return null;
+        return "Part 2 - Common letters: " + findCommonLettersBetweenCorrectBoxIds();
     }
 
     @Override
@@ -70,6 +70,10 @@ public class Day02 implements Days {
         }
 
         return doubleLetters * tripleLetters;
+    }
+
+    private String findCommonLettersBetweenCorrectBoxIds() {
+        return "";
     }
 }
 
