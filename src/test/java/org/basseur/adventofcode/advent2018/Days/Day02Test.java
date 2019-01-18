@@ -16,41 +16,50 @@ import java.util.List;
 @PrepareForTest({FileReaders.class})
 public class Day02Test {
 
-    /*
-     * abcdef contains no letters that appear exactly two or three times.
-     * bababc contains two a and three b, so it counts for both.
-     * abbcde contains two b, but no letter appears exactly three times.
-     * abcccd contains three c, but no letter appears exactly two times.
-     * aabcdd contains two a and two d, but it only counts once.
-     * abcdee contains two e.
-     * ababab contains three a and three b, but it only counts once.
-     *
-     * Of these box IDs, four of them contain a letter which appears exactly
-     * twice, and three of them contain a letter which appears exactly three
-     * times. Multiplying these together produces a checksum of 4 * 3 = 12.
-     */
-
     private Day02 subjectToTest = new Day02();
-    private List<String> boxIDs = new ArrayList<>();
+    private List<String> boxIds = new ArrayList<>();
 
     @Test
     public void calculateChecksumCorrectly() {
         //arrange
-        boxIDs.add("abcdef");
-        boxIDs.add("bababc");
-        boxIDs.add("abbcde");
-        boxIDs.add("abcccd");
-        boxIDs.add("aabcdd");
-        boxIDs.add("abcdee");
-        boxIDs.add("ababab");
+        boxIds.add("abcdef");
+        boxIds.add("bababc");
+        boxIds.add("abbcde");
+        boxIds.add("abcccd");
+        boxIds.add("aabcdd");
+        boxIds.add("abcdee");
+        boxIds.add("ababab");
 
         PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIDs);
+        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
 
         String expectedResult = "Part 1 - Checksum: " + 12;
 
         //act
         String actualResult = subjectToTest.firstPart();
+
+        //assert
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void findCorrectCommonLettersBetweenBoxIds() {
+        //arrange
+        boxIds.add("abcde");
+        boxIds.add("fghij");
+        boxIds.add("klmno");
+        boxIds.add("pqrst");
+        boxIds.add("fguij");
+        boxIds.add("axcye");
+        boxIds.add("wvxyz");
+
+        PowerMockito.mockStatic(FileReaders.class);
+        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
+
+        String expectedResult = "Part 2 - Common letters: fgij";
+
+        //act
+        String actualResult = subjectToTest.secondPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
