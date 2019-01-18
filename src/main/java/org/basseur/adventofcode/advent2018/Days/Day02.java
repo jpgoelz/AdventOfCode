@@ -82,7 +82,7 @@ public class Day02 implements Days {
 
             for (int j = i + 1; j < lengthOfListElements; j++) {
                 String otherBoxId = boxIds.get(j);
-                commonLetters.setLength(0);
+                commonLetters.delete(0,commonLetters.length());
                 int breakCounter = 0;
 
                 for (int k = 0; k < boxId.length(); k++) {
