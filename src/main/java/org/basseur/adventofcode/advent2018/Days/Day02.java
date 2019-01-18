@@ -17,7 +17,7 @@ public class Day02 implements Days {
     public Day02() {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.IN_PROGRESS);
+        this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
     }
 
     @Override
@@ -43,7 +43,6 @@ public class Day02 implements Days {
 
     private int calculateChecksum() {
         List<String> boxIds = FileReaders.readFileIntoStringList(fileLocation);
-
         int tripleLetters = 0;
         int doubleLetters = 0;
 
@@ -64,6 +63,7 @@ public class Day02 implements Days {
             if (containsDoubleLetters) {
                 doubleLetters++;
             }
+
             if (containsTripleLetters) {
                 tripleLetters++;
             }
@@ -73,11 +73,34 @@ public class Day02 implements Days {
     }
 
     private String findCommonLettersBetweenCorrectBoxIds() {
-        return "";
+        List<String> boxIds = FileReaders.readFileIntoStringList(fileLocation);
+        StringBuilder commonLetters = new StringBuilder();
+        int lengthOfListElements = boxIds.size();
+
+        for (int i = 0; i < lengthOfListElements; i++) {
+            String boxId = boxIds.get(i);
+
+            for (int j = i + 1; j < lengthOfListElements; j++) {
+                String otherBoxId = boxIds.get(j);
+                commonLetters.delete(0,commonLetters.length());
+                int breakCounter = 0;
+
+                for (int k = 0; k < boxId.length(); k++) {
+                    if (boxId.substring(k, k + 1).equals(otherBoxId.substring(k, k + 1))) {
+                        commonLetters.append(boxId, k, k + 1);
+                    } else {
+                        breakCounter++;
+                        if (breakCounter > 1) {
+                            break;
+                        }
+                    }
+                }
+
+                if (breakCounter == 1) {
+                    return commonLetters.toString();
+                }
+            }
+        }
+        return commonLetters.toString();
     }
 }
-
-
-
-
-
