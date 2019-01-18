@@ -31,21 +31,21 @@ public class Day02Test {
      */
 
     private Day02 subjectToTest = new Day02();
-    private List<String> boxIDs = new ArrayList<>();
+    private List<String> boxIds = new ArrayList<>();
 
     @Test
     public void calculateChecksumCorrectly() {
         //arrange
-        boxIDs.add("abcdef");
-        boxIDs.add("bababc");
-        boxIDs.add("abbcde");
-        boxIDs.add("abcccd");
-        boxIDs.add("aabcdd");
-        boxIDs.add("abcdee");
-        boxIDs.add("ababab");
+        boxIds.add("abcdef");
+        boxIds.add("bababc");
+        boxIds.add("abbcde");
+        boxIds.add("abcccd");
+        boxIds.add("aabcdd");
+        boxIds.add("abcdee");
+        boxIds.add("ababab");
 
         PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIDs);
+        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
 
         String expectedResult = "Part 1 - Checksum: " + 12;
 
