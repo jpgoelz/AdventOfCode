@@ -22,8 +22,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping(value = "/api/adventOfCode", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AdventOfCodeController {
 
-    private final List<Days> daysSolutions;
     private static final Logger logger = LoggerFactory.getLogger(AdventOfCodeController.class);
+    private final List<Days> daysSolutions;
 
     @Autowired
     public AdventOfCodeController(List<Days> daysSolutions) {
@@ -31,7 +31,7 @@ public class AdventOfCodeController {
     }
 
     @GetMapping
-    public Resource getResult(@RequestParam(value="day", defaultValue="") String day, @RequestParam(value="part", defaultValue="") String part) {
+    public Resource getResult(@RequestParam(value = "day", defaultValue = "") String day, @RequestParam(value = "part", defaultValue = "") String part) {
 
         logger.info("controller logging");
 
@@ -42,13 +42,19 @@ public class AdventOfCodeController {
 
     private String getResultsForASpecificDayAndPuzzlePart(String day, String part) {
         Days thisDaysClass = findDayForDay(Integer.parseInt(day));
-        if (("1").equals(part)) {
+        if (!isProblemSolvedForPart(thisDaysClass, part)) {
+            throw new PuzzleNotSolvedYetException(new Throwable());
+        } else if (("1").equals(part)) {
             return thisDaysClass.firstPart();
         } else if (("2").equals(part)) {
             return thisDaysClass.secondPart();
         } else {
-            throw new PuzzleNotSolvedYetException(new Throwable());
+            return "This puzzle has not been solved yet.";
         }
+    }
+
+    private boolean isProblemSolvedForPart(Days thisDaysClass, String part) {
+        return thisDaysClass.getProblemStatus().containsKey(part) && thisDaysClass.getProblemStatus().get(part) == ProblemStatusEnum.SOLVED;
     }
 
     private Days findDayForDay(int day) {

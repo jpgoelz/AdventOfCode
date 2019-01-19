@@ -100,4 +100,9 @@ task npmRunScriptBuild( type: NpmTask, dependsOn: 'npmInstall' ) {
 npmSetup.dependsOn nodeSetup
 npmInstall.dependsOn npmSetup
 npmRunScriptBuild.dependsOn npmInstall
+
+/** processResources is part of the jar task and copies production resources into the production
+ *  resources directory. This should only happen after then npmRunScriptBuild has generated those
+ *  resources.
+ */
 processResources.dependsOn npmRunScriptBuild
