@@ -10,7 +10,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({FileReaders.class, Day01.class})
+@PrepareForTest({FileReaders.class})
 public class Day01Test {
 
     private Integer[] frequencies;
