@@ -16,7 +16,6 @@ import java.util.List;
 @PrepareForTest({FileReaders.class})
 public class Day02Test {
 
-    private Day02 subjectToTest = new Day02();
     private List<String> boxIds = new ArrayList<>();
 
     @Test
@@ -32,11 +31,12 @@ public class Day02Test {
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
+        Day02 day02 = new Day02();
 
         String expectedResult = "Part 1 - Checksum: " + 12;
 
         //act
-        String actualResult = subjectToTest.firstPart();
+        String actualResult = day02.firstPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -55,11 +55,12 @@ public class Day02Test {
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
+        Day02 day02 = new Day02();
 
         String expectedResult = "Part 2 - Common letters: fgij";
 
         //act
-        String actualResult = subjectToTest.secondPart();
+        String actualResult = day02.secondPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
