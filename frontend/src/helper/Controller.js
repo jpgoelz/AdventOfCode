@@ -13,6 +13,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import FloatingActionButtons from "../components/buttons/FloatingActionButtons";
 
 const styles = theme => ({
   root: {
@@ -35,11 +36,6 @@ const styles = theme => ({
     minHeight: 250,
     margin: "auto",
     marginTop: 20
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
   },
   title: {
     fontSize: 14
@@ -150,6 +146,7 @@ class Controller extends Component {
             <Typography component="p">
               <p>{this.state.result}</p>
             </Typography>
+            <FloatingActionButtons />
           </CardContent>
         </Card>
       </div>
