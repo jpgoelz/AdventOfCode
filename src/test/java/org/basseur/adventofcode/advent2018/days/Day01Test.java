@@ -1,6 +1,6 @@
-package org.basseur.adventofcode.advent2018.Days;
+package org.basseur.adventofcode.advent2018.days;
 
-import org.basseur.adventofcode.advent2018.Utils.FileReaders;
+import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

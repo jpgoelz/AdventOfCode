@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018.Utils;
+package org.basseur.adventofcode.advent2018.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
