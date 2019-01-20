@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^1.3.0",
+    "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^1.1.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "@material-ui/styles": "^3.0.0-alpha.8",
+    "http-proxy-middleware": "^0.19.1",
+    "react": "next",
+    "react-dom": "next",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "^2.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,11 +29,6 @@
     "fetch-mock": "^6.0.0",
     "jest-localstorage-mock": "^2.2.0",
     "prettier": "^1.13.7"
-  },
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:8080"
-    }
   },
   "jest": {
     "snapshotSerializers": [
