@@ -14,6 +14,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FloatingActionButtons from "../components/buttons/FloatingActionButtons";
+import { puzzleController } from "./PuzzleController";
 
 const styles = theme => ({
   root: {
@@ -53,6 +54,7 @@ const styles = theme => ({
 });
 
 class Controller extends Component {
+  controller;
   constructor(props) {
     super(props);
     this.state = {
@@ -62,7 +64,7 @@ class Controller extends Component {
       day: "",
       loading: false
     };
-    this.callController = this.callController.bind(this);
+    this.controller = puzzleController.bind(this);
   }
 
   handleChange = event => {
@@ -130,7 +132,7 @@ class Controller extends Component {
           variant="contained"
           color="primary"
           className="ui button"
-          onClick={this.callController}
+          onClick={this.controller}
         >
           Go!
         </Button>
@@ -151,29 +153,6 @@ class Controller extends Component {
         </Card>
       </div>
     );
-  }
-
-  delay = duration => new Promise(resolve => setTimeout(resolve, duration));
-
-  async callController() {
-    this.setState({ loading: true });
-    await this.delay(2000);
-    const response = await fetch(
-      "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.value
-    );
-    try {
-      const data = await response.json();
-      const content = data.content;
-      const message = data.message;
-      if (response.ok) {
-        this.setState({ result: content, loading: false });
-      } else {
-        this.setState({ result: message, loading: false });
-      }
-    } catch (e) {
-      this.setState({ result: "There has been a technical error." });
-      this.setState({ loading: false });
-    }
   }
 }
 

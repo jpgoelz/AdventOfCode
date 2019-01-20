@@ -1,14 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import FloatingActionButtons from "../buttons/FloatingActionButtons";
 import PuzzleCard from "./PuzzleCard";
 import AddNewCard from "./AddNewCard";
+import { puzzleController } from "../../helper/PuzzleController";
 
 const styles = {
   card: {
@@ -30,11 +30,11 @@ const styles = {
   }
 };
 
-function renderAddNewCardActions(cardType, classes) {
+function renderAddNewCardActions(cardType, classes, controller) {
   if (cardType == "newCard") {
     return (
       <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton aria-label="Add to favorites">
+        <IconButton onClick={controller}>
           <FloatingActionButtons />
         </IconButton>
       </CardActions>
@@ -54,18 +54,33 @@ function renderAddNewCardContent(cardType) {
   }
 }
 
-function CardTemplate(props) {
-  const { classes, cardType } = props;
+class CardTemplate extends Component {
+  controller;
+  constructor(props) {
+    super(props);
+    this.state = {
+      part: "",
+      result: "",
+      value: "",
+      day: "",
+      loading: false
+    };
+    this.controller = puzzleController.bind(this);
+  }
 
-  return (
-    <Card className={classes.card}>
-      <CardContent>
-        {renderPuzzleCardContent(cardType)}
-        {renderAddNewCardContent(cardType)}
-      </CardContent>
-      {renderAddNewCardActions(cardType, classes)}
-    </Card>
-  );
+  render() {
+    const { classes, cardType } = this.props;
+
+    return (
+      <Card className={classes.card}>
+        <CardContent>
+          {renderPuzzleCardContent(cardType)}
+          {renderAddNewCardContent(cardType)}
+        </CardContent>
+        {renderAddNewCardActions(cardType, classes, this.controller)}
+      </Card>
+    );
+  }
 }
 
 CardTemplate.propTypes = {
