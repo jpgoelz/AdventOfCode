@@ -12,7 +12,7 @@ import java.util.Set;
 @Component
 public class Day01 implements Days {
 
-    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day01Input.txt";
+    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/days/Day01Input.txt";
 
     private HashMap<String, ProblemStatusEnum> problemStatus;
     private Integer[] frequencies;

@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class Day02 implements Days {
 
-    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day02Input.txt";
+    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/days/Day02Input.txt";
     private List<String> boxIds;
 
     private HashMap<String, ProblemStatusEnum> problemStatus;
