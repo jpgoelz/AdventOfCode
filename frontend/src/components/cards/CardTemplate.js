@@ -9,6 +9,7 @@ import FloatingActionButtons from "../buttons/FloatingActionButtons";
 import PuzzleCard from "./PuzzleCard";
 import AddNewCard from "./AddNewCard";
 import { puzzleController } from "../../helper/PuzzleController";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
   card: {
@@ -27,14 +28,18 @@ const styles = {
   },
   pos: {
     marginBottom: 12
+  },
+  buttonProgress: {
+    position: "relative",
+    bottom: -15,
   }
 };
 
-function renderAddNewCardActions(cardType, classes, controller) {
+function renderAddNewCardActions(cardType, classes, callController) {
   if (cardType == "newCard") {
     return (
       <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton onClick={controller}>
+        <IconButton onClick={callController}>
           <FloatingActionButtons />
         </IconButton>
       </CardActions>
@@ -42,20 +47,7 @@ function renderAddNewCardActions(cardType, classes, controller) {
   }
 }
 
-function renderPuzzleCardContent(cardType) {
-  if (cardType == "puzzleCard") {
-    return <PuzzleCard />;
-  }
-}
-
-function renderAddNewCardContent(cardType) {
-  if (cardType == "newCard") {
-    return <AddNewCard />;
-  }
-}
-
 class CardTemplate extends Component {
-  controller;
   constructor(props) {
     super(props);
     this.state = {
@@ -63,24 +55,69 @@ class CardTemplate extends Component {
       result: "",
       value: "",
       day: "",
-      loading: false
+      loading: false,
+      cardType: this.props.cardType
     };
-    this.controller = puzzleController.bind(this);
+    this.callController = this.callController.bind(this);
+    this.renderAddNewCardContent = this.renderAddNewCardContent.bind(this);
+    this.setCartTemplateState = this.setCartTemplateState.bind(this);
   }
 
   render() {
-    const { classes, cardType } = this.props;
+    const { classes } = this.props;
 
     return (
       <Card className={classes.card}>
         <CardContent>
-          {renderPuzzleCardContent(cardType)}
-          {renderAddNewCardContent(cardType)}
+          {this.renderPuzzleCardContent()}
+          {this.renderAddNewCardContent()}
+          {this.state.loading && (
+            <CircularProgress className={classes.buttonProgress} />
+          )}
         </CardContent>
-        {renderAddNewCardActions(cardType, classes, this.controller)}
+        {renderAddNewCardActions(this.state.cardType, classes, this.callController )}
       </Card>
     );
   }
+
+  renderPuzzleCardContent() {
+        if (this.state.cardType == "puzzleCard") {
+            return <PuzzleCard callback={this.setCartTemplateState} result={this.state.result} day={this.state.day}/>;
+        }
+    }
+  renderAddNewCardContent() {
+    if (this.state.cardType === "newCard") {
+        return <AddNewCard callback={this.setCartTemplateState}/>;
+    }
+  }
+
+  setCartTemplateState(value) {
+      this.setState(value);
+  }
+
+  delay = duration => new Promise(resolve => setTimeout(resolve, duration));
+
+  async callController() {
+      this.setState({ loading: true });
+      await this.delay(2000);
+      const response = await fetch(
+          "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.value
+      );
+      try {
+          const data = await response.json();
+          const content = data.content;
+          const message = data.message;
+          if (response.ok) {
+              this.setState({ result: content, loading: false, cardType: "puzzleCard" });
+          } else {
+              this.setState({ result: message, loading: false });
+          }
+      } catch (e) {
+          this.setState({ result: "There has been a technical error." });
+          this.setState({ loading: false });
+      }
+  }
+
 }
 
 CardTemplate.propTypes = {

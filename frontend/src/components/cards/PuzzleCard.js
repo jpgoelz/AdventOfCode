@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -23,14 +23,26 @@ const styles = {
   }
 };
 
-function PuzzleCard(props) {
-  const { classes } = props;
+class PuzzleCard extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-  return (
-    <Typography className={classes.title} color="textSecondary" gutterBottom>
-      Puzzle
-    </Typography>
-  );
+    render () {
+        const { classes } = this.props;
+
+        return (
+            <div>
+                <Typography variant="h5" component="h2">
+                    Result for Day {this.props.day}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary" />
+                <Typography component="p">
+                    <p>{this.props.result}</p>
+                </Typography>
+            </div>
+        );
+    }
 }
 
 PuzzleCard.propTypes = {

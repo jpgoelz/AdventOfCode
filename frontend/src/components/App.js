@@ -7,6 +7,14 @@ import Grid from "@material-ui/core/Grid";
 import PuzzleCard from "./cards/PuzzleCard";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      part: "",
+    };
+    this.setCartTemplateState = this.setCartTemplateState.bind(this);
+  }
+
   render() {
     return (
       <div className="App">
@@ -18,13 +26,16 @@ class App extends Component {
           alignItems="flex-start"
           style={{ margin: 10 }}
         >
-          <CardTemplate cardType={"newCard"} />
+          <CardTemplate callback={this.setCartTemplateState} cardType={"newCard"} />
           <CardTemplate cardType={"puzzleCard"} />
           <CardTemplate cardType={"puzzleCard"} />
         </Grid>
-        <Controller />
       </div>
     );
+  }
+
+  setCartTemplateState(value) {
+    this.setState(value);
   }
 }
 

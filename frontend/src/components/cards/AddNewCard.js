@@ -39,18 +39,18 @@ class AddNewCard extends Component {
       part: "",
       result: "",
       value: "",
-      day: "",
-      loading: false
+      day: ""
     };
-    //this.callController = this.callController.bind(this);
   }
 
   handleChange = event => {
     this.setState({ value: event.target.value });
+    this.props.callback({ value: event.target.value });
   };
 
   handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
+    this.props.callback({ [event.target.name]: event.target.value })
   };
 
   render() {
