@@ -1,8 +1,25 @@
 import React, { Component } from "react";
 import "./App.css";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import PrimarySearchAppBar from "./appbar/PrimarySearchAppBar";
 import CardTemplate from "./cards/CardTemplate";
 import Grid from "@material-ui/core/Grid";
+
+const styles = theme => {
+  return {
+    alignCards: {
+      [theme.breakpoints.up("xs")] : {
+        justifyContent: "center",
+        margin: 0
+      },
+      [theme.breakpoints.up("sm")] : {
+        justifyContent: "flex-start",
+        margin: 10
+      }
+    }
+  }
+}
 
 class App extends Component {
   constructor(props) {
@@ -25,15 +42,16 @@ class App extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div className="App">
         <PrimarySearchAppBar />
         <Grid
+          className={classes.alignCards}
           container
           direction="row"
-          justify="flex-start"
           alignItems="flex-start"
-          style={{ margin: 10 }}
         >
           <CardTemplate callback={this.setCartTemplateState} cardType={"newCard"} />
           {this.addPuzzleCards()}
@@ -47,4 +65,8 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(App);
