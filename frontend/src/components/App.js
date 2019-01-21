@@ -27,8 +27,8 @@ class App extends Component {
           style={{ margin: 10 }}
         >
           <CardTemplate callback={this.setCartTemplateState} cardType={"newCard"} />
-          <CardTemplate cardType={"puzzleCard"} />
-          <CardTemplate cardType={"puzzleCard"} />
+          <CardTemplate callback={this.setCartTemplateState} cardType={"puzzleCard"} day={"1"} result={"Part 2 - Frequency reached twice: 81204"}/>
+          <CardTemplate callback={this.setCartTemplateState} cardType={"puzzleCard"} day={"1"} result={"Part 1 - Frequency: 599"}/>
         </Grid>
       </div>
     );

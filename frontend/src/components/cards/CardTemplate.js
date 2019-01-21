@@ -52,9 +52,9 @@ class CardTemplate extends Component {
     super(props);
     this.state = {
       part: "",
-      result: "",
+      result: this.props.result,
       value: "",
-      day: "",
+      day: this.props.day,
       loading: false,
       cardType: this.props.cardType
     };
