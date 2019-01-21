@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -15,20 +16,27 @@ const styles = theme => ({
     flexWrap: "wrap"
   },
   formControl: {
-    margin: theme.spacing.unit * 3,
-    minWidth: 120
+    margin: theme.spacing.unit,
+    width: 180
   },
   group: {
     margin: `${theme.spacing.unit}px 0`
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit
   },
   title: {
     fontSize: 14
   },
   pos: {
     marginBottom: 12
+  },
+  radios: {
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: theme.spacing.unit,
+    width: 90
+  },
+  textField: {
+    width: 180,
+    marginTop: -theme.spacing.unit
   }
 });
 
@@ -72,7 +80,7 @@ class AddNewCard extends Component {
               name: "day",
               id: "day-simple"
             }}
-            style={{ width: "150px" }}
+            style={{ width: "180px" }}
           >
             <MenuItem value="">
               <em>None</em>
@@ -81,6 +89,12 @@ class AddNewCard extends Component {
             <MenuItem value={2}>December 2nd</MenuItem>
             <MenuItem value={3}>December 3rd</MenuItem>
           </Select>
+        </FormControl>
+        <FormControl
+          component="fieldset"
+          className={classes.formControl}
+          style={{ display: "inline" }}
+        >
           <RadioGroup
             aria-label="part"
             name="part"
@@ -94,16 +108,28 @@ class AddNewCard extends Component {
               control={<Radio color="primary" />}
               label="Part 1"
               labelPlacement="start"
-              style={{ width: "120px" }}
+              className={classes.radios}
             />
             <FormControlLabel
               value="2"
               control={<Radio color="primary" />}
               label="Part 2"
               labelPlacement="start"
-              style={{ width: "120px" }}
+              className={classes.radios}
             />
           </RadioGroup>
+        </FormControl>
+        <FormControl
+          component="fieldset"
+          className={classes.formControl}
+          style={{ display: "inline" }}
+        >
+          <TextField
+            id="standard-dense"
+            label="Paste your puzzle input"
+            className={classes.textField}
+            margin="dense"
+          />
         </FormControl>
       </div>
     );
