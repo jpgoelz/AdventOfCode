@@ -1,8 +1,8 @@
-package org.basseur.adventofcode.advent2018.Days;
+package org.basseur.adventofcode.advent2018.days;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
-import org.basseur.adventofcode.advent2018.Utils.Claim;
-import org.basseur.adventofcode.advent2018.Utils.FileReaders;
+import org.basseur.adventofcode.advent2018.utils.Claim;
+import org.basseur.adventofcode.advent2018.utils.FileReaders;
 
 import java.util.HashMap;
 import java.util.List;
