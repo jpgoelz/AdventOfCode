@@ -8,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import FloatingActionButtons from "../buttons/FloatingActionButtons";
 import PuzzleCard from "./PuzzleCard";
 import AddNewCard from "./AddNewCard";
-import { puzzleController } from "../../helper/PuzzleController";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
@@ -36,7 +35,7 @@ const styles = {
 };
 
 function renderAddNewCardActions(cardType, classes, callController) {
-  if (cardType == "newCard") {
+  if (cardType === "newCard") {
     return (
       <CardActions className={classes.actions} disableActionSpacing>
         <IconButton onClick={callController}>
@@ -81,7 +80,7 @@ class CardTemplate extends Component {
   }
 
   renderPuzzleCardContent() {
-        if (this.state.cardType == "puzzleCard") {
+        if (this.state.cardType === "puzzleCard") {
             return <PuzzleCard callback={this.setCartTemplateState} result={this.state.result} day={this.state.day}/>;
         }
     }
