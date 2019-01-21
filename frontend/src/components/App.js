@@ -1,18 +1,27 @@
 import React, { Component } from "react";
 import "./App.css";
-import Controller from "../helper/Controller";
 import PrimarySearchAppBar from "./appbar/PrimarySearchAppBar";
 import CardTemplate from "./cards/CardTemplate";
 import Grid from "@material-ui/core/Grid";
-import PuzzleCard from "./cards/PuzzleCard";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       part: "",
+      solved: { 1: {day: "1", part: "1", result: "Part 1 - Frequency: 599"},
+                2: {day: "1", part: "2", result: "Part 2 - Frequency reached twice: 81204"}}
     };
     this.setCartTemplateState = this.setCartTemplateState.bind(this);
+    this.addPuzzleCards = this.addPuzzleCards.bind(this);
+  }
+
+  addPuzzleCards() {
+    const cards = [];
+    for (var i = 1; i <= Object.keys(this.state.solved).length; i++) {
+      cards.push(<CardTemplate callback={this.setCartTemplateState} cardType={"puzzleCard"} day={this.state.solved[i].day} result={this.state.solved[i].result}/>);
+    }
+    return cards;
   }
 
   render() {
@@ -27,8 +36,7 @@ class App extends Component {
           style={{ margin: 10 }}
         >
           <CardTemplate callback={this.setCartTemplateState} cardType={"newCard"} />
-          <CardTemplate callback={this.setCartTemplateState} cardType={"puzzleCard"} day={"1"} result={"Part 2 - Frequency reached twice: 81204"}/>
-          <CardTemplate callback={this.setCartTemplateState} cardType={"puzzleCard"} day={"1"} result={"Part 1 - Frequency: 599"}/>
+          {this.addPuzzleCards()}
         </Grid>
       </div>
     );
