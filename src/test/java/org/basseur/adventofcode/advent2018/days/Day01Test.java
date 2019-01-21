@@ -1,6 +1,6 @@
-package org.basseur.adventofcode.advent2018.Days;
+package org.basseur.adventofcode.advent2018.days;
 
-import org.basseur.adventofcode.advent2018.Utils.FileReaders;
+import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +13,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest({FileReaders.class})
 public class Day01Test {
 
-    private Day01 subjectToTest = new Day01();
     private Integer[] frequencies;
 
     @Test
-    public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() {
+    public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() throws Exception {
         //arrange
         frequencies = new Integer[4];
         frequencies[0] = 1;
@@ -27,11 +26,12 @@ public class Day01Test {
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 2 - Frequency reached twice: " + 2;
 
         //act
-        String actualResult = subjectToTest.secondPart();
+        String actualResult = day01.secondPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -46,11 +46,12 @@ public class Day01Test {
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 2 - Frequency reached twice: " + 0;
 
         //act
-        String actualResult = subjectToTest.secondPart();
+        String actualResult = day01.secondPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -68,11 +69,12 @@ public class Day01Test {
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 2 - Frequency reached twice: " + 10;
 
         //act
-        String actualResult = subjectToTest.secondPart();
+        String actualResult = day01.secondPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -90,11 +92,12 @@ public class Day01Test {
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 2 - Frequency reached twice: " + 5;
 
         //act
-        String actualResult = subjectToTest.secondPart();
+        String actualResult = day01.secondPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -112,11 +115,12 @@ public class Day01Test {
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 2 - Frequency reached twice: " + 14;
 
         //act
-        String actualResult = subjectToTest.secondPart();
+        String actualResult = day01.secondPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -132,11 +136,12 @@ public class Day01Test {
         frequencies[3] = 1;
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 1 - Frequency: " + 3;
 
         //act
-        String actualResult = subjectToTest.firstPart();
+        String actualResult = day01.firstPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -151,11 +156,12 @@ public class Day01Test {
         frequencies[2] = 1;
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 1 - Frequency: " + 3;
 
         //act
-        String actualResult = subjectToTest.firstPart();
+        String actualResult = day01.firstPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -170,11 +176,12 @@ public class Day01Test {
         frequencies[2] = -2;
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 1 - Frequency: " + 0;
 
         //act
-        String actualResult = subjectToTest.firstPart();
+        String actualResult = day01.firstPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);
@@ -189,11 +196,12 @@ public class Day01Test {
         frequencies[2] = -3;
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
+        Day01 day01 = new Day01();
 
         String expectedResult = "Part 1 - Frequency: " + -6;
 
         //act
-        String actualResult = subjectToTest.firstPart();
+        String actualResult = day01.firstPart();
 
         //assert
         Assert.assertEquals(expectedResult, actualResult);

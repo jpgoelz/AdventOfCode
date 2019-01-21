@@ -1,7 +1,7 @@
 package org.basseur.adventofcode.advent2018;
 
-import org.basseur.adventofcode.advent2018.Days.Days;
-import org.basseur.adventofcode.advent2018.Exceptions.PuzzleNotSolvedYetException;
+import org.basseur.adventofcode.advent2018.days.Days;
+import org.basseur.adventofcode.advent2018.exceptions.PuzzleNotSolvedYetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

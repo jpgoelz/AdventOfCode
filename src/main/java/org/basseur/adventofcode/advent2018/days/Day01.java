@@ -1,7 +1,7 @@
-package org.basseur.adventofcode.advent2018.Days;
+package org.basseur.adventofcode.advent2018.days;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
-import org.basseur.adventofcode.advent2018.Utils.FileReaders;
+import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -12,11 +12,13 @@ import java.util.Set;
 @Component
 public class Day01 implements Days {
 
-    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day01Input.txt";
+    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/days/Day01Input.txt";
 
     private HashMap<String, ProblemStatusEnum> problemStatus;
+    private Integer[] frequencies;
 
     public Day01() {
+        this.frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
@@ -43,12 +45,10 @@ public class Day01 implements Days {
     }
 
     private int calculateFrequency() {
-        Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
         return Arrays.stream(frequencies).mapToInt(a -> a).sum();
     }
 
     private int calculateDoubleFrequency() {
-        Integer[] frequencies = FileReaders.readFileIntoArrayOfIntegers(fileLocation);
         Set<Integer> uniqueFrequencies = new HashSet<>();
         int frequency = 0;
 
