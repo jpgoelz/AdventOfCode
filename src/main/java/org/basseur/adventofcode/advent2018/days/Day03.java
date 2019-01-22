@@ -49,6 +49,6 @@ public class Day03 implements Days {
     }
 
     private int calculateAreaOfFabric() {
-        return Claim.getNumberOfMultipleClaims();
+        return 0;
     }
 }
