@@ -41,7 +41,7 @@ public class Day02Test {
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
         Day02 day02 = new Day02();
 
-        String expectedResult = "Part 1 - Checksum: " + 12;
+        String expectedResult = "Part 1 - Checksum: 12";
 
         //act
         String actualResult = day02.firstPart();

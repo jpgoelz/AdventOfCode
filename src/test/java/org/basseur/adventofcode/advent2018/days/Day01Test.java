@@ -36,7 +36,7 @@ public class Day01Test {
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
         Day01 day01 = new Day01();
 
-        String expectedResult = "Part 2 - Frequency reached twice: " + 2;
+        String expectedResult = "Part 2 - Frequency reached twice: 2";
 
         //act
         String actualResult = day01.secondPart();
@@ -56,7 +56,7 @@ public class Day01Test {
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
         Day01 day01 = new Day01();
 
-        String expectedResult = "Part 2 - Frequency reached twice: " + 0;
+        String expectedResult = "Part 2 - Frequency reached twice: 0";
 
         //act
         String actualResult = day01.secondPart();
