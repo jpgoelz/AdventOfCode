@@ -19,6 +19,14 @@ public class Day02Test {
     private List<String> boxIds = new ArrayList<>();
 
     @Test
+    public void testGetDay() {
+        Day02 day02 = new Day02();
+        int expectedResult = 2;
+        int actualResult = day02.getDay();
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void calculateChecksumCorrectly() {
         //arrange
         boxIds.add("abcdef");

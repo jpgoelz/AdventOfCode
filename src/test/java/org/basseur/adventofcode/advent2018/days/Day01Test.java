@@ -16,6 +16,14 @@ public class Day01Test {
     private Integer[] frequencies;
 
     @Test
+    public void testGetDay() {
+        Day01 day01 = new Day01();
+        int expectedResult = 1;
+        int actualResult = day01.getDay();
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() throws Exception {
         //arrange
         frequencies = new Integer[4];
