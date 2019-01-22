@@ -33,8 +33,7 @@ public class Claim {
         return this.rectangle.intersection(other.rectangle);
     }
 
-    boolean overlaps(Claim other) {
+    public boolean overlaps(Claim other) {
         return this.rectangle.intersects(other.rectangle);
     }
-//    HashMap
 }

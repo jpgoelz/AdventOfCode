@@ -10,31 +10,30 @@ import java.awt.*;
 @RunWith(SpringRunner.class)
 public class ClaimTest {
 
-    @Test
-    public void Claim() {
-        Claim claim = new Claim("#1 @ 2,3: 4x5");
-        int expectedId = 1;
-        Rectangle expectedRectangle = new Rectangle(2, 3, 4, 5);
-
-        Assert.assertEquals(expectedId, claim.getId());
-        Assert.assertEquals(expectedRectangle, claim.getRectangle());
-    }
-
-    /**
+    /*
      * claim1 is on top of claim2, no overlap.
      * claim3 is on the right of claim1, no overlap.
      * claim4 overlaps claim1 on the lower right corner.
      * claim4 overlaps claim2 on the upper right corner.
      * claim5 completely surrounds claim1 (overlaps).
      */
+    private Claim claim1 = new Claim("#1 @ 2,2: 4x3");
+    private Claim claim2 = new Claim("#2 @ 2,6: 4x3");
+    private Claim claim3 = new Claim("#3 @ 7,2: 4x3");
+    private Claim claim4 = new Claim("#4 @ 4,4: 4x3");
+    private Claim claim5 = new Claim("#5 @ 1,1: 6x5");
+
+    @Test
+    public void Claim() {
+        int expectedId = 3;
+        Rectangle expectedRectangle = new Rectangle(7, 2, 4, 3);
+
+        Assert.assertEquals(expectedId, claim3.getId());
+        Assert.assertEquals(expectedRectangle, claim3.getRectangle());
+    }
+
     @Test
     public void overlaps() {
-        Claim claim1 = new Claim("#1 @ 2,2: 4x3");
-        Claim claim2 = new Claim("#2 @ 2,6: 4x3");
-        Claim claim3 = new Claim("#3 @ 7,2: 4x3");
-        Claim claim4 = new Claim("#4 @ 4,4: 4x3");
-        Claim claim5 = new Claim("#5 @ 1,1: 6x5");
-
         boolean result1 = claim1.overlaps(claim2);
         boolean result2 = claim1.overlaps(claim3);
         boolean result3 = claim1.overlaps(claim4);
@@ -50,12 +49,6 @@ public class ClaimTest {
 
     @Test
     public void overlap() {
-        Claim claim1 = new Claim("#1 @ 2,2: 4x3");
-        Claim claim2 = new Claim("#2 @ 2,6: 4x3");
-        Claim claim3 = new Claim("#3 @ 7,2: 4x3");
-        Claim claim4 = new Claim("#4 @ 4,4: 4x3");
-        Claim claim5 = new Claim("#5 @ 1,1: 6x5");
-
         Rectangle expectedOverlap1 = new Rectangle(2, 6, 4, -1);
         Rectangle expectedOverlap2 = new Rectangle(7, 2, -1, 3);
         Rectangle expectedOverlap3 = new Rectangle(4, 4, 2, 1);
