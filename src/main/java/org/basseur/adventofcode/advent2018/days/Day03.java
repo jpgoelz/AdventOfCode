@@ -20,7 +20,7 @@ public class Day03 implements Days {
 
     public Day03() {
         this.problemStatus = new HashMap<>();
-        this.problemStatus.put("1", ProblemStatusEnum.IN_PROGRESS);
+        this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
 
         this.claimList = claimStringListToClaimArrayList(FileReaders.readFileIntoStringList(FILE_LOCATION));
