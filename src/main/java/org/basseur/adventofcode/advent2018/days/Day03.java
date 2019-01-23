@@ -38,7 +38,7 @@ public class Day03 implements Days {
 
     @Override
     public String firstPart() {
-        return "Part 1 - Fabric claim intersection: " + calculateAreaWithMultipleClaims() + " square inches";
+        return "Part 1 - Fabric area claimed by multiple Elves: " + calculateAreaWithMultipleClaims() + " square inches";
     }
 
     @Override

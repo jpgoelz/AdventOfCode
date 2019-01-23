@@ -57,7 +57,7 @@ public class Day03Test {
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
 
-        String expectedResult = "Part 1 - Fabric claim intersection: 4 square inches";
+        String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 4 square inches";
         String actualResult = day03.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
@@ -79,7 +79,7 @@ public class Day03Test {
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
 
-        String expectedResult = "Part 1 - Fabric claim intersection: 6 square inches";
+        String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 6 square inches";
         String actualResult = day03.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
@@ -103,7 +103,7 @@ public class Day03Test {
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
 
-        String expectedResult = "Part 1 - Fabric claim intersection: 5 square inches";
+        String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 5 square inches";
         String actualResult = day03.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
@@ -126,7 +126,7 @@ public class Day03Test {
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
 
-        String expectedResult = "Part 1 - Fabric claim intersection: 2 square inches";
+        String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 2 square inches";
         String actualResult = day03.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
@@ -151,7 +151,7 @@ public class Day03Test {
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
 
-        String expectedResult = "Part 1 - Fabric claim intersection: 11 square inches";
+        String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 11 square inches";
         String actualResult = day03.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
@@ -178,7 +178,7 @@ public class Day03Test {
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
 
-        String expectedResult = "Part 1 - Fabric claim intersection: 10 square inches";
+        String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 10 square inches";
         String actualResult = day03.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
