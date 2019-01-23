@@ -59,7 +59,7 @@ class CardTemplate extends Component {
     };
     this.callController = this.callController.bind(this);
     this.renderAddNewCardContent = this.renderAddNewCardContent.bind(this);
-    this.setCartTemplateState = this.setCartTemplateState.bind(this);
+    this.setCardTemplateState = this.setCardTemplateState.bind(this);
   }
 
   render() {
@@ -81,16 +81,16 @@ class CardTemplate extends Component {
 
   renderPuzzleCardContent() {
         if (this.state.cardType === "puzzleCard") {
-            return <PuzzleCard callback={this.setCartTemplateState} result={this.state.result} day={this.state.day}/>;
+            return <PuzzleCard callback={this.setCardTemplateState} result={this.state.result} day={this.state.day}/>;
         }
     }
   renderAddNewCardContent() {
     if (this.state.cardType === "newCard") {
-        return <AddNewCard callback={this.setCartTemplateState}/>;
+        return <AddNewCard callback={this.setCardTemplateState}/>;
     }
   }
 
-  setCartTemplateState(value) {
+  setCardTemplateState(value) {
       this.setState(value);
   }
 

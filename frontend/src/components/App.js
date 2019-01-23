@@ -29,14 +29,14 @@ class App extends Component {
       solved: { 1: {day: "1", part: "1", result: "Part 1 - Frequency: 599"},
                 2: {day: "1", part: "2", result: "Part 2 - Frequency reached twice: 81204"}}
     };
-    this.setCartTemplateState = this.setCartTemplateState.bind(this);
+    this.setCardTemplateState = this.setCardTemplateState.bind(this);
     this.addPuzzleCards = this.addPuzzleCards.bind(this);
   }
 
   addPuzzleCards() {
     const cards = [];
     for (var i = 1; i <= Object.keys(this.state.solved).length; i++) {
-      cards.push(<CardTemplate callback={this.setCartTemplateState} cardType={"puzzleCard"} day={this.state.solved[i].day} result={this.state.solved[i].result}/>);
+      cards.push(<CardTemplate callback={this.setCardTemplateState} cardType={"puzzleCard"} day={this.state.solved[i].day} result={this.state.solved[i].result}/>);
     }
     return cards;
   }
@@ -53,14 +53,14 @@ class App extends Component {
           direction="row"
           alignItems="flex-start"
         >
-          <CardTemplate callback={this.setCartTemplateState} cardType={"newCard"} />
+          <CardTemplate callback={this.setCardTemplateState} cardType={"newCard"} />
           {this.addPuzzleCards()}
         </Grid>
       </div>
     );
   }
 
-  setCartTemplateState(value) {
+  setCardTemplateState(value) {
     this.setState(value);
   }
 }

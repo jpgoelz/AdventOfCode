@@ -1,5 +1,6 @@
 package org.basseur.adventofcode.advent2018;
 
+import io.swagger.annotations.ApiOperation;
 import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.exceptions.PuzzleNotSolvedYetException;
 import org.slf4j.Logger;
@@ -30,6 +31,7 @@ public class AdventOfCodeController {
         this.daysSolutions = Objects.requireNonNull(daysSolutions);
     }
 
+    @ApiOperation("blablubb")
     @GetMapping
     public Resource getResult(@RequestParam(value = "day", defaultValue = "") String day, @RequestParam(value = "part", defaultValue = "") String part) {
 
