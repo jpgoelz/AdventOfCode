@@ -5,7 +5,6 @@ import org.basseur.adventofcode.advent2018.utils.Claim;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,7 +82,7 @@ public class Day03 implements Days {
         int maxY = getMaxY(claimList);
         for (int x = 0; x < maxX; x++) {
             for (int y = 0; y < maxY; y++) {
-                Rectangle scanRect = new Rectangle(x, y, 1, 1);
+                Claim scanRect = new Claim("#0 @ " + x + "," + y + ": 1x1");
                 int claimsPerScanRect = 0;
                 for (Claim claim : claimList) {
                     if (claim.intersects(scanRect)) {
@@ -101,7 +100,7 @@ public class Day03 implements Days {
     private int getMaxX(List<Claim> claims) {
         int maxX = 0;
         for (Claim claim : claims) {
-            maxX = (int) Double.max(maxX, claim.x + claim.width);
+            maxX = Integer.max(maxX, claim.getX() + claim.getWidth());
         }
         return maxX;
     }
@@ -109,7 +108,7 @@ public class Day03 implements Days {
     private int getMaxY(List<Claim> claims) {
         int maxY = 0;
         for (Claim claim : claims) {
-            maxY = (int) Double.max(maxY, claim.y + claim.height);
+            maxY = (int) Double.max(maxY, claim.getY() + claim.getHeight());
         }
         return maxY;
     }

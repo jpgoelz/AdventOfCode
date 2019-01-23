@@ -1,12 +1,14 @@
 package org.basseur.adventofcode.advent2018.utils;
 
-import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Claim extends Rectangle {
-    private int id;
-    private Rectangle rectangle;
+public class Claim {
+    private final int id;
+    private final int x;
+    private final int y;
+    private final int width;
+    private final int height;
 
     public Claim(String claimsListItem) {
         Pattern pattern = Pattern.compile("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)");
@@ -17,7 +19,6 @@ public class Claim extends Rectangle {
             this.y = Integer.parseInt(matcher.group(3));
             this.width = Integer.parseInt(matcher.group(4));
             this.height = Integer.parseInt(matcher.group(5));
-            this.rectangle = new Rectangle(x, y, width, height);
         } else {
             throw new IllegalArgumentException(claimsListItem + " does not match Pattern");
         }
@@ -27,11 +28,28 @@ public class Claim extends Rectangle {
         return id;
     }
 
-    public Rectangle getRectangle() {
-        return rectangle;
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public boolean intersects(Claim other) {
-        return this.rectangle.intersects(other.rectangle);
+        int thisX2 = this.x + this.width;
+        int thisY2 = this.y + this.height;
+        int otherX2 = other.x + other.width;
+        int otherY2 = other.y + other.height;
+
+        return (this.x < otherX2) && (thisX2 > other.x) && (this.y < otherY2) && (thisY2 > other.y);
     }
 }
