@@ -46,7 +46,6 @@ public class Day03 implements Days {
     }
 
     private int findIdOfClaimWithoutOverlaps() {
-        int id = 0;
         for (int i = 0; i < claimList.size(); i++) {
             Claim currentClaim = claimList.get(i);
             boolean overlaps = false;
@@ -61,11 +60,10 @@ public class Day03 implements Days {
                 }
             }
             if (!overlaps) {
-                id = currentClaim.getId();
-                break;
+                return currentClaim.getId();
             }
         }
-        return id;
+        return 0;
     }
 
     private List<Claim> claimStringListToClaimArrayList(List<String> claimsStringList) {
