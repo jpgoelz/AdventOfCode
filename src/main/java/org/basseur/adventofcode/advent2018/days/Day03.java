@@ -3,20 +3,20 @@ package org.basseur.adventofcode.advent2018.days;
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
 import org.basseur.adventofcode.advent2018.utils.Claim;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Component
 public class Day03 implements Days {
 
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day03Input.txt";
     private HashMap<String, ProblemStatusEnum> problemStatus;
 
     private List<Claim> claimList;
-    private List<Rectangle> overlapList = new ArrayList<>();
-    private List<Rectangle> overlapsOfOverlapsList = new ArrayList<>();
 
     public Day03() {
         this.problemStatus = new HashMap<>();
