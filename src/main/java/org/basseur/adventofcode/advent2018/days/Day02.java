@@ -10,21 +10,27 @@ import java.util.List;
 @Component
 public class Day02 implements Days {
 
-    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/days/Day02Input.txt";
+    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/Day02Input.txt";
     private List<String> boxIds;
 
     private HashMap<String, ProblemStatusEnum> problemStatus;
 
     public Day02() {
-        this.boxIds = FileReaders.readFileIntoStringList(fileLocation);
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
+
+        this.boxIds = FileReaders.readFileIntoStringList(FILE_LOCATION);
     }
 
     @Override
     public int getDay() {
         return 2;
+    }
+
+    @Override
+    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
+        return problemStatus;
     }
 
     @Override
@@ -36,11 +42,6 @@ public class Day02 implements Days {
     @Override
     public String secondPart() {
         return "Part 2 - Common letters: " + findCommonLettersBetweenCorrectBoxIds();
-    }
-
-    @Override
-    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
-        return problemStatus;
     }
 
     private int calculateChecksum() {
