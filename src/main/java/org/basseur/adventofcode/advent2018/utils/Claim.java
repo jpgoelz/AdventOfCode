@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Claim {
+public class Claim extends Rectangle {
     private int id;
     private Rectangle rectangle;
 
@@ -13,10 +13,10 @@ public class Claim {
         Matcher matcher = pattern.matcher(claimsListItem);
         while (matcher.find()) {
             this.id = Integer.parseInt(matcher.group(1));
-            int x = Integer.parseInt(matcher.group(2));
-            int y = Integer.parseInt(matcher.group(3));
-            int width = Integer.parseInt(matcher.group(4));
-            int height = Integer.parseInt(matcher.group(5));
+            this.x = Integer.parseInt(matcher.group(2));
+            this.y = Integer.parseInt(matcher.group(3));
+            this.width = Integer.parseInt(matcher.group(4));
+            this.height = Integer.parseInt(matcher.group(5));
             this.rectangle = new Rectangle(x, y, width, height);
         }
     }
@@ -29,11 +29,11 @@ public class Claim {
         return rectangle;
     }
 
-    public Rectangle overlap(Claim other) {
-        return this.rectangle.intersection(other.rectangle);
+    public boolean intersects(Claim other) {
+        return this.rectangle.intersects(other.rectangle);
     }
 
-    public boolean overlaps(Claim other) {
-        return this.rectangle.intersects(other.rectangle);
+    public Rectangle intersection(Claim other) {
+        return this.rectangle.intersection(other.rectangle);
     }
 }
