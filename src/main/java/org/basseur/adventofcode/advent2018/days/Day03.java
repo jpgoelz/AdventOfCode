@@ -4,28 +4,26 @@ import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
 import org.basseur.adventofcode.advent2018.utils.Claim;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Day03 implements Days {
 
-    private static String fileLocation = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day03Input.txt";
-    private List<String> claimsList;
-    private Claim[] claims;
-
+    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/Days/Day03Input.txt";
     private HashMap<String, ProblemStatusEnum> problemStatus;
+
+    private List<Claim> claimList;
+    private List<Rectangle> overlapList = new ArrayList<>();
+    private List<Rectangle> overlapsOfOverlapsList = new ArrayList<>();
 
     public Day03() {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.IN_PROGRESS);
         this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
 
-        this.claimsList = FileReaders.readFileIntoStringList(fileLocation);
-        int claimsListSize = claimsList.size();
-        this.claims = new Claim[claimsListSize];
-        for (int i = 0; i < claimsListSize; i++) {
-            this.claims[i] = new Claim(claimsList.get(i));
-        }
+        this.claimList = claimStringListToClaimArrayList(FileReaders.readFileIntoStringList(FILE_LOCATION));
     }
 
     @Override
@@ -34,8 +32,13 @@ public class Day03 implements Days {
     }
 
     @Override
+    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
+        return problemStatus;
+    }
+
+    @Override
     public String firstPart() {
-        return "Part 1 - Fabric claim overlap: " + calculateAreaOfFabric() + " square inches";
+        return "Part 1 - Fabric claim intersection: " + calculateAreaWithMultipleClaims() + " square inches";
     }
 
     @Override
@@ -43,12 +46,49 @@ public class Day03 implements Days {
         return null;
     }
 
-    @Override
-    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
-        return problemStatus;
+    private List<Claim> claimStringListToClaimArrayList(List<String> claimsStringList) {
+        List<Claim> claimListFromStrings = new ArrayList<>();
+        for (String claimsStingListItem : claimsStringList) {
+            claimListFromStrings.add(new Claim(claimsStingListItem));
+        }
+        return claimListFromStrings;
     }
 
-    private int calculateAreaOfFabric() {
-        return 0;
+    private int calculateAreaWithMultipleClaims() {
+        int areaWithMultipleClaims = 0;
+        int maxX = getMaxX(claimList);
+        int maxY = getMaxY(claimList);
+        for (int x = 0; x < maxX; x++) {
+            for (int y = 0; y < maxY; y++) {
+                Rectangle scanRect = new Rectangle(x, y, 1, 1);
+                int claimsPerScanRect = 0;
+                for (Claim claim : claimList) {
+                    if (claim.intersects(scanRect)) {
+                        claimsPerScanRect++;
+                    }
+                }
+                if (claimsPerScanRect > 1) {
+                    areaWithMultipleClaims++;
+                }
+            }
+
+        }
+        return areaWithMultipleClaims;
+    }
+
+    private int getMaxX(List<Claim> claims) {
+        int maxX = 0;
+        for (Claim claim : claims) {
+            maxX = (int) Double.max(maxX, claim.x + claim.width);
+        }
+        return maxX;
+    }
+
+    private int getMaxY(List<Claim> claims) {
+        int maxY = 0;
+        for (Claim claim : claims) {
+            maxY = (int) Double.max(maxY, claim.y + claim.height);
+        }
+        return maxY;
     }
 }
