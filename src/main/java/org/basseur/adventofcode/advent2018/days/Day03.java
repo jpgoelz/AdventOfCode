@@ -14,9 +14,9 @@ import java.util.List;
 public class Day03 implements Days {
 
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/Day03Input.txt";
-    private HashMap<String, ProblemStatusEnum> problemStatus;
-
     private List<Claim> claimList;
+
+    private HashMap<String, ProblemStatusEnum> problemStatus;
 
     public Day03() {
         this.problemStatus = new HashMap<>();
@@ -71,7 +71,6 @@ public class Day03 implements Days {
                     areaWithMultipleClaims++;
                 }
             }
-
         }
         return areaWithMultipleClaims;
     }

@@ -20,10 +20,22 @@ public class Day03Test {
 
     @Test
     public void testGetDay() {
+        PowerMockito.mockStatic(FileReaders.class);
+        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
+
         int expectedResult = 3;
         int actualResult = day03.getDay();
         Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testInputFile() {
+        try {
+            new Day03();
+        } catch (IllegalArgumentException e) {
+            Assert.fail("There seems to be something wrong with the input file or input file handling.");
+        }
     }
 
     @Test
@@ -39,7 +51,7 @@ public class Day03Test {
          */
         claimsStringList.add("#1 @ 1,3: 4x4"); // intersects with #2 by 4
         claimsStringList.add("#2 @ 3,1: 4x4"); // intersects with #1 by 4
-        claimsStringList.add("X3 @ 5,5: 2x2"); // does not intersection
+        claimsStringList.add("#3 @ 5,5: 2x2"); // does not intersection
 
         PowerMockito.mockStatic(FileReaders.class);
         PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
