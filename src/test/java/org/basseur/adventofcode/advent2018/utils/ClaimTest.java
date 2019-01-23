@@ -33,7 +33,7 @@ public class ClaimTest {
     }
 
     @Test
-    public void Claim() {
+    public void testClaim() {
         int expectedId = 3;
         Rectangle expectedRectangle = new Rectangle(7, 2, 4, 3);
 

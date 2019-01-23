@@ -34,8 +34,4 @@ public class Claim extends Rectangle {
     public boolean intersects(Claim other) {
         return this.rectangle.intersects(other.rectangle);
     }
-
-    public Rectangle intersection(Claim other) {
-        return this.rectangle.intersection(other.rectangle);
-    }
 }
