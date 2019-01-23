@@ -21,7 +21,7 @@ public class Day03 implements Days {
     public Day03() {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
 
         this.claimList = claimStringListToClaimArrayList(FileReaders.readFileIntoStringList(FILE_LOCATION));
     }
@@ -43,7 +43,30 @@ public class Day03 implements Days {
 
     @Override
     public String secondPart() {
-        return null;
+        return "Part 2 - The only non-overlapping claim has ID #" + findIdOfClaimWithoutOverlaps() + ".";
+    }
+
+    private int findIdOfClaimWithoutOverlaps() {
+        int id = 0;
+        for (int i = 0; i < claimList.size(); i++) {
+            Claim currentClaim = claimList.get(i);
+            boolean overlaps = false;
+            for (int j = 0; j < claimList.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                Claim otherClaim = claimList.get(j);
+                if (currentClaim.intersects(otherClaim)) {
+                    overlaps = true;
+                    break;
+                }
+            }
+            if (!overlaps) {
+                id = currentClaim.getId();
+                break;
+            }
+        }
+        return id;
     }
 
     private List<Claim> claimStringListToClaimArrayList(List<String> claimsStringList) {

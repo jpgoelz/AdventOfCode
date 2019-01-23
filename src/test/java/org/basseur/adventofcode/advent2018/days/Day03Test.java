@@ -186,5 +186,26 @@ public class Day03Test {
 
     @Test
     public void testSecondPart() {
+        /*  ........
+         *  ...2222.
+         *  ...2222.
+         *  .11XX22.
+         *  .11XX22.
+         *  .111133.
+         *  .111133.
+         *  ........
+         */
+        claimsStringList.add("#1 @ 1,3: 4x4"); // intersects with #2 by 4
+        claimsStringList.add("#2 @ 3,1: 4x4"); // intersects with #1 by 4
+        claimsStringList.add("#3 @ 5,5: 2x2"); // does not intersection
+
+        PowerMockito.mockStatic(FileReaders.class);
+        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03();
+
+        String expectedResult = "Part 2 - The only non-overlapping claim has ID #3.";
+        String actualResult = day03.secondPart();
+
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }
