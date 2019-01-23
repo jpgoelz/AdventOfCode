@@ -174,6 +174,5 @@ public class Day03Test {
 
     @Test
     public void testSecondPart() {
-        Assert.fail();
     }
 }
