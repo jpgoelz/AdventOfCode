@@ -11,13 +11,15 @@ public class Claim extends Rectangle {
     public Claim(String claimsListItem) {
         Pattern pattern = Pattern.compile("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)");
         Matcher matcher = pattern.matcher(claimsListItem);
-        while (matcher.find()) {
+        if (matcher.find()) {
             this.id = Integer.parseInt(matcher.group(1));
             this.x = Integer.parseInt(matcher.group(2));
             this.y = Integer.parseInt(matcher.group(3));
             this.width = Integer.parseInt(matcher.group(4));
             this.height = Integer.parseInt(matcher.group(5));
             this.rectangle = new Rectangle(x, y, width, height);
+        } else {
+            throw new IllegalArgumentException(claimsListItem + " does not match Pattern");
         }
     }
 
