@@ -9,8 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ClaimTest {
 
     @Test
-    public void testClaim() {
+    public void testConstructorAndGetters() {
         Claim claim = new Claim("#1 @ 2,3: 4x5");
+
         Assert.assertEquals(1, claim.getId());
         Assert.assertEquals(2, claim.getX());
         Assert.assertEquals(3, claim.getY());
@@ -24,7 +25,7 @@ public class ClaimTest {
     }
 
     @Test
-    public void intersects() {
+    public void testIntersects() {
         /* These are the possible cases for intersection:
          * claim1 is on top of claim2, no intersection.
          * claim3 is on the right of claim1, no intersection.
@@ -49,5 +50,15 @@ public class ClaimTest {
         Assert.assertTrue(result3);
         Assert.assertTrue(result4);
         Assert.assertTrue(result5);
+    }
+
+    @Test
+    public void testMove() {
+        Claim claim = new Claim("#0 @ 1,2: 3x4");
+
+        claim.moveTo(13, 37);
+
+        Assert.assertEquals(13, claim.getX());
+        Assert.assertEquals(37, claim.getY());
     }
 }
