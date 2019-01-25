@@ -29,15 +29,6 @@ public class Day03Test {
     }
 
     @Test
-    public void testInputFile() {
-        try {
-            new Day03();
-        } catch (IllegalArgumentException e) {
-            Assert.fail("There seems to be something wrong with the input file or input file handling.");
-        }
-    }
-
-    @Test
     public void testFirstPartOneSimpleOverlap() {
         /*  ........
          *  ...2222.
