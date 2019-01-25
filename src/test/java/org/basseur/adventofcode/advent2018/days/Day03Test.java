@@ -20,12 +20,11 @@ public class Day03Test {
 
     @Test
     public void testGetDay() {
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
         Day03 day03 = new Day03();
 
         int expectedResult = 3;
         int actualResult = day03.getDay();
+
         Assert.assertEquals(expectedResult, actualResult);
     }
 
