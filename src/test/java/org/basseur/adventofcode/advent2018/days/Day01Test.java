@@ -16,6 +16,14 @@ public class Day01Test {
     private Integer[] frequencies;
 
     @Test
+    public void testGetDay() {
+        Day01 day01 = new Day01();
+        int expectedResult = 1;
+        int actualResult = day01.getDay();
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() throws Exception {
         //arrange
         frequencies = new Integer[4];
@@ -28,7 +36,7 @@ public class Day01Test {
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
         Day01 day01 = new Day01();
 
-        String expectedResult = "Part 2 - Frequency reached twice: " + 2;
+        String expectedResult = "Part 2 - Frequency reached twice: 2";
 
         //act
         String actualResult = day01.secondPart();
@@ -48,7 +56,7 @@ public class Day01Test {
         PowerMockito.when(FileReaders.readFileIntoArrayOfIntegers(Mockito.anyString())).thenReturn(frequencies);
         Day01 day01 = new Day01();
 
-        String expectedResult = "Part 2 - Frequency reached twice: " + 0;
+        String expectedResult = "Part 2 - Frequency reached twice: 0";
 
         //act
         String actualResult = day01.secondPart();

@@ -22,8 +22,8 @@ public class FileReaders {
     public static List<String> readFileIntoStringList(String filename) {
         Scanner scanner = openFileReturnScanner(filename);
         List<String> stringList = new ArrayList<>();
-        while (Objects.requireNonNull(scanner).hasNext()) {
-            stringList.add(scanner.next());
+        while (Objects.requireNonNull(scanner).hasNextLine()) {
+            stringList.add(scanner.nextLine());
         }
         scanner.close();
         return stringList;
