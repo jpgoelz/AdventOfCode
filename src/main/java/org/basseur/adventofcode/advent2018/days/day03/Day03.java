@@ -66,7 +66,7 @@ public class Day03 implements Days {
     }
 
     /**
-     * Primary Method for the Day 3, Part 1.
+     * Primary method for the Day 3, Part 1.
      * Calculates the area of fabric that is claimed more than once.
      * <p>
      * A "scanning-claim" ({@code Claim scanRect}) of size 1x1 is used that scans
@@ -100,7 +100,7 @@ public class Day03 implements Days {
     }
 
     /**
-     * Primary Method for the Day 3, Part 2.
+     * Primary method for the Day 3, Part 2.
      * It finds the ID of the first claim that does not overlap with others.
      * <p>
      * All claims are checked against each other. Unless claims are the same,

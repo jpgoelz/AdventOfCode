@@ -43,6 +43,12 @@ public class Day04 implements Days {
         return null;
     }
 
+    /**
+     * Primary method for Day 4, Part 1.
+     * Multiplies the ID of the guard who slept the longest by the minute he slept the most.
+     *
+     * @return product of the <u>ID</u> of the guard who slept the longest and the <u>minute</u> he slept the most.
+     */
     private String getIdMultipliedByMinute() {
         return null;
     }
