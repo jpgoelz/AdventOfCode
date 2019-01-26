@@ -1,6 +1,7 @@
-package org.basseur.adventofcode.advent2018.days;
+package org.basseur.adventofcode.advent2018.days.day01;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
+import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @Component
 public class Day01 implements Days {
 
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/Day01Input.txt";
+    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day01/Input.txt";
 
     private HashMap<String, ProblemStatusEnum> problemStatus;
     private Integer[] frequencies;

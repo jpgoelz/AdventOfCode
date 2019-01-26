@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018.utils;
+package org.basseur.adventofcode.advent2018.days.day03;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
