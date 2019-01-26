@@ -24,7 +24,7 @@ public class Day01Test {
     }
 
     @Test
-    public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() throws Exception {
+    public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() {
         //arrange
         frequencies = new Integer[4];
         frequencies[0] = 1;

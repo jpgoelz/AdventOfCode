@@ -12,11 +12,11 @@ import java.util.List;
 public class Day02 implements Days {
 
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day02/Input.txt";
-    private List<String> boxIds;
+    private final List<String> boxIds;
 
-    private HashMap<String, ProblemStatusEnum> problemStatus;
+    private final HashMap<String, ProblemStatusEnum> problemStatus;
 
-    public Day02() {
+    Day02() {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);

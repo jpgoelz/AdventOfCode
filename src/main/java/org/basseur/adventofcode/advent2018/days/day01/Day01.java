@@ -14,15 +14,16 @@ import java.util.Set;
 public class Day01 implements Days {
 
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day01/Input.txt";
+    private final Integer[] frequencies;
 
-    private HashMap<String, ProblemStatusEnum> problemStatus;
-    private Integer[] frequencies;
+    private final HashMap<String, ProblemStatusEnum> problemStatus;
 
-    public Day01() {
-        this.frequencies = FileReaders.readFileIntoArrayOfIntegers(FILE_LOCATION);
+    Day01() {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
+
+        this.frequencies = FileReaders.readFileIntoArrayOfIntegers(FILE_LOCATION);
     }
 
     @Override

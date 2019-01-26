@@ -16,7 +16,7 @@ import java.util.List;
 @PrepareForTest({FileReaders.class})
 public class Day03Test {
 
-    private List<String> claimsStringList = new ArrayList<>();
+    private final List<String> claimsStringList = new ArrayList<>();
 
     @Test
     public void testGetDay() {

@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 /**
  * A class that defines Claims to be used in Day 3. They are defined like rectangles.
  *
- * @author Jan Philipp Gölz
+ * @author Jan Philipp G&ouml;lz
  */
-public class Claim {
+class Claim {
     /** ID of this claim */
     private final int id;
     /** width of this claim */
@@ -32,7 +32,7 @@ public class Claim {
      * @throws IllegalArgumentException
      *         in case {@code claimsListItem} does not match the pattern
      */
-    public Claim(String claimsListItem) {
+    Claim(String claimsListItem) {
         Pattern pattern = Pattern.compile("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)");
         Matcher matcher = pattern.matcher(claimsListItem);
         if (matcher.find()) {
@@ -52,7 +52,7 @@ public class Claim {
      *
      * @return ID of this claim
      */
-    public int getId() {
+    int getId() {
         return id;
     }
 
@@ -61,7 +61,7 @@ public class Claim {
      *
      * @return x of this claim
      */
-    public int getX() {
+    int getX() {
         return x;
     }
 
@@ -70,7 +70,7 @@ public class Claim {
      *
      * @return y of this claim
      */
-    public int getY() {
+    int getY() {
         return y;
     }
 
@@ -79,7 +79,7 @@ public class Claim {
      *
      * @return width of this claim
      */
-    public int getWidth() {
+    int getWidth() {
         return width;
     }
 
@@ -88,7 +88,7 @@ public class Claim {
      *
      * @return height of this claim
      */
-    public int getHeight() {
+    int getHeight() {
         return height;
     }
 
@@ -101,7 +101,7 @@ public class Claim {
      * The same goes for {@code y} and {@code y2}. To check for overlaps, the opposite is checked.
      * All statements must be true (or else no overlap).
      */
-    public boolean intersects(Claim other) {
+    boolean intersects(Claim other) {
         int thisX2 = this.x + this.width;
         int thisY2 = this.y + this.height;
         int otherX2 = other.x + other.width;
@@ -118,7 +118,7 @@ public class Claim {
      * @param newY
      *         new position on the y-axis
      */
-    public void moveTo(int newX, int newY) {
+    void moveTo(int newX, int newY) {
         this.x = newX;
         this.y = newY;
     }
