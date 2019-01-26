@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
  * A class that defines Claims to be used in Day 3. They are defined like rectangles.
  *
  * @author Jan Philipp Gölz
- * @contributor
  */
 public class Claim {
     /** ID of this claim */

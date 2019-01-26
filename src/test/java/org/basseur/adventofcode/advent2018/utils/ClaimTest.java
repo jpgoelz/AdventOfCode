@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ClaimTest {
 
     @Test
-    public void testConstructorAndGetters() {
+    public void testConstructor() {
         Claim claim = new Claim("#1 @ 2,3: 4x5");
 
         Assert.assertEquals(1, claim.getId());
