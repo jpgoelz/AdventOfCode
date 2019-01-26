@@ -2,6 +2,7 @@ package org.basseur.adventofcode.advent2018.days;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -17,8 +18,9 @@ public class Day01 implements Days {
     private HashMap<String, ProblemStatusEnum> problemStatus;
     private Integer[] frequencies;
 
-    public Day01() {
-        this.frequencies = FileReaders.readFileIntoArrayOfIntegers(FILE_LOCATION);
+    @Autowired
+    public Day01(FileReaders fileReaders) {
+        this.frequencies = fileReaders.readFileIntoArrayOfIntegers(FILE_LOCATION);
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
