@@ -61,7 +61,7 @@ public class AdventOfCodeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("content", is(resultDay1Part1)))
                 .andExpect(jsonPath("$._links.self.href", is("http://localhost:8080" + baseUrl + "?day=" + day1 + "&part=" + part1)))
-                .andDo(document("getAppointmentsForADateForAnEmployee",
+                .andDo(document("getResultForASpecificDayAndPuzzlePart",
                         preprocessResponse(prettyPrint()),
                         responseFields(getResultForASpecificDayAndPuzzlePart("")))
                 );

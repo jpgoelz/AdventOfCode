@@ -1,0 +1,26 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+= REST Service API Documentation
+
+== /api/adventOfCode?day={day}&part={part}
+
+=== Get a puzzle result for a day and part
+
+A `GET` request that will provide the result for a puzzle {part} for a specific {day}
+
+==== Example request
+
+include::../../../target/snippets/getResultForASpecificDayAndPuzzlePart/http-request.adoc[]
+
+==== Example response
+
+include::../../../target/snippets//getResultForASpecificDayAndPuzzlePart/http-response.adoc[]
+
+==== Response fields
+
+include::../../../target/snippets//getResultForASpecificDayAndPuzzlePart/response-fields.adoc[]

@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+content+`
+|`+String+`
+|Result of the Puzzle for a specific day and part of the AdventOfCode calendar
+
+|`+_links.self.href+`
+|`+String+`
+|Self link to the query for the specific solution for a day and part
+
+|===

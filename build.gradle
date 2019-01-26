@@ -2,7 +2,6 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
-        maven { url 'https://repo.spring.io/libs-snapshot' }
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -66,8 +65,6 @@ ext {
     snippetsDir = file('target/snippets')
 }
 
-ext['spring-restdocs.version'] = '2.0.3.RELEASE'
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
@@ -77,7 +74,7 @@ dependencies {
     implementation 'com.h2database:h2'
     implementation 'org.postgresql:postgresql:42.2.1'
     implementation 'org.liquibase:liquibase-core'
-    asciidoctor "org.springframework.restdocs:spring-restdocs-asciidoctor:${project.ext['spring-restdocs.version']}"
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'junit:junit'
