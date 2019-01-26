@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A class that defines Claims to be used in Day 3. They are defined like rectangles.
+ * A class that defines Claims to be used in Day 3.
  *
- * @author Jan Philipp Gölz
+ * @author Jan Philipp G&ouml;lz
  */
 public class Claim {
     /** ID of this claim */
