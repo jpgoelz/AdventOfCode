@@ -38,11 +38,10 @@ public class AdventOfCodeController {
     @GetMapping
     public Resource getResultForASpecificDayAndPuzzlePart(@RequestParam(value = "day", defaultValue = "") String day, @RequestParam(value = "part", defaultValue = "") String part) {
 
-        logger.info("controller logging");
+        logger.info("The results for day " + day + ", part " + part + " have been requested.");
 
         return new Resource<>(adventOfCodeService.getResultsForASpecificDayAndPuzzlePart(day, part),
                 linkTo(methodOn(AdventOfCodeController.class).getResultForASpecificDayAndPuzzlePart(day, part)).withSelfRel()
         );
     }
-
 }
