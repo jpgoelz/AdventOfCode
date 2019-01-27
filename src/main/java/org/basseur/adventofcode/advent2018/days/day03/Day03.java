@@ -3,6 +3,7 @@ package org.basseur.adventofcode.advent2018.days.day03;
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
 import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,12 +18,13 @@ public class Day03 implements Days {
 
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 
-    Day03() {
+    @Autowired
+    Day03(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
 
-        this.claimList = claimStringListToClaimArrayList(FileReaders.readFileIntoStringList(FILE_LOCATION));
+        this.claimList = claimStringListToClaimArrayList(fileReaders.readFileIntoStringList(FILE_LOCATION));
     }
 
     @Override
