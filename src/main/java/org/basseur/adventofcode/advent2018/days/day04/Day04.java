@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class Day04 implements Days {
 
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/Input.txt";
+    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day04/Input.txt";
     private final List<String> guardRecords;
 
     private final HashMap<String, ProblemStatusEnum> problemStatus;
