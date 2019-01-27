@@ -1,11 +1,11 @@
-package org.basseur.adventofcode.advent2018.utils;
+package org.basseur.adventofcode.advent2018.days.day04;
 
 /**
  * A class that defines Guards to be used in Day 4.
  *
  * @author Jan Philipp G&ouml;lz
  */
-public class Guard {
+class Guard {
     /** ID of this guard */
     private final int id;
 
