@@ -1,8 +1,8 @@
 package org.basseur.adventofcode.advent2018.service;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
-import org.basseur.adventofcode.advent2018.days.Day01;
 import org.basseur.adventofcode.advent2018.days.Days;
+import org.basseur.adventofcode.advent2018.days.day01.Day01;
 import org.basseur.adventofcode.advent2018.exceptions.PuzzleNotSolvedYetException;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018.days;
+package org.basseur.adventofcode.advent2018.days.day02;
 
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
@@ -14,7 +14,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 public class Day02Test {
 
-    private List<String> boxIds = new ArrayList<>();
+    private final List<String> boxIds = new ArrayList<>();
 
     @MockBean
     FileReaders fileReaders;
