@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
   root: {
@@ -58,7 +58,7 @@ class AddNewCard extends Component {
 
   handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
-    this.props.callback({ [event.target.name]: event.target.value })
+    this.props.callback({ [event.target.name]: event.target.value });
   };
 
   render() {
