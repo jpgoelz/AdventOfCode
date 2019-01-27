@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018.days;
+package org.basseur.adventofcode.advent2018.days.day03;
 
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
@@ -16,7 +16,7 @@ import java.util.List;
 @PrepareForTest({FileReaders.class})
 public class Day03Test {
 
-    private List<String> claimsStringList = new ArrayList<>();
+    private final List<String> claimsStringList = new ArrayList<>();
 
     @Test
     public void testGetDay() {

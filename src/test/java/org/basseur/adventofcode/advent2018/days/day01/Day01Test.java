@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018.days;
+package org.basseur.adventofcode.advent2018.days.day01;
 
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
@@ -24,7 +24,7 @@ public class Day01Test {
     }
 
     @Test
-    public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() throws Exception {
+    public void calculateDoubleFrequencyFindsFirstDoubleFrequencyForFirstExample() {
         //arrange
         frequencies = new Integer[4];
         frequencies[0] = 1;
