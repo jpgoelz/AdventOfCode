@@ -20,7 +20,7 @@ public class AdventOfCodeService {
     }
 
     /**
-     * Asks for the implementation for the requested {@param day} and then checks whether the requested {@param part}
+     * Asks for the implementation for the requested day and then checks whether the requested part
      * has been solved yet. Then it requests the retrieved implementation to calculate the solution.
      *
      * @param day the simple day of the advent calendar to be solved
