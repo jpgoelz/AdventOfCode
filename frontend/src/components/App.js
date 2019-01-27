@@ -9,25 +9,31 @@ import Grid from "@material-ui/core/Grid";
 const styles = theme => {
   return {
     alignCards: {
-      [theme.breakpoints.up("xs")] : {
+      [theme.breakpoints.up("xs")]: {
         justifyContent: "center",
         margin: 0
       },
-      [theme.breakpoints.up("sm")] : {
+      [theme.breakpoints.up("sm")]: {
         justifyContent: "flex-start",
         margin: 10
       }
     }
-  }
-}
+  };
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       part: "",
-      solved: { 1: {day: "1", part: "1", result: "Part 1 - Frequency: 599"},
-                2: {day: "1", part: "2", result: "Part 2 - Frequency reached twice: 81204"}}
+      solved: {
+        1: { day: "1", part: "1", result: "Part 1 - Frequency: 599" },
+        2: {
+          day: "1",
+          part: "2",
+          result: "Part 2 - Frequency reached twice: 81204"
+        }
+      }
     };
     this.setCardTemplateState = this.setCardTemplateState.bind(this);
     this.addPuzzleCards = this.addPuzzleCards.bind(this);
@@ -36,7 +42,14 @@ class App extends Component {
   addPuzzleCards() {
     const cards = [];
     for (var i = 1; i <= Object.keys(this.state.solved).length; i++) {
-      cards.push(<CardTemplate callback={this.setCardTemplateState} cardType={"puzzleCard"} day={this.state.solved[i].day} result={this.state.solved[i].result}/>);
+      cards.push(
+        <CardTemplate
+          callback={this.setCardTemplateState}
+          cardType={"puzzleCard"}
+          day={this.state.solved[i].day}
+          result={this.state.solved[i].result}
+        />
+      );
     }
     return cards;
   }
@@ -53,7 +66,10 @@ class App extends Component {
           direction="row"
           alignItems="flex-start"
         >
-          <CardTemplate callback={this.setCardTemplateState} cardType={"newCard"} />
+          <CardTemplate
+            callback={this.setCardTemplateState}
+            cardType={"newCard"}
+          />
           {this.addPuzzleCards()}
         </Grid>
       </div>
