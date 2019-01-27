@@ -1,5 +1,7 @@
 package org.basseur.adventofcode.advent2018.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,9 +9,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+@Component
 public class FileReaders {
 
-    public static Integer[] readFileIntoArrayOfIntegers(String filename) {
+    public Integer[] readFileIntoArrayOfIntegers(String filename) {
         Scanner scanner = openFileReturnScanner(filename);
         List<Integer> integerList = new ArrayList<>();
         while (Objects.requireNonNull(scanner).hasNext()) {
@@ -19,17 +22,17 @@ public class FileReaders {
         return integerList.toArray(new Integer[0]);
     }
 
-    public static List<String> readFileIntoStringList(String filename) {
+    public List<String> readFileIntoStringList(String filename) {
         Scanner scanner = openFileReturnScanner(filename);
         List<String> stringList = new ArrayList<>();
-        while (Objects.requireNonNull(scanner).hasNext()) {
-            stringList.add(scanner.next());
+        while (Objects.requireNonNull(scanner).hasNextLine()) {
+            stringList.add(scanner.nextLine());
         }
         scanner.close();
         return stringList;
     }
 
-    private static Scanner openFileReturnScanner(String filename) {
+    private Scanner openFileReturnScanner(String filename) {
         File file = new File(filename);
         Scanner scanner = null;
         try {

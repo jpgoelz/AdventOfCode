@@ -1,7 +1,6 @@
 package org.basseur.adventofcode.advent2018;
 
-import org.basseur.adventofcode.advent2018.days.Days;
-import org.basseur.adventofcode.advent2018.exceptions.PuzzleNotSolvedYetException;
+import org.basseur.adventofcode.advent2018.service.AdventOfCodeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Objects;
-
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -23,44 +19,30 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class AdventOfCodeController {
 
     private static final Logger logger = LoggerFactory.getLogger(AdventOfCodeController.class);
-    private final List<Days> daysSolutions;
+
+    private AdventOfCodeService adventOfCodeService;
 
     @Autowired
-    public AdventOfCodeController(List<Days> daysSolutions) {
-        this.daysSolutions = Objects.requireNonNull(daysSolutions);
+    public AdventOfCodeController(AdventOfCodeService adventOfCodeService) {
+        this.adventOfCodeService = adventOfCodeService;
     }
 
+    /**
+     * Handles a GET-Request with the day of the advent calendar and the part to be solved and returns a HATEOAS
+     * {@code Resource<>} with the corresponding solution.
+     *
+     * @param day the simple day of the advent calendar to be solved
+     * @param part the part of the puzzle for that day
+     * @return a HATEOAS-{@code Resource<>} with the corresponding solution
+     */
     @GetMapping
-    public Resource getResult(@RequestParam(value = "day", defaultValue = "") String day, @RequestParam(value = "part", defaultValue = "") String part) {
+    public Resource getResultForASpecificDayAndPuzzlePart(@RequestParam(value = "day", defaultValue = "") String day, @RequestParam(value = "part", defaultValue = "") String part) {
 
         logger.info("controller logging");
 
-        return new Resource<>(getResultsForASpecificDayAndPuzzlePart(day, part),
-                linkTo(methodOn(AdventOfCodeController.class).getResult(day, part)).withSelfRel()
+        return new Resource<>(adventOfCodeService.getResultsForASpecificDayAndPuzzlePart(day, part),
+                linkTo(methodOn(AdventOfCodeController.class).getResultForASpecificDayAndPuzzlePart(day, part)).withSelfRel()
         );
     }
 
-    private String getResultsForASpecificDayAndPuzzlePart(String day, String part) {
-        Days thisDaysClass = findDayForDay(Integer.parseInt(day));
-        if (!isProblemSolvedForPart(thisDaysClass, part)) {
-            throw new PuzzleNotSolvedYetException(new Throwable());
-        } else if (("1").equals(part)) {
-            return thisDaysClass.firstPart();
-        } else if (("2").equals(part)) {
-            return thisDaysClass.secondPart();
-        } else {
-            return "This puzzle has not been solved yet.";
-        }
-    }
-
-    private boolean isProblemSolvedForPart(Days thisDaysClass, String part) {
-        return thisDaysClass.getProblemStatus().containsKey(part) && thisDaysClass.getProblemStatus().get(part) == ProblemStatusEnum.SOLVED;
-    }
-
-    private Days findDayForDay(int day) {
-        return daysSolutions.stream()
-                .filter(solution -> solution.getDay() == day)
-                .findFirst()
-                .orElseThrow(() -> new PuzzleNotSolvedYetException(new Throwable()));
-    }
 }
