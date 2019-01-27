@@ -30,7 +30,7 @@ const styles = {
   },
   buttonProgress: {
     position: "relative",
-    bottom: -15,
+    bottom: -15
   }
 };
 
@@ -74,49 +74,62 @@ class CardTemplate extends Component {
             <CircularProgress className={classes.buttonProgress} />
           )}
         </CardContent>
-        {renderAddNewCardActions(this.state.cardType, classes, this.callController )}
+        {renderAddNewCardActions(
+          this.state.cardType,
+          classes,
+          this.callController
+        )}
       </Card>
     );
   }
 
   renderPuzzleCardContent() {
-        if (this.state.cardType === "puzzleCard") {
-            return <PuzzleCard callback={this.setCardTemplateState} result={this.state.result} day={this.state.day}/>;
-        }
+    if (this.state.cardType === "puzzleCard") {
+      return (
+        <PuzzleCard
+          callback={this.setCardTemplateState}
+          result={this.state.result}
+          day={this.state.day}
+        />
+      );
     }
+  }
   renderAddNewCardContent() {
     if (this.state.cardType === "newCard") {
-        return <AddNewCard callback={this.setCardTemplateState}/>;
+      return <AddNewCard callback={this.setCardTemplateState} />;
     }
   }
 
   setCardTemplateState(value) {
-      this.setState(value);
+    this.setState(value);
   }
 
   delay = duration => new Promise(resolve => setTimeout(resolve, duration));
 
   async callController() {
-      this.setState({ loading: true });
-      await this.delay(2000);
-      const response = await fetch(
-          "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.value
-      );
-      try {
-          const data = await response.json();
-          const content = data.content;
-          const message = data.message;
-          if (response.ok) {
-              this.setState({ result: content, loading: false, cardType: "puzzleCard" });
-          } else {
-              this.setState({ result: message, loading: false });
-          }
-      } catch (e) {
-          this.setState({ result: "There has been a technical error." });
-          this.setState({ loading: false });
+    this.setState({ loading: true });
+    await this.delay(2000);
+    const response = await fetch(
+      "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.value
+    );
+    try {
+      const data = await response.json();
+      const content = data.content;
+      const message = data.message;
+      if (response.ok) {
+        this.setState({
+          result: content,
+          loading: false,
+          cardType: "puzzleCard"
+        });
+      } else {
+        this.setState({ result: message, loading: false });
       }
+    } catch (e) {
+      this.setState({ result: "There has been a technical error." });
+      this.setState({ loading: false });
+    }
   }
-
 }
 
 CardTemplate.propTypes = {

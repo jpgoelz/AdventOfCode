@@ -24,22 +24,21 @@ const styles = {
 };
 
 class PuzzleCard extends Component {
+  render() {
+    const { classes } = this.props;
 
-    render () {
-        const { classes } = this.props;
-
-        return (
-            <div>
-                <Typography variant="h5" component="h2">
-                    Result for Day {this.props.day}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary" />
-                <Typography component="p">
-                    <p>{this.props.result}</p>
-                </Typography>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <Typography variant="h5" component="h2">
+          Result for Day {this.props.day}
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary" />
+        <Typography component="p">
+          <p>{this.props.result}</p>
+        </Typography>
+      </div>
+    );
+  }
 }
 
 PuzzleCard.propTypes = {
