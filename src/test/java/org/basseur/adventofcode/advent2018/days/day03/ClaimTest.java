@@ -1,4 +1,4 @@
-package org.basseur.adventofcode.advent2018.utils;
+package org.basseur.adventofcode.advent2018.days.day03;
 
 import org.junit.Assert;
 import org.junit.Test;
