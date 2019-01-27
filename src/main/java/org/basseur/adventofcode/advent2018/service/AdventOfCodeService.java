@@ -15,7 +15,7 @@ public class AdventOfCodeService {
     private final List<Days> daysSolutions;
 
     @Autowired
-    public AdventOfCodeService(List<Days> daysSolutions) {
+    AdventOfCodeService(List<Days> daysSolutions) {
         this.daysSolutions = Objects.requireNonNull(daysSolutions);
     }
 
