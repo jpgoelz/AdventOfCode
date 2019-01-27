@@ -1,26 +1,27 @@
-package org.basseur.adventofcode.advent2018.days;
+package org.basseur.adventofcode.advent2018.days.day02;
 
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({FileReaders.class})
+@RunWith(SpringRunner.class)
 public class Day02Test {
 
-    private List<String> boxIds = new ArrayList<>();
+    private final List<String> boxIds = new ArrayList<>();
+
+    @MockBean
+    FileReaders fileReaders;
 
     @Test
     public void testGetDay() {
-        Day02 day02 = new Day02();
+        Day02 day02 = new Day02(fileReaders);
         int expectedResult = 2;
         int actualResult = day02.getDay();
         Assert.assertEquals(expectedResult, actualResult);
@@ -37,9 +38,8 @@ public class Day02Test {
         boxIds.add("abcdee");
         boxIds.add("ababab");
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
-        Day02 day02 = new Day02();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
+        Day02 day02 = new Day02(fileReaders);
 
         String expectedResult = "Part 1 - Checksum: 12";
 
@@ -61,9 +61,8 @@ public class Day02Test {
         boxIds.add("axcye");
         boxIds.add("wvxyz");
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
-        Day02 day02 = new Day02();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(boxIds);
+        Day02 day02 = new Day02(fileReaders);
 
         String expectedResult = "Part 2 - Common letters: fgij";
 

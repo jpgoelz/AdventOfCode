@@ -1,26 +1,27 @@
-package org.basseur.adventofcode.advent2018.days;
+package org.basseur.adventofcode.advent2018.days.day03;
 
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({FileReaders.class})
+@RunWith(SpringRunner.class)
 public class Day03Test {
 
-    private List<String> claimsStringList = new ArrayList<>();
+    private final List<String> claimsStringList = new ArrayList<>();
+
+    @MockBean
+    FileReaders fileReaders;
 
     @Test
     public void testGetDay() {
-        Day03 day03 = new Day03();
+        Day03 day03 = new Day03(fileReaders);
 
         int expectedResult = 3;
         int actualResult = day03.getDay();
@@ -43,9 +44,8 @@ public class Day03Test {
         claimsStringList.add("#2 @ 3,1: 4x4"); // intersects with #1 by 4
         claimsStringList.add("#3 @ 5,5: 2x2"); // does not intersection
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
-        Day03 day03 = new Day03();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03(fileReaders);
 
         String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 4 square inches";
         String actualResult = day03.firstPart();
@@ -65,9 +65,8 @@ public class Day03Test {
         claimsStringList.add("#2 @ 3,1: 3x3"); // intersects #1 by 3 and #3 by 3
         claimsStringList.add("#3 @ 5,1: 3x3"); // intersects #2 by 3
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
-        Day03 day03 = new Day03();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03(fileReaders);
 
         String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 6 square inches";
         String actualResult = day03.firstPart();
@@ -89,9 +88,8 @@ public class Day03Test {
         claimsStringList.add("#2 @ 3,1: 3x3"); // intersects #1 by 3 and #3 by 2
         claimsStringList.add("#3 @ 2,3: 3x3"); // intersects #1 by 2 and #2 by 2
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
-        Day03 day03 = new Day03();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03(fileReaders);
 
         String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 5 square inches";
         String actualResult = day03.firstPart();
@@ -112,9 +110,8 @@ public class Day03Test {
         claimsStringList.add("#2 @ 3,1: 3x3"); // intersects #1 by 3 and #3 by 2
         claimsStringList.add("#3 @ 3,3: 1x1"); // intersects #1 by 2 and #2 by 2
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
-        Day03 day03 = new Day03();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03(fileReaders);
 
         String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 2 square inches";
         String actualResult = day03.firstPart();
@@ -137,9 +134,8 @@ public class Day03Test {
         claimsStringList.add("#2 @ 2,2: 3x3"); // intersects #1 by 9 and #3 by 1
         claimsStringList.add("#3 @ 4,3: 4x1"); // intersects #1 by 3 and #2 by 1
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
-        Day03 day03 = new Day03();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03(fileReaders);
 
         String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 11 square inches";
         String actualResult = day03.firstPart();
@@ -164,9 +160,8 @@ public class Day03Test {
         claimsStringList.add("#4 @ 5,3: 3x4"); // intersects #2 by 4, #3 by 2, #5 by 3
         claimsStringList.add("#5 @ 6,0: 1x6"); // intersects #2 by 3, #3 by 3, #4 by 3
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
-        Day03 day03 = new Day03();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03(fileReaders);
 
         String expectedResult = "Part 1 - Fabric area claimed by multiple Elves: 10 square inches";
         String actualResult = day03.firstPart();
@@ -189,9 +184,8 @@ public class Day03Test {
         claimsStringList.add("#2 @ 3,1: 4x4"); // intersects with #1 by 4
         claimsStringList.add("#3 @ 5,5: 2x2"); // does not intersection
 
-        PowerMockito.mockStatic(FileReaders.class);
-        PowerMockito.when(FileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
-        Day03 day03 = new Day03();
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(claimsStringList);
+        Day03 day03 = new Day03(fileReaders);
 
         String expectedResult = "Part 2 - The only non-overlapping claim has ID #3.";
         String actualResult = day03.secondPart();

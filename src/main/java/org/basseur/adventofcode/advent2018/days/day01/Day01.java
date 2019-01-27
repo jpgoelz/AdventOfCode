@@ -1,7 +1,9 @@
-package org.basseur.adventofcode.advent2018.days;
+package org.basseur.adventofcode.advent2018.days.day01;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
+import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -12,16 +14,18 @@ import java.util.Set;
 @Component
 public class Day01 implements Days {
 
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/Day01Input.txt";
+    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day01/Input.txt";
+    private final Integer[] frequencies;
 
-    private HashMap<String, ProblemStatusEnum> problemStatus;
-    private Integer[] frequencies;
+    private final HashMap<String, ProblemStatusEnum> problemStatus;
 
-    public Day01() {
-        this.frequencies = FileReaders.readFileIntoArrayOfIntegers(FILE_LOCATION);
+    @Autowired
+    Day01(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
+
+        this.frequencies = fileReaders.readFileIntoArrayOfIntegers(FILE_LOCATION);
     }
 
     @Override

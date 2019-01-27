@@ -1,23 +1,26 @@
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
     }
 }
 
 plugins {
     id 'java'
     id "com.moowork.node" version "1.2.0"
+    id "org.asciidoctor.convert" version "1.5.3"
 }
 
 allprojects {
     repositories {
         mavenCentral()
+        mavenLocal()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -45,6 +48,10 @@ node {
 bootJar {
     baseName = 'gs-spring-boot'
     version =  '0.1.0'
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
 }
 
 group 'org.basseur'
@@ -52,6 +59,10 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+ext {
+    snippetsDir = file('target/snippets')
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
@@ -62,10 +73,20 @@ dependencies {
     implementation 'com.h2database:h2'
     implementation 'org.postgresql:postgresql:42.2.1'
     implementation 'org.liquibase:liquibase-core'
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'junit:junit'
-    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
-    testImplementation "org.powermock:powermock-mockito-release-full:1.6.1"
+    testImplementation 'org.mockito:mockito-inline:2.8.9'
+}
+
+test {
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
 }
 
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
