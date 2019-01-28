@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A class that defines Claims to be used in Day 3.
+ * A class that defines Claims to be used in {@link Day03}.
  *
  * @author Jan Philipp G&ouml;lz
  */

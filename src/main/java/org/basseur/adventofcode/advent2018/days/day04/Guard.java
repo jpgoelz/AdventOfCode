@@ -1,7 +1,7 @@
 package org.basseur.adventofcode.advent2018.days.day04;
 
 /**
- * A class that defines Guards to be used in Day 4.
+ * A class that defines Guards to be used in {@link Day04}.
  *
  * @author Jan Philipp G&ouml;lz
  */
