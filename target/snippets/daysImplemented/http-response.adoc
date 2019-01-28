@@ -1,0 +1,17 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Length: 176
+Content-Type: application/json;charset=UTF-8
+
+{
+  "_embedded" : {
+    "integerList" : [ 1, 2 ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/adventOfCode/daysimplemented"
+    }
+  }
+}
+----

@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/api/adventOfCode/daysimplemented' \
+    'Content-Type:application/hal+json;charset=UTF-8'
+----
