@@ -41,7 +41,6 @@ public class Day02 implements Days {
         return "Part 1 - Checksum: " + calculateChecksum();
     }
 
-    //TODO: implement solution
     @Override
     public String secondPart() {
         return "Part 2 - Common letters: " + findCommonLettersBetweenCorrectBoxIds();
