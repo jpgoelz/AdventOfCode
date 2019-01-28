@@ -65,4 +65,13 @@ public class AdventOfCodeService {
                 .findFirst()
                 .orElseThrow(() -> new PuzzleNotSolvedYetException(new Throwable()));
     }
+
+    /**
+     * Getter for {@code daysSolutions}
+     *
+     * @return a List of all implemented days
+     */
+    public List<Days> getDaysSolutions() {
+        return daysSolutions;
+    }
 }
