@@ -114,16 +114,21 @@ tasks.withType(Test) {
     }
 }
 
-task npmRunScriptBuild( type: NpmTask, dependsOn: 'npmInstall' ) {
+task npmRunScriptBuild( type: NpmTask, dependsOn: 'npmTest' ) {
     args = ['run-script', 'build:jar']
     execOverrides {
         it.workingDir = 'frontend'
     }
 }
 
+task npmTest( type: NpmTask, dependsOn: 'npmInstall') {
+    args = ['test']
+}
+
 npmSetup.dependsOn nodeSetup
 npmInstall.dependsOn npmSetup
-npmRunScriptBuild.dependsOn npmInstall
+npmTest.dependsOn npmInstall
+npmRunScriptBuild.dependsOn npmTest
 
 /** processResources is part of the jar task and copies production resources into the production
  *  resources directory. This should only happen after then npmRunScriptBuild has generated those
