@@ -124,7 +124,7 @@ public class AdventOfCodeControllerTest {
 
         ArrayList<FieldDescriptor> fieldDescriptorList = new ArrayList<>();
         fieldDescriptorList.add(fieldWithPath(pathString + "_embedded.integerList")
-                .description("List of all  implemented days."));
+                .description("List of all implemented days."));
         fieldDescriptorList.add(fieldWithPath(pathString + "_links.self.href")
                 .description("Self link to the query for the specific solution for a day and part"));
 
