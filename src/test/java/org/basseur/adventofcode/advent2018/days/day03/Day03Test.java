@@ -17,7 +17,7 @@ public class Day03Test {
     private final List<String> claimsStringList = new ArrayList<>();
 
     @MockBean
-    FileReaders fileReaders;
+    private FileReaders fileReaders;
 
     @Test
     public void testGetDay() {

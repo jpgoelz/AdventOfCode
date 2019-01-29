@@ -14,7 +14,7 @@ public class Day01Test {
     private Integer[] frequencies;
 
     @MockBean
-    FileReaders fileReaders;
+    private FileReaders fileReaders;
 
     @Test
     public void testGetDay() {

@@ -35,8 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AdventOfCodeControllerTest {
 
     @MockBean
-    private
-    AdventOfCodeService adventOfCodeService;
+    private AdventOfCodeService adventOfCodeService;
 
     private String baseUrl = "/api/adventOfCode";
 
