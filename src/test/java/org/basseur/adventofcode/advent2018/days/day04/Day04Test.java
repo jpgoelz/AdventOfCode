@@ -16,7 +16,7 @@ import java.util.List;
 public class Day04Test {
 
     @MockBean
-    FileReaders fileReaders;
+    private FileReaders fileReaders;
     private List<String> guardRecords = new ArrayList<>();
 
     @Test
