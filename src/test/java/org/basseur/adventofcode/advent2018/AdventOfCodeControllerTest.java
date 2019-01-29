@@ -1,5 +1,6 @@
 package org.basseur.adventofcode.advent2018;
 
+import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.service.AdventOfCodeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -32,6 +34,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class AdventOfCodeControllerTest {
 
+    @MockBean
+    private AdventOfCodeService adventOfCodeService;
+
     private String baseUrl = "/api/adventOfCode";
 
     private MediaType contentType = new MediaType("application", "hal+json", Charset.forName("UTF-8"));
@@ -43,18 +48,14 @@ public class AdventOfCodeControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
-    AdventOfCodeService adventOfCodeService;
-
     @Before
     public void setup() {
-
         Mockito.when(adventOfCodeService.getResultsForASpecificDayAndPuzzlePart(day1, part1))
                 .thenReturn(resultDay1Part1);
     }
 
     @Test
-    public void testGetResultForASpecificDayAndPuzzlePart()throws Exception {
+    public void testGetResultForASpecificDayAndPuzzlePart() throws Exception {
 
         mvc.perform(get(baseUrl + "?day=" + day1 + "&part=" + part1)
                 .contentType(contentType))
@@ -68,6 +69,38 @@ public class AdventOfCodeControllerTest {
 
     }
 
+    @Test
+    public void testDaysImplemented() throws Exception {
+        Days day01Stub = Mockito.mock(Days.class);
+        Mockito.when(day01Stub.getDay()).thenReturn(1);
+
+        Days day02Stub = Mockito.mock(Days.class);
+        Mockito.when(day02Stub.getDay()).thenReturn(2);
+
+        List<Days> daysImplementedList = new ArrayList<>();
+        daysImplementedList.add(day01Stub);
+        daysImplementedList.add(day02Stub);
+
+        List<Integer> daysImplementedIntegerList = new ArrayList<>();
+        daysImplementedIntegerList.add(1);
+        daysImplementedIntegerList.add(2);
+
+        Mockito.when(adventOfCodeService.getDaysSolutions())
+                .thenReturn(daysImplementedList);
+
+        mvc.perform(get(baseUrl + "/daysimplemented")
+                .contentType(contentType))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("_embedded.integerList", is(daysImplementedIntegerList)))
+                .andExpect(jsonPath("$._links.self.href", is("http://localhost:8080" + baseUrl + "/daysimplemented")))
+                .andDo(document(
+                        "daysImplemented",
+                        preprocessResponse(prettyPrint()),
+                        responseFields(daysImplemented(""))
+                        )
+                );
+    }
+
     private ArrayList<FieldDescriptor> getResultForASpecificDayAndPuzzlePart(String path) {
         String pathString;
         if (path.isEmpty()) {
@@ -77,6 +110,21 @@ public class AdventOfCodeControllerTest {
         ArrayList<FieldDescriptor> fieldDescriptorList = new ArrayList<>();
         fieldDescriptorList.add(fieldWithPath(pathString + "content")
                 .description("Result of the Puzzle for a specific day and part of the AdventOfCode calendar"));
+        fieldDescriptorList.add(fieldWithPath(pathString + "_links.self.href")
+                .description("Self link to the query for the specific solution for a day and part"));
+
+        return fieldDescriptorList;
+    }
+
+    private ArrayList<FieldDescriptor> daysImplemented(String path) {
+        String pathString;
+        if (path.isEmpty()) {
+            pathString = "";
+        } else pathString = path;
+
+        ArrayList<FieldDescriptor> fieldDescriptorList = new ArrayList<>();
+        fieldDescriptorList.add(fieldWithPath(pathString + "_embedded.integerList")
+                .description("List of all implemented days"));
         fieldDescriptorList.add(fieldWithPath(pathString + "_links.self.href")
                 .description("Self link to the query for the specific solution for a day and part"));
 

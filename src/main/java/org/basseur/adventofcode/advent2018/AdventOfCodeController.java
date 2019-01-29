@@ -1,15 +1,19 @@
 package org.basseur.adventofcode.advent2018;
 
+import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.service.AdventOfCodeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -38,11 +42,30 @@ public class AdventOfCodeController {
     @GetMapping
     public Resource getResultForASpecificDayAndPuzzlePart(@RequestParam(value = "day", defaultValue = "") String day, @RequestParam(value = "part", defaultValue = "") String part) {
 
-        logger.info("controller logging");
+        logger.info("The results for day " + day + ", part " + part + " have been requested.");
 
-        return new Resource<>(adventOfCodeService.getResultsForASpecificDayAndPuzzlePart(day, part),
+        return new Resource<>(
+                adventOfCodeService.getResultsForASpecificDayAndPuzzlePart(day, part),
                 linkTo(methodOn(AdventOfCodeController.class).getResultForASpecificDayAndPuzzlePart(day, part)).withSelfRel()
         );
     }
 
+
+    /**
+     * Returns a HATEOAS {@code Resources<>} with an integer list of all days that have been implemented
+     *
+     * @return a HATEOAS-{@code Resources<>} with an integer list of all days that have been implemented
+     */
+    @GetMapping("/daysimplemented")
+    public Resources daysImplemented() {
+
+        logger.info("A list of implemented days has been requested.");
+
+        return new Resources<>(
+                adventOfCodeService.getDaysSolutions().stream()
+                        .map(Days::getDay)
+                        .collect(Collectors.toList()),
+                linkTo(methodOn(AdventOfCodeController.class).daysImplemented()).withSelfRel()
+        );
+    }
 }

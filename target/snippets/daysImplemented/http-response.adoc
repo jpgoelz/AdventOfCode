@@ -1,14 +1,16 @@
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 200 OK
-Content-Length: 160
+Content-Length: 176
 Content-Type: application/json;charset=UTF-8
 
 {
-  "content" : "Part 1 - Frequency: 599",
+  "_embedded" : {
+    "integerList" : [ 1, 2 ]
+  },
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/api/adventOfCode?day=1&part=1"
+      "href" : "http://localhost:8080/api/adventOfCode/daysimplemented"
     }
   }
 }

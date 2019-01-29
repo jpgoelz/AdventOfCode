@@ -24,3 +24,23 @@ include::../../../target/snippets//getResultForASpecificDayAndPuzzlePart/http-re
 ==== Response fields
 
 include::../../../target/snippets//getResultForASpecificDayAndPuzzlePart/response-fields.adoc[]
+
+
+
+== /api/adventOfCode/daysimplemented
+
+=== Get a list of all implemented days
+
+A `GET` request that will provide a list of all implemented days
+
+==== Example request
+
+include::../../../target/snippets/daysImplemented/http-request.adoc[]
+
+==== Example response
+
+include::../../../target/snippets//daysImplemented/http-response.adoc[]
+
+==== Response fields
+
+include::../../../target/snippets//daysImplemented/response-fields.adoc[]
