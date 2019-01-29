@@ -3,7 +3,7 @@
 
 |`+_embedded.integerList+`
 |`+Array+`
-|List of all  implemented days.
+|List of all implemented days
 
 |`+_links.self.href+`
 |`+String+`
