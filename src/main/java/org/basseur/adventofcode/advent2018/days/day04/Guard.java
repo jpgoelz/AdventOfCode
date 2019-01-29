@@ -12,15 +12,18 @@ class Guard {
     /**
      * A constructor setting the ID
      *
-     * @param id
-     *         the ID of the new guard
+     * @param id the ID of the new guard
      */
     public Guard(int id) {
         this.id = id;
     }
 
-    public void addEvent(String event) {
+    /**
+     * Getter for {@code id }
+     *
+     * @return the ID of this guard
+     */
+    int getID() {
+        return this.id;
     }
-
-
 }
