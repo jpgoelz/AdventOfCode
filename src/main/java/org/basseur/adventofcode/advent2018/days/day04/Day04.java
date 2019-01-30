@@ -13,15 +13,30 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Implementation for <i>Day 4: Repose Record</i>.
+ *
+ * @author Jan Philipp G&ouml;lz
+ */
 @Component
 public class Day04 implements Days {
 
+    /** The location of the puzzle input file */
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day04/Input.txt";
+    /** A list containing all the guard records */
     private final List<String> guardRecords;
+    /** A {@code Map} containing all the {@link Guard}s mapped to their IDs */
     private final Map<Integer, Guard> guardHashMap = new HashMap<>();
 
+    /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 
+    /**
+     * Causes the input file to be parsed into the guard
+     * records list and then sorts them.
+     *
+     * @param fileReaders {@code @Autowired} fileReader
+     */
     @Autowired
     Day04(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
@@ -76,6 +91,7 @@ public class Day04 implements Days {
      */
     private int getIdMultipliedByMinute() {
         parseGuards();
+
         return 0;
     }
 }
