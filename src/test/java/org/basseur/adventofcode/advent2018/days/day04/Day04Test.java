@@ -29,7 +29,6 @@ public class Day04Test {
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Ignore
     @Test
     public void testFirstPart() {
         guardRecords.add("[1518-11-05 00:03] Guard #99 begins shift");

@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.Collator;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 /**
  * Implementation for <i>Day 4: Repose Record</i>.
@@ -40,7 +42,7 @@ public class Day04 implements Days {
     @Autowired
     Day04(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
-        this.problemStatus.put("1", ProblemStatusEnum.IN_PROGRESS);
+        this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
 
         this.guardRecords = fileReaders.readFileIntoStringList(FILE_LOCATION);
@@ -69,21 +71,6 @@ public class Day04 implements Days {
 
 
     /**
-     * Parses all the Guards from the {@code guardRecords} and adds them to {@code HashMap<Integer, Guard> guardHashMap}.
-     */
-    private void parseGuards() {
-        for (String guardRecord : guardRecords) {
-            Pattern pattern = Pattern.compile("\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}\\] Guard #(\\d+) begins shift");
-            Matcher matcher = pattern.matcher(guardRecord);
-            int id = 0;
-            if (matcher.find()) {
-                id = Integer.parseInt(matcher.group(1));
-                guardHashMap.put(id, new Guard(id));
-            }
-        }
-    }
-
-    /**
      * Primary method for Day 4, Part 1.
      * Multiplies the ID of the guard who slept the longest by the minute he slept the most.
      *
@@ -91,7 +78,64 @@ public class Day04 implements Days {
      */
     private int getIdMultipliedByMinute() {
         parseGuards();
+        parseRecords();
 
-        return 0;
+        int maxTotalSleep = 0;
+        int idOfGuardWithMaxTotalSleep = 0;
+        int minuteOfMaximumSleep = 0;
+
+        for (Map.Entry<Integer, Guard> entry : guardHashMap.entrySet()) {
+            Guard currentGuard = entry.getValue();
+
+            if (currentGuard.getTotalSleep() > maxTotalSleep) {
+                maxTotalSleep = currentGuard.getTotalSleep();
+                idOfGuardWithMaxTotalSleep = currentGuard.getID();
+                minuteOfMaximumSleep = currentGuard.getMinuteOfMaximumSleep();
+            }
+        }
+        return idOfGuardWithMaxTotalSleep * minuteOfMaximumSleep;
+    }
+
+    /**
+     * Parses all the Guards from the {@code guardRecords} and adds them to {@code HashMap<Integer, Guard> guardHashMap}.
+     */
+    private void parseGuards() {
+        for (String guardRecord : guardRecords) {
+            Matcher matcher = Pattern.compile(".+Guard #(\\d+) begins shift").matcher(guardRecord);
+            if (matcher.find()) {
+                int id = Integer.parseInt(matcher.group(1));
+                guardHashMap.put(id, new Guard(id));
+            }
+        }
+    }
+
+    /**
+     * Parses all the Minutes of Sleep and adds them to the corresponding {@link Guard}s.
+     */
+    private void parseRecords() {
+        int[] minutesOfSleep = new int[60];
+        int asleepFrom = 0;
+        int id = 0;
+
+        for (String guardRecord : guardRecords) {
+            Matcher matcher = Pattern.compile(".+Guard #(\\d+) begins shift").matcher(guardRecord);
+
+            if (matcher.find()) {
+                id = Integer.parseInt(matcher.group(1));
+
+            } else if (guardRecord.toLowerCase().contains("falls asleep")) {
+                asleepFrom = Integer.valueOf(guardRecord.substring(15, 17));
+
+            } else if (guardRecord.toLowerCase().contains("wakes up")) {
+                int asleepUntil = Integer.valueOf(guardRecord.substring(15, 17));
+                System.out.println("Guard ID #" + id + " slept from " + asleepFrom + " until " + asleepUntil);
+
+                IntStream.range(asleepFrom, asleepUntil).forEach(minute -> minutesOfSleep[minute] += 1);
+                System.out.println("slept " + IntStream.of(minutesOfSleep).sum() + " min");
+                guardHashMap.get(id).addSleep(minutesOfSleep);
+                Arrays.fill(minutesOfSleep, 0);
+                System.out.println(guardHashMap.get(id).getTotalSleep());
+            }
+        }
     }
 }
