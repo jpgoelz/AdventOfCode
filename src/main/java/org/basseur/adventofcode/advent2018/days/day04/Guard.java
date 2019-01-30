@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 class Guard {
     /** ID of this guard */
     private final int id;
+    /** An array of size 60 to store the amount of sleep per minute */
     private final int[] sleepPerMinute = new int[60];
 
     /**
