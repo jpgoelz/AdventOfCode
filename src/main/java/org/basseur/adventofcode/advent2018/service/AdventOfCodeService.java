@@ -20,7 +20,7 @@ public class AdventOfCodeService {
     }
 
     /**
-     * Asks for the implementation for the requested {@param day} and then checks whether the requested {@param part}
+     * Asks for the implementation for the requested day and then checks whether the requested part
      * has been solved yet. Then it requests the retrieved implementation to calculate the solution.
      *
      * @param day the simple day of the advent calendar to be solved
@@ -64,5 +64,14 @@ public class AdventOfCodeService {
                 .filter(solution -> solution.getDay() == day)
                 .findFirst()
                 .orElseThrow(() -> new PuzzleNotSolvedYetException(new Throwable()));
+    }
+
+    /**
+     * Getter for {@code daysSolutions}
+     *
+     * @return a List of all implemented days
+     */
+    public List<Days> getDaysSolutions() {
+        return daysSolutions;
     }
 }
