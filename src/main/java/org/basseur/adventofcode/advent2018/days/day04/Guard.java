@@ -67,4 +67,13 @@ class Guard {
         }
         return minuteOfMaximumSleep;
     }
+
+    /**
+     * Returns the maximum amount of sleep per minute.
+     *
+     * @return the maximum amount of sleep per minute
+     */
+    int getAmountOfSleepForMaxSleepMinute() {
+        return IntStream.of(sleepPerMinute).max().orElse(0);
+    }
 }
