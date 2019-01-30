@@ -10,14 +10,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Implementation for <i>Day 3: No Matter How You Slice It</i>.
+ *
+ * @author Jan Philipp G&ouml;lz
+ */
 @Component
 public class Day03 implements Days {
 
+    /** The location of the puzzle input file */
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day03/Input.txt";
+    /** A list containing all the {@link Claim}s */
     private final List<Claim> claimList;
 
+    /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 
+    /**
+     * Causes the input file to be parsed into the claim list.
+     *
+     * @param fileReaders {@code @Autowired} fileReader
+     */
     @Autowired
     Day03(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
@@ -51,10 +64,8 @@ public class Day03 implements Days {
      * Returns a {@code List<Claim>}, which contains all claims from {@code claimsStringList}.
      * Each line is passed as a parameter to the constructor of {@code Claim}, which parses it.
      *
-     * @param claimsStringList
-     *         requires a {@code List<String>} of claims in the format
-     *         #<u>id</u> @ <u>x</u>,<u>y</u>: <u>width</u>x<u>height</u>
-     *
+     * @param claimsStringList requires a {@code List<String>} of claims in the format
+     * #<u>id</u> @ <u>x</u>,<u>y</u>: <u>width</u>x<u>height</u>
      * @return a {@code List<Claim>} containing all parsed claims
      */
     private List<Claim> claimStringListToClaimArrayList(List<String> claimsStringList) {
@@ -66,7 +77,7 @@ public class Day03 implements Days {
     }
 
     /**
-     * Primary Method for the Day 3, Part 1.
+     * Primary method for Day 3, Part 1.
      * Calculates the area of fabric that is claimed more than once.
      * <p>
      * A "scanning-claim" ({@code Claim scanRect}) of size 1x1 is used that scans
@@ -100,7 +111,7 @@ public class Day03 implements Days {
     }
 
     /**
-     * Primary Method for the Day 3, Part 2.
+     * Primary method for the Day 3, Part 2.
      * It finds the ID of the first claim that does not overlap with others.
      * <p>
      * All claims are checked against each other. Unless claims are the same,
@@ -133,9 +144,7 @@ public class Day03 implements Days {
     /**
      * Finds the maximum extent of all claims in x-direction.
      *
-     * @param claims
-     *         a {@code List<Claim>}
-     *
+     * @param claims a {@code List<Claim>}
      * @return the maximum extent of all claims in x-direction
      */
     private int getMaxX(List<Claim> claims) {
@@ -149,9 +158,7 @@ public class Day03 implements Days {
     /**
      * Finds the maximum extent of all claims in y-direction.
      *
-     * @param claims
-     *         a {@code List<Claim>}
-     *
+     * @param claims a {@code List<Claim>}
      * @return the maximum extent of all claims in y-direction
      */
     private int getMaxY(List<Claim> claims) {

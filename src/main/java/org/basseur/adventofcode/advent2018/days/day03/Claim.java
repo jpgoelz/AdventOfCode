@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A class that defines Claims to be used in Day 3. They are defined like rectangles.
+ * A class that defines Claims to be used in {@link Day03}.
  *
  * @author Jan Philipp G&ouml;lz
  */
@@ -25,12 +25,9 @@ class Claim {
      * Because claims should only be created, if the pattern is matched,
      * an exception is thrown if they don't.
      *
-     * @param claimsListItem
-     *         a {@code String} in the format
-     *         #<u>id</u> @ <u>x</u>,<u>y</u>: <u>width</u>x<u>height</u>
-     *
-     * @throws IllegalArgumentException
-     *         in case {@code claimsListItem} does not match the pattern
+     * @param claimsListItem a {@code String} in the format
+     * #<u>id</u> @ <u>x</u>,<u>y</u>: <u>width</u>x<u>height</u>
+     * @throws IllegalArgumentException in case {@code claimsListItem} does not match the pattern
      */
     Claim(String claimsListItem) {
         Pattern pattern = Pattern.compile("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)");
@@ -45,7 +42,6 @@ class Claim {
             throw new IllegalArgumentException(claimsListItem + " does not match Pattern");
         }
     }
-
 
     /**
      * Returns the ID of this claim.
@@ -100,6 +96,9 @@ class Claim {
      * Rectangles don't overlap if {@code x2} of one is smaller than {@code x} of the other.
      * The same goes for {@code y} and {@code y2}. To check for overlaps, the opposite is checked.
      * All statements must be true (or else no overlap).
+     *
+     * @param other another {@code Claim} to compare this Claim to
+     * @return wether the compared {@code Claim}s overlap or not.
      */
     boolean intersects(Claim other) {
         int thisX2 = this.x + this.width;
@@ -113,10 +112,8 @@ class Claim {
     /**
      * Moves this claim to the new specified positions on the x- and y-axis.
      *
-     * @param newX
-     *         new position on the x-axis
-     * @param newY
-     *         new position on the y-axis
+     * @param newX new position on the x-axis
+     * @param newY new position on the y-axis
      */
     void moveTo(int newX, int newY) {
         this.x = newX;

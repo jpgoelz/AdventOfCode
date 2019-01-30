@@ -11,14 +11,27 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Implementation for <i>Day 1: Chronal Calibration</i>.
+ *
+ * @author Jan Philipp G&ouml;lz
+ */
 @Component
 public class Day01 implements Days {
 
+    /** The location of the puzzle input file */
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day01/Input.txt";
+    /** An array containing all the frequencies */
     private final Integer[] frequencies;
 
+    /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 
+    /**
+     * Causes the input file to be parsed into the frequencies array ({@code frequencies}).
+     *
+     * @param fileReaders {@code @Autowired} fileReader
+     */
     @Autowired
     Day01(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
@@ -48,10 +61,22 @@ public class Day01 implements Days {
         return "Part 2 - Frequency reached twice: " + calculateDoubleFrequency();
     }
 
+    /**
+     * Primary method for Day 1, Part 1.
+     * Calculates the final frequency as the sum of all frequencies.
+     *
+     * @return the final frequency
+     */
     private int calculateFrequency() {
         return Arrays.stream(frequencies).mapToInt(a -> a).sum();
     }
 
+    /**
+     * Primary method for Day 1, Part 2.
+     * Finds and returns the first frequency reached twice.
+     *
+     * @return the first frequency found twice
+     */
     private int calculateDoubleFrequency() {
         Set<Integer> uniqueFrequencies = new HashSet<>();
         int frequency = 0;

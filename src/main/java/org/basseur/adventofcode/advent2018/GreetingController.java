@@ -8,6 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * GreetingController is "just for fun".
+ * Will be removed later.
+ *
+ * @author Michelle Fernandez Bieber
+ */
 @RestController
 public class GreetingController {
 

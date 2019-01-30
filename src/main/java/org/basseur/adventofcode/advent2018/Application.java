@@ -3,6 +3,11 @@ package org.basseur.adventofcode.advent2018;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * The Spring Boot Application.
+ *
+ * @author Michelle Fernandez Bieber
+ */
 @SpringBootApplication
 public class Application {
 

@@ -9,14 +9,27 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Implementation for <i>Day 2: Inventory Management System</i>.
+ *
+ * @author Jan Philipp G&ouml;lz
+ */
 @Component
 public class Day02 implements Days {
 
+    /** The location of the puzzle input file */
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day02/Input.txt";
+    /** A list containing all the box IDs */
     private final List<String> boxIds;
 
+    /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 
+    /**
+     * Causes the input file to be parsed into the list of box IDs ({@code boxIds}).
+     *
+     * @param fileReaders {@code @Autowired} fileReader
+     */
     @Autowired
     Day02(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
@@ -46,6 +59,12 @@ public class Day02 implements Days {
         return "Part 2 - Common letters: " + findCommonLettersBetweenCorrectBoxIds();
     }
 
+    /**
+     * Primary method for Day 2, Part 1.
+     * Calculates and returns the checksum of double letters multiplied by tipple letters.
+     *
+     * @return the checksum of double letters multiplied by tipple letters
+     */
     private int calculateChecksum() {
         int tripleLetters = 0;
         int doubleLetters = 0;
@@ -76,6 +95,12 @@ public class Day02 implements Days {
         return doubleLetters * tripleLetters;
     }
 
+    /**
+     * Primary method for Day 2, Part 2.
+     * Finds and returns the common letters between correct box IDs.
+     *
+     * @return the common letters between correct box IDs
+     */
     private String findCommonLettersBetweenCorrectBoxIds() {
         StringBuilder commonLetters = new StringBuilder();
         int lengthOfListElements = boxIds.size();
@@ -104,6 +129,7 @@ public class Day02 implements Days {
                 }
             }
         }
+
         return commonLetters.toString();
     }
 }
