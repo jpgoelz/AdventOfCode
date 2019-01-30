@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 /**
  * The Puzzle entity is managed by the {@link PuzzleRepository}.
+ *
+ * @author Michelle Fernandez Bieber
  */
 @Entity
 public class Puzzle {

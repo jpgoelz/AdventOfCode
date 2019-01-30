@@ -2,6 +2,8 @@ package org.basseur.adventofcode.advent2018;
 
 /**
  * Contains the possible statuses for each puzzle.
+ *
+ * @author Michelle Fernandez Bieber
  */
 public enum ProblemStatusEnum {
     /** if the puzzle has been solved */

@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * The PuzzleRepository manages the {@link Puzzle} entities.
+ *
+ * @author Michelle Fernandez Bieber
  */
 @Repository
 public interface PuzzleRepository extends CrudRepository<Puzzle, Long> {
