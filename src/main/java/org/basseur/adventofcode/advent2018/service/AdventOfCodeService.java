@@ -9,11 +9,25 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The <i>Advent of Code</i> Service is used by
+ * {@link org.basseur.adventofcode.advent2018.AdventOfCodeController}
+ * to handle calls made to it.
+ *
+ * @author Michelle Fernandez Bieber
+ */
 @Component
 public class AdventOfCodeService {
 
+    /** A list containing all {@link Days} from the corresponding subpackages. */
     private final List<Days> daysSolutions;
 
+
+    /**
+     * {@code @Autowired} constructor adding all implemented {@link Days} to the list of Days.
+     *
+     * @param daysSolutions {@code @Autowired} days solutions
+     */
     @Autowired
     public AdventOfCodeService(List<Days> daysSolutions) {
         this.daysSolutions = Objects.requireNonNull(daysSolutions);
