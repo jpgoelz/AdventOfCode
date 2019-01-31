@@ -104,11 +104,8 @@ class CardTemplate extends Component {
     this.setState(value);
   }
 
-  delay = duration => new Promise(resolve => setTimeout(resolve, duration));
-
   async callController() {
     this.setState({ loading: true });
-    await this.delay(2000);
     const response = await fetch(
       "/api/adventOfCode?day=" + this.state.day + "&part=" + this.state.value
     );
