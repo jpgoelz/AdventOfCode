@@ -49,7 +49,6 @@ function renderAddNewCardActions(cardType, classes, callController) {
 class CardTemplate extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       part: "",
       result: this.props.result,
