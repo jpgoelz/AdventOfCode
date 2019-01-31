@@ -35,7 +35,7 @@ class App extends Component {
         }
       }
     };
-    this.setCardTemplateState = this.setCardTemplateState.bind(this);
+    this.setPuzzleResult = this.setPuzzleResult.bind(this);
     this.addPuzzleCards = this.addPuzzleCards.bind(this);
   }
 
@@ -44,7 +44,7 @@ class App extends Component {
     for (var i = 1; i <= Object.keys(this.state.solved).length; i++) {
       cards.push(
         <CardTemplate
-          callback={this.setCardTemplateState}
+          callback={this.setPuzzleResult}
           cardType={"puzzleCard"}
           day={this.state.solved[i].day}
           result={this.state.solved[i].result}
@@ -66,18 +66,20 @@ class App extends Component {
           direction="row"
           alignItems="flex-start"
         >
-          <CardTemplate
-            callback={this.setCardTemplateState}
-            cardType={"newCard"}
-          />
+          <CardTemplate callback={this.setPuzzleResult} cardType={"newCard"} />
           {this.addPuzzleCards()}
         </Grid>
       </div>
     );
   }
 
-  setCardTemplateState(value) {
-    this.setState(value);
+  setPuzzleResult(value) {
+    console.log(value);
+    let nextSolved = Object.keys(this.state.solved).length + 1;
+    let solved = Object.assign({}, this.state.solved);
+    solved[nextSolved] = value;
+    console.log(solved);
+    this.setState({ solved });
   }
 }
 
