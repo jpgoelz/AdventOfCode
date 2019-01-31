@@ -6,7 +6,10 @@ import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Implementation for <i>Day 5: Alchemical Reduction</i>.
@@ -33,7 +36,7 @@ public class Day05 implements Days {
     Day05(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
 
         this.polymerString = String.join("", fileReaders.readFileIntoStringList(FILE_LOCATION));
     }
@@ -45,12 +48,12 @@ public class Day05 implements Days {
 
     @Override
     public String firstPart() {
-        return "Part 1 - Number of remaining units: " + unitsRemaining();
+        return "Part 1 - Length of remaining polymer: " + unitsRemaining(polymerString);
     }
 
     @Override
     public String secondPart() {
-        return "Part 2 - ";
+        return "Part 2 - Length of the shortest polymer: " + shortestPossiblePolymer();
     }
 
     @Override
@@ -59,7 +62,7 @@ public class Day05 implements Days {
     }
 
     /**
-     * Primary method for Day 5, Part 1.
+     * Primary method for Day 5, Part 1 and helper method for Part 2.
      * <p>
      * Finds and returns the number of units remaining after fully reacting the polymer.
      * For this each letter combination of <i>aA</i> and <i>Aa</i> is removed. Removal
@@ -70,8 +73,8 @@ public class Day05 implements Days {
      *
      * @return the number of units remaining
      */
-    private int unitsRemaining() {
-        String resultingPolymerString = polymerString;
+    private int unitsRemaining(String inputPolymer) {
+        String resultingPolymerString = inputPolymer;
         boolean replaced = true;
 
         while (replaced)
@@ -81,8 +84,8 @@ public class Day05 implements Days {
                 String upperLower = alphabet + Character.toString(alphabet).toLowerCase();
                 String lowerUpper = Character.toString(alphabet).toLowerCase() + alphabet;
 
-                resultingPolymerString = resultingPolymerString.replace(upperLower, "");
-                resultingPolymerString = resultingPolymerString.replace(lowerUpper, "");
+                resultingPolymerString = resultingPolymerString.replaceAll(upperLower, "");
+                resultingPolymerString = resultingPolymerString.replaceAll(lowerUpper, "");
 
                 if (resultingPolymerString.length() == initialLength) {
                     replaced = false;
@@ -92,5 +95,24 @@ public class Day05 implements Days {
                 }
             }
         return resultingPolymerString.length();
+    }
+
+    /**
+     * Primary method for Day 5, Part 2.
+     * <p>
+     * The method runs through all letters of the alphabet and removes them from the {@code polymerString}
+     * case-insensitive. The result is added to a {@code List<Integer>} that returns the minimum at the end.
+     *
+     * @return the length of the shortest producible polymer
+     */
+    private int shortestPossiblePolymer() {
+        List<Integer> finalLengths = new ArrayList<>();
+
+        for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
+            finalLengths.add(unitsRemaining(polymerString
+                    .replaceAll("(?i)" + alphabet, "")
+            ));
+        }
+        return Collections.min(finalLengths);
     }
 }
