@@ -41,9 +41,10 @@ class App extends Component {
 
   addPuzzleCards() {
     const cards = [];
-    for (var i = 1; i <= Object.keys(this.state.solved).length; i++) {
+    for (let i = Object.keys(this.state.solved).length; i >= 1; i--) {
       cards.push(
         <CardTemplate
+          key={i}
           callback={this.setPuzzleResult}
           cardType={"puzzleCard"}
           day={this.state.solved[i].day}
@@ -74,11 +75,9 @@ class App extends Component {
   }
 
   setPuzzleResult(value) {
-    console.log(value);
     let nextSolved = Object.keys(this.state.solved).length + 1;
     let solved = Object.assign({}, this.state.solved);
     solved[nextSolved] = value;
-    console.log(solved);
     this.setState({ solved });
   }
 }
