@@ -18,14 +18,27 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+/**
+ * The main REST controller for the <i>Advent Of Code 2018</i> Application.
+ * It is used to handle calls to {@code /api/adventOfCode}.
+ *
+ * @author Michelle Fernandez Bieber
+ */
 @RestController
 @RequestMapping(value = "/api/adventOfCode", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AdventOfCodeController {
 
+    /** Adds a logger to the controller */
     private static final Logger logger = LoggerFactory.getLogger(AdventOfCodeController.class);
 
+    /** Implements the {@link AdventOfCodeService}. */
     private AdventOfCodeService adventOfCodeService;
 
+    /**
+     * {@code @Autowired} constructor of this controller.
+     *
+     * @param adventOfCodeService {@code @Autowired} adventOfCodeService
+     */
     @Autowired
     public AdventOfCodeController(AdventOfCodeService adventOfCodeService) {
         this.adventOfCodeService = adventOfCodeService;
@@ -49,7 +62,6 @@ public class AdventOfCodeController {
                 linkTo(methodOn(AdventOfCodeController.class).getResultForASpecificDayAndPuzzlePart(day, part)).withSelfRel()
         );
     }
-
 
     /**
      * Returns a HATEOAS {@code Resources<>} with an integer list of all days that have been implemented
