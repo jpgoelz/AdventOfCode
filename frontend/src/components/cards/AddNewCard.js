@@ -48,7 +48,7 @@ class AddNewCard extends Component {
       result: "",
       value: "",
       day: "",
-      daysImplemented: ""
+      daysImplemented: []
     };
   }
 
