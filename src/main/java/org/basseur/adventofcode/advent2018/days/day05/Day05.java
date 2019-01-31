@@ -61,7 +61,6 @@ public class Day05 implements Days {
         return problemStatus;
     }
 
-
     /**
      * Primary method for Day 5, Part 1 and helper method for Part 2.
      * <p>
