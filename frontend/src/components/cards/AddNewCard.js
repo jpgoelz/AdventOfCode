@@ -88,6 +88,7 @@ class AddNewCard extends Component {
             <MenuItem value={1}>December 1st</MenuItem>
             <MenuItem value={2}>December 2nd</MenuItem>
             <MenuItem value={3}>December 3rd</MenuItem>
+            <MenuItem value={4}>December 4th</MenuItem>
           </Select>
         </FormControl>
         <FormControl
