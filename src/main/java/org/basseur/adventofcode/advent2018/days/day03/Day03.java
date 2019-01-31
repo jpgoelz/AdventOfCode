@@ -66,7 +66,7 @@ public class Day03 implements Days {
     }
 
     /**
-     * Primary method for the Day 3, Part 1.
+     * Primary method for Day 3, Part 1.
      * Calculates the area of fabric that is claimed more than once.
      * <p>
      * A "scanning-claim" ({@code Claim scanRect}) of size 1x1 is used that scans
