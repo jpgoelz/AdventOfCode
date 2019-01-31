@@ -61,6 +61,7 @@ public class Day05 implements Days {
         return problemStatus;
     }
 
+
     /**
      * Primary method for Day 5, Part 1 and helper method for Part 2.
      * <p>
@@ -71,6 +72,7 @@ public class Day05 implements Days {
      * been removed, {@code replaced} stays at {@code false} and the length of the String
      * can be returned.
      *
+     * @param inputPolymer the polymer string which is supposed to be reacted
      * @return the number of units remaining
      */
     private int unitsRemaining(String inputPolymer) {
