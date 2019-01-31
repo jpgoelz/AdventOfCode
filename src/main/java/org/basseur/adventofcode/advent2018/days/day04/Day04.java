@@ -59,12 +59,12 @@ public class Day04 implements Days {
 
     @Override
     public String firstPart() {
-        return "Part 1 - The ID of the guard multiplied by the minute: " + getIdMultipliedByMinutePart1();
+        return "Part 1 - The ID of the guard multiplied by the minute: " + idMultipliedByMinute(1);
     }
 
     @Override
     public String secondPart() {
-        return "Part 2 - The ID of the guard multiplied by the minute: " + getIdMultipliedByMinutePart2();
+        return "Part 2 - The ID of the guard multiplied by the minute: " + idMultipliedByMinute(2);
     }
 
     @Override
@@ -73,49 +73,33 @@ public class Day04 implements Days {
     }
 
     /**
-     * Primary method for Day 4, Part 1.
-     * Multiplies the ID of the guard who slept the longest by the minute he slept the most.
+     * Primary method for Day 4, both Parts.
+     * Multiplies the ID of the chosen guard by the chosen minute.
      *
-     * @return product of the <u>ID</u> of the guard who slept the longest and the <u>minute</u> he slept the most.
+     * @return product of the <u>ID</u> of the chosen guard and the chosen <u>minute</u>.
      */
-    private int getIdMultipliedByMinutePart1() {
-        int maxTotalSleep = 0;
-        int idOfGuardWithMaxTotalSleep = 0;
-        int minuteOfMaximumSleep = 0;
+    private int idMultipliedByMinute(int part) {
+        int max = 0;
+        int chosenGuardId = 0;
+        int chosenMinute = 0;
 
         for (Map.Entry<Integer, Guard> entry : guardHashMap.entrySet()) {
             Guard currentGuard = entry.getValue();
+            int possibleMax = 0;
 
-            if (currentGuard.getTotalSleep() > maxTotalSleep) {
-                maxTotalSleep = currentGuard.getTotalSleep();
-                idOfGuardWithMaxTotalSleep = currentGuard.getID();
-                minuteOfMaximumSleep = currentGuard.getMinuteOfMaximumSleep();
+            if (part == 1) {
+                possibleMax = currentGuard.getTotalSleep();
+            } else if (part == 2) {
+                possibleMax = currentGuard.getAmountOfSleepForMaxSleepMinute();
+            }
+
+            if (possibleMax > max) {
+                max = possibleMax;
+                chosenGuardId = currentGuard.getID();
+                chosenMinute = currentGuard.getMinuteOfMaximumSleep();
             }
         }
-        return idOfGuardWithMaxTotalSleep * minuteOfMaximumSleep;
-    }
-
-    /**
-     * Primary method for Day 4, Part 2.
-     * Multiplies the ID of the guard who is most frequently asleep on the same minute by that minute.
-     *
-     * @return product of the <u>ID</u> of the guard who is most frequently asleep on the same minute and that <u>minute</u>.
-     */
-    private int getIdMultipliedByMinutePart2() {
-        int maxAmountOfSleepPerMinute = 0;
-        int idOfGuardWithMaxTotalSleep = 0;
-        int minuteOfMaximumSleep = 0;
-
-        for (Map.Entry<Integer, Guard> entry : guardHashMap.entrySet()) {
-            Guard currentGuard = entry.getValue();
-
-            if (currentGuard.getAmountOfSleepForMaxSleepMinute() > maxAmountOfSleepPerMinute) {
-                maxAmountOfSleepPerMinute = currentGuard.getAmountOfSleepForMaxSleepMinute();
-                idOfGuardWithMaxTotalSleep = currentGuard.getID();
-                minuteOfMaximumSleep = currentGuard.getMinuteOfMaximumSleep();
-            }
-        }
-        return idOfGuardWithMaxTotalSleep * minuteOfMaximumSleep;
+        return chosenGuardId * chosenMinute;
     }
 
     /**
