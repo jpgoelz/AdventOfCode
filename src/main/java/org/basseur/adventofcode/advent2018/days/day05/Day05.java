@@ -47,6 +47,11 @@ public class Day05 implements Days {
     }
 
     @Override
+    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
+        return problemStatus;
+    }
+
+    @Override
     public String firstPart() {
         return "Part 1 - Length of remaining polymer: " + unitsRemaining(polymerString);
     }
@@ -54,11 +59,6 @@ public class Day05 implements Days {
     @Override
     public String secondPart() {
         return "Part 2 - Length of the shortest polymer: " + shortestPossiblePolymer();
-    }
-
-    @Override
-    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
-        return problemStatus;
     }
 
     /**

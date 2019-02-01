@@ -58,6 +58,11 @@ public class Day04 implements Days {
     }
 
     @Override
+    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
+        return problemStatus;
+    }
+
+    @Override
     public String firstPart() {
         return "Part 1 - The ID of the guard multiplied by the minute: " + idMultipliedByMinute(1);
     }
@@ -65,11 +70,6 @@ public class Day04 implements Days {
     @Override
     public String secondPart() {
         return "Part 2 - The ID of the guard multiplied by the minute: " + idMultipliedByMinute(2);
-    }
-
-    @Override
-    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
-        return problemStatus;
     }
 
     /**
