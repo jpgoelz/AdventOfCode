@@ -65,8 +65,8 @@ public class Day05 implements Days {
      * Primary method for Day 5, Part 1 and helper method for Part 2.
      * <p>
      * Finds and returns the number of units remaining after fully reacting the polymer.
-     * For this each letter combination of <i>aA</i> and <i>Aa</i> is removed. Removal
-     * results in a shorter string. In that case the for-loop is reset to {@code 'A'-1},
+     * For this purpose each letter combination of e.g. <i>aA</i> and <i>Aa</i> is removed.
+     * Removal results in a shorter string. In that case the for-loop is reset to {@code 'A'-1},
      * because it will get incremented to {@code 'A'} by the loop. If no letters have
      * been removed, {@code replaced} stays at {@code false} and the length of the String
      * can be returned.
@@ -79,11 +79,11 @@ public class Day05 implements Days {
         boolean replaced = true;
 
         while (replaced)
-            for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
+            for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
                 int initialLength = resultingPolymerString.length();
 
-                String upperLower = alphabet + Character.toString(alphabet).toLowerCase();
-                String lowerUpper = Character.toString(alphabet).toLowerCase() + alphabet;
+                String lowerUpper = alphabet + Character.toString(alphabet).toUpperCase();
+                String upperLower = Character.toString(alphabet).toUpperCase() + alphabet;
 
                 resultingPolymerString = resultingPolymerString.replaceAll(upperLower, "");
                 resultingPolymerString = resultingPolymerString.replaceAll(lowerUpper, "");
@@ -92,7 +92,7 @@ public class Day05 implements Days {
                     replaced = false;
                 } else {
                     replaced = true;
-                    alphabet = 'A' - 1;
+                    alphabet = 'a' - 1;
                 }
             }
         return resultingPolymerString.length();
