@@ -78,6 +78,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'junit:junit'
     testImplementation 'org.mockito:mockito-inline:2.8.9'
+    testImplementation 'com.tngtech.archunit:archunit:0.9.3'
 }
 
 test {
