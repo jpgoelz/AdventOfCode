@@ -7,12 +7,12 @@ import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ConditionEvents;
 import com.tngtech.archunit.lang.SimpleConditionEvent;
+import com.tngtech.archunit.lang.conditions.ArchPredicates;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Stream;
-
-import static com.tngtech.archunit.lang.conditions.ArchPredicates.be;
 
 public class MethodCondition extends ArchCondition<JavaMethod> {
 
@@ -29,7 +29,39 @@ public class MethodCondition extends ArchCondition<JavaMethod> {
      * @return The method transformer.
      */
     public static MethodCondition beReturning(final DescribedPredicate<? super JavaMethod> predicate) {
-        return new MethodCondition(be(Objects.requireNonNull(predicate)));
+        return new MethodCondition(ArchPredicates.be(Objects.requireNonNull(predicate)));
+    }
+
+    /**
+     * Factory method that can be imported statically to get more readable
+     * rule chains.
+     *
+     * Example:
+     *
+     *      no(...).that(...).should(have(...))
+     *
+     * @param predicate The predicate that is applied to the methods.
+     * @return The condition object.
+     */
+    @Nonnull
+    public static MethodCondition have(@Nonnull final DescribedPredicate<? super JavaMethod> predicate) {
+        return new MethodCondition(ArchPredicates.have(Objects.requireNonNull(predicate)));
+    }
+
+    /**
+     * Factory method that can be imported statically to get more readable
+     * rule chains.
+     *
+     * Example:
+     *
+     *      no(...).that(...).should(be(...))
+     *
+     * @param predicate The predicate that is applied to the methods.
+     * @return The condition object.
+     */
+    @Nonnull
+    public static MethodCondition be(@Nonnull final DescribedPredicate<? super JavaMethod> predicate) {
+        return new MethodCondition(ArchPredicates.be(Objects.requireNonNull(predicate)));
     }
 
     public MethodCondition(final DescribedPredicate<? super JavaMethod> predicate) {

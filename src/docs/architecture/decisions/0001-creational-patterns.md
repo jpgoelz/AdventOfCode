@@ -12,7 +12,7 @@ We want to have a common contract for the way that our specific solutions for ea
 
 ## Decision
 
-The interface `Days.class` is part of an _Abstract Factory_ for concrete Day classes. The instances for the specific Days are created and provided by the Spring context upon annotating the specific days with `@Component` and making them implement the interface, so it is not a real factory - just part of it. 
+The interface `Days.class` is part of an _Abstract Factory_ for concrete Day classes, allowing us to use polymorphism for days. The instances for the specific Days are created and provided by the Spring context upon annotating the specific days with `@Component` and making them implement the interface, so it is not a real factory - just part of it. 
 
 In the `AdventOfCodeService.class` (think of it as a _Facade_ to the subsystem), a `List<Days>`, which is populated by Spring with instances of the specific Days, is used by a _factory method_, or _repository method_ if you want to name it that way in order to find the correct instance for a specific requested day. Note that `AdventOfCodeService.class` is in our case part of the creation, but has also Structural Patterns characteristics. We will cover that more deeply in a corresponding ADR section.
 

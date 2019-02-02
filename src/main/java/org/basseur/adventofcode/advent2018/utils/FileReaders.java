@@ -58,13 +58,11 @@ public class FileReaders {
      */
     private Scanner openFileReturnScanner(String filename) {
         File file = new File(filename);
-        Scanner scanner = null;
         try {
-            scanner = new Scanner(file);
+            return new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
+            throw new RuntimeException("File not found!", e);
         }
-        return scanner;
     }
 
 }
