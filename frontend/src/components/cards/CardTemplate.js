@@ -114,10 +114,14 @@ class CardTemplate extends Component {
       const content = data.content;
       const message = data.message;
       if (response.ok) {
+        this.props.callback({
+          day: this.state.day.toString(),
+          part: this.state.value.toString(),
+          result: content
+        });
         this.setState({
           result: content,
-          loading: false,
-          cardType: "puzzleCard"
+          loading: false
         });
       } else {
         this.setState({ result: message, loading: false });
