@@ -9,7 +9,7 @@ import static com.tngtech.archunit.lang.conditions.ArchConditions.callMethod;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.no;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static org.basseur.adventofcode.advent2018.archUnitTestingUtils.MethodCondition.have;
-import static org.basseur.adventofcode.advent2018.archUnitTestingUtils.MethodPredicates.moreParametersThan;
+import static org.basseur.adventofcode.advent2018.archUnitTestingUtils.MethodParameterNumberPredicate.moreParametersThan;
 import static org.basseur.adventofcode.advent2018.archUnitTestingUtils.MethodTransformer.methods;
 
 public class AntiPatternDetectionTest {

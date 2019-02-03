@@ -23,6 +23,11 @@ public class FieldsCondition extends ArchCondition<JavaClass> {
         return new FieldsCondition(predicate.as("have fields that " + predicate.getDescription()));
     }
 
+    @Nonnull
+    public static FieldsCondition areOfType(@Nonnull final DescribedPredicate<? super  JavaField> predicate) {
+        return new FieldsCondition(predicate.as("are of type " + predicate.getDescription()));
+    }
+
     public FieldsCondition(@Nonnull final DescribedPredicate<? super JavaField> predicate) {
         super(Objects.requireNonNull(predicate).getDescription());
         this.predicate = predicate;
