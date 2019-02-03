@@ -1,5 +1,6 @@
-package org.basseur.adventofcode.advent2018;
+package org.basseur.adventofcode.advent2018.controller;
 
+import org.basseur.adventofcode.advent2018.Greeting;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
