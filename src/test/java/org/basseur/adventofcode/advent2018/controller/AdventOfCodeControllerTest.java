@@ -1,6 +1,5 @@
-package org.basseur.adventofcode.advent2018;
+package org.basseur.adventofcode.advent2018.controller;
 
-import org.basseur.adventofcode.advent2018.controller.AdventOfCodeController;
 import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.service.AdventOfCodeService;
 import org.junit.Before;
