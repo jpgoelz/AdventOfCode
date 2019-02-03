@@ -151,7 +151,7 @@ class AddNewCard extends Component {
     const response = await fetch("/api/adventOfCode/daysimplemented");
     try {
       const data = await response.json();
-      const content = data._embedded.integerList.sort();
+      const content = data._embedded.integerList;
       const message = data.message;
       if (response.ok) {
         console.log(content);

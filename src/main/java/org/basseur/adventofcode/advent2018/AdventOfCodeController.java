@@ -76,6 +76,7 @@ public class AdventOfCodeController {
         return new Resources<>(
                 adventOfCodeService.getDaysSolutions().stream()
                         .map(Days::getDay)
+                        .sorted()
                         .collect(Collectors.toList()),
                 linkTo(methodOn(AdventOfCodeController.class).daysImplemented()).withSelfRel()
         );
