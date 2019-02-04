@@ -70,7 +70,7 @@ public class AdventOfCodeControllerTest {
     }
 
     @Test
-    public void testDaysImplemented() throws Exception {
+    public void testDaysImplementedReturnsSortedList() throws Exception {
         Days day01Stub = Mockito.mock(Days.class);
         Mockito.when(day01Stub.getDay()).thenReturn(1);
 
@@ -78,8 +78,8 @@ public class AdventOfCodeControllerTest {
         Mockito.when(day02Stub.getDay()).thenReturn(2);
 
         List<Days> daysImplementedList = new ArrayList<>();
-        daysImplementedList.add(day01Stub);
         daysImplementedList.add(day02Stub);
+        daysImplementedList.add(day01Stub);
 
         List<Integer> daysImplementedIntegerList = new ArrayList<>();
         daysImplementedIntegerList.add(1);
