@@ -1,0 +1,13 @@
+@startuml
+[Controller] <<..controller..>>
+[Service] <<..service..>>
+[Domain] <<..domain..>>
+[Day] <<..days..>>
+
+
+[Controller] --> [Service]
+
+[Service] --> [Domain]
+
+[Service] --> [Day]
+@enduml

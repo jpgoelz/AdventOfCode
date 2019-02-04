@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+#
+# Run the tool `adr` (architecture decision records) in a Docker container.
+#
+# Invoke this script from the project root:
+#
+#     docker/bin/adr list
+#
+# Additional arguments are simply passed on to `adr`.
+#
+
+# Stop script on failure.
+set -e -o pipefail
+
+ADR_VERSION="3.0.0"
+ADR_IMAGE_TAG="adr:${ADR_VERSION}"
+
+if [[ "$(docker images -q ${ADR_IMAGE_TAG} 2> /dev/null)" == "" ]]; then
+  # Image does not exist yet, build it now.
+  docker build --build-arg adr_version=${ADR_VERSION} --quiet --tag adr:${ADR_VERSION} docker/container/adr > /dev/null
+fi
+
+docker run -it --user="$UID" --rm -v `pwd`:/tmp/adr adr:${ADR_VERSION} "$@"

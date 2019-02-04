@@ -1,6 +1,7 @@
 package org.basseur.adventofcode.advent2018.service;
 
 import org.basseur.adventofcode.advent2018.ProblemStatusEnum;
+import org.basseur.adventofcode.advent2018.controller.AdventOfCodeController;
 import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.exceptions.PuzzleNotSolvedYetException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.Objects;
 
 /**
  * The <i>Advent of Code</i> Service is used by
- * {@link org.basseur.adventofcode.advent2018.AdventOfCodeController}
+ * {@link AdventOfCodeController}
  * to handle calls made to it.
  *
  * @author Michelle Fernandez Bieber
