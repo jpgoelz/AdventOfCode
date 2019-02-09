@@ -14,6 +14,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import GoogleOAuth2Login from "../googleoauth2/GoogleOAuth2Login";
+import GoogleOAuth2Logout from "../googleoauth2/GoogleOAuth2Logout";
 
 const styles = theme => {
   return {
@@ -132,8 +134,12 @@ class PrimarySearchAppBar extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>Log in</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>Log out</MenuItem>
+        <MenuItem onClick={this.handleMenuClose}>
+          <GoogleOAuth2Login />
+        </MenuItem>
+        <MenuItem onClick={this.handleMenuClose}>
+          <GoogleOAuth2Logout />
+        </MenuItem>
         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
       </Menu>
     );
