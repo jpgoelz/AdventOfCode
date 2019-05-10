@@ -21,23 +21,28 @@ public class Day06 implements Days {
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day06/Input.txt";
     /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
-    /** The list of coordinates */
-    private List<String> coordinatesStringList;
+    /** The list of coordinate Strings */
+    private List<String> coordinateStringList;
+    /** The list of VoronoiCells */
+    private List<VoronoiCell> voronoiCellList;
 
     /**
      * Constructor of Day06.
-     * Causes the input file to be stored in coordinatesStringList.
+     * Causes the input file to be stored in coordinateStringList.
      *
      * @param fileReaders {@code @Autowired} fileReader
      */
     @Autowired
     Day06(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
-        this.problemStatus.put("1", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("1", ProblemStatusEnum.IN_PROGRESS);
         this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
 
-        this.coordinatesStringList = fileReaders.readFileIntoStringList(FILE_LOCATION);
+        this.coordinateStringList = fileReaders.readFileIntoStringList(FILE_LOCATION);
+
+//        generateVoronoiCells();
     }
+
 
     @Override
     public int getDay() {
@@ -58,4 +63,13 @@ public class Day06 implements Days {
     public String secondPart() {
         return null;
     }
+
+//    private void generateVoronoiCells() {
+//        for (String coordinateSting : coordinateStringList) {
+//            Matcher matcher = Pattern.compile("(\\d+), (\\d+)").matcher(coordinateSting);
+//            if (matcher.find()) {
+//                voronoiCellList.add(new VoronoiCell(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2))));
+//            }
+//        }
+//    }
 }
