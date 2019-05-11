@@ -16,9 +16,9 @@ public class VoronoiCellTest {
 
         voronoiCell = new VoronoiCell(10, 10);
 
-        voronoiCell.addCoodinate(1, 1);
-        voronoiCell.addCoodinate(1, 2);
-        voronoiCell.addCoodinate(1, 3);
+        voronoiCell.addCoordinate(1, 1);
+        voronoiCell.addCoordinate(1, 2);
+        voronoiCell.addCoordinate(1, 3);
     }
 
     @Test

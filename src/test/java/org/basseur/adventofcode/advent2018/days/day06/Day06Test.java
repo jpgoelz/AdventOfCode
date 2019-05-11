@@ -44,7 +44,6 @@ public class Day06Test {
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Ignore
     @Test
     public void firstPart() {
         String expectedResult = "Size of the largest area that isn't infinite: 17";

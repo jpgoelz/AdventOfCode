@@ -13,9 +13,9 @@ public class VoronoiCell {
     /** Set to true if it has member coordinates on the outer border */
     public boolean isInfinite;
     /** x coordinate of the Voronoi seed of this cell */
-    private int x;
+    public int x;
     /** y coordinate of the Voronoi seed of this cell */
-    private int y;
+    public int y;
     /** A list of all coordinates closest to the Voronoi seed of this cell */
     private List<Coordinate> coordinateList = new ArrayList<>();
 
@@ -38,9 +38,8 @@ public class VoronoiCell {
      * @param x the coordinates x coordinate
      * @param y the coordinates y coordinate
      */
-    public void addCoodinate(int x, int y) {
-        Coordinate coordinate = new Coordinate(x, y);
-        coordinateList.add(coordinate);
+    public void addCoordinate(int x, int y) {
+        coordinateList.add(new Coordinate(x, y));
     }
 
     /**
