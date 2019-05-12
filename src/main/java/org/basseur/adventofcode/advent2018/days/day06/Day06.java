@@ -85,25 +85,20 @@ public class Day06 implements Days {
      * <p>
      * Finds and returns the size of the Voronoi cell with the largest area. For this purpose the
      * plane is swept from the minimum to maximum X and Y values. The distance to the corresponding
-     * coordinate is determined. If there is only one cell with a minimum distance, the coordinate
-     * is added to that cell. If the coordinate is on the edge, that Voronoi cell is set to infinite
+     * coordinate is determined. If there is only one cell with a minimum distance, the area of that
+     * cell is incremented. If the coordinate is on the edge, that Voronoi cell is set to infinite
      * so it will later be excluded.
      *
      * @return size of the largest finite Voronoi cell
      */
     private int findSizeOfLargestVoronoiCell() {
-        Coordinate sweepingCoordinate = new Coordinate(0, 0);
-
         for (int x = minX; x <= maxX; x++) {
-            sweepingCoordinate.x = x;
-
             for (int y = minY; y <= maxY; y++) {
-                sweepingCoordinate.y = y;
                 int minimalDistance = Integer.MAX_VALUE;
                 VoronoiCell closestVoronoiCell = null;
 
                 for (VoronoiCell voronoiCell : voronoiCellList) {
-                    int currentDistance = voronoiCell.distanceTo(sweepingCoordinate);
+                    int currentDistance = voronoiCell.distanceTo(x, y);
 
                     if (x == minX || x == maxX || y == minY || y == maxY) {
                         voronoiCell.isInfinite = true;
@@ -117,25 +112,22 @@ public class Day06 implements Days {
                         minimalDistance = currentDistance;
                         closestVoronoiCell = voronoiCell;
                     }
-
                 }
 
                 if (closestVoronoiCell != null) {
-                    closestVoronoiCell.addCoordinate(x, y);
+                    closestVoronoiCell.voronoiArea++;
                 }
             }
         }
 
         int[] areaSizes = new int[voronoiCellList.size()];
         for (int i = 0; i < voronoiCellList.size(); i++) {
-            areaSizes[i] = voronoiCellList.get(i).voronoiArea();
+            areaSizes[i] = voronoiCellList.get(i).voronoiArea;
         }
 
         Arrays.sort(areaSizes);
 
         return areaSizes[areaSizes.length - 1];
-
-
     }
 
     /**
@@ -150,18 +142,13 @@ public class Day06 implements Days {
      * @return size of the region of coordinates with a maximum total distance to all Voronoi seeds smaller than {@link Day06#maxTotalDistance}
      */
     private int calculateSizeOfRegionOfLocations() {
-        Coordinate sweepingCoordinate = new Coordinate(0, 0);
         int sizeOfRegionOfLocations = 0;
-
         for (int x = minX; x <= maxX; x++) {
-            sweepingCoordinate.x = x;
-
             for (int y = minY; y <= maxY; y++) {
-                sweepingCoordinate.y = y;
                 int totalDistance = 0;
 
                 for (VoronoiCell voronoiCell : voronoiCellList) {
-                    totalDistance += voronoiCell.distanceTo(sweepingCoordinate);
+                    totalDistance += voronoiCell.distanceTo(x, y);
                 }
                 if (totalDistance < maxTotalDistance) {
                     sizeOfRegionOfLocations++;

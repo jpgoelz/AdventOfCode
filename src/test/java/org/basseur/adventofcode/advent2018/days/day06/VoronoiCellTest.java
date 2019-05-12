@@ -13,27 +13,14 @@ public class VoronoiCellTest {
 
     @Before
     public void setUp() {
-
-        voronoiCell = new VoronoiCell(10, 10);
-
-        voronoiCell.addCoordinate(1, 1);
-        voronoiCell.addCoordinate(1, 2);
-        voronoiCell.addCoordinate(1, 3);
-    }
-
-    @Test
-    public void voronoiArea() {
-        int expectedResult = 3;
-        int actualResult = voronoiCell.voronoiArea();
-
-        Assert.assertEquals(expectedResult, actualResult);
+        voronoiCell = new VoronoiCell(13, 37);
+        voronoiCell.voronoiArea = 1337;
     }
 
     @Test
     public void distanceTo() {
-        Coordinate coordinate = new Coordinate(4, 5);
-        int expectedResult = 11;
-        int actualResult = voronoiCell.distanceTo(coordinate);
+        int expectedResult = 25;
+        int actualResult = voronoiCell.distanceTo(20, 19);
 
         Assert.assertEquals(expectedResult, actualResult);
     }
