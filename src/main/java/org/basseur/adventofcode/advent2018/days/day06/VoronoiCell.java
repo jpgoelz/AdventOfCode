@@ -5,7 +5,8 @@ import java.util.List;
 
 /**
  * A class that defines Voronoi cells to be used in {@link Day06}.
- * A Voronoi cell is the region  of coordinates closest to
+ * A Voronoi cell is the region of coordinates closest to the corresponding
+ * Voronoi seed but not of equal distance to other seeds.
  *
  * @author Jan Philipp G&ouml;lz
  */

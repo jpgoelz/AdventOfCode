@@ -72,6 +72,26 @@ public class Day06 implements Days {
 
     @Override
     public String firstPart() {
+        return "Size of the largest area that isn't infinite: " + findSizeOfLargestVoronoiCell();
+    }
+
+    @Override
+    public String secondPart() {
+        return "Size of the region containing all locations which have a total distance to all given coordinates of less than " + maxTotalDistance + ": " + calculateSizeOfRegionOfLocations();
+    }
+
+    /**
+     * Primary method for Day 6, Part 1.
+     * <p>
+     * Finds and returns the size of the Voronoi cell with the largest area. For this purpose the
+     * plane is swept from the minimum to maximum X and Y values. The distance to the corresponding
+     * coordinate is determined. If there is only one cell with a minimum distance, the coordinate
+     * is added to that cell. If the coordinate is on the edge, that Voronoi cell is set to infinite
+     * so it will later be excluded.
+     *
+     * @return size of the largest finite Voronoi cell
+     */
+    private int findSizeOfLargestVoronoiCell() {
         Coordinate sweepingCoordinate = new Coordinate(0, 0);
 
         for (int x = minX; x <= maxX; x++) {
@@ -113,11 +133,23 @@ public class Day06 implements Days {
 
         Arrays.sort(areaSizes);
 
-        return "Size of the largest area that isn't infinite: " + areaSizes[areaSizes.length - 1];
+        return areaSizes[areaSizes.length - 1];
+
+
     }
 
-    @Override
-    public String secondPart() {
+    /**
+     * Primary method for Day 6, Part 2.
+     * <p>
+     * Calculates the size of the region containing all locations that have a total distance to all
+     * given coordinates of less than {@link Day06#maxTotalDistance}. For this purpose the plane is
+     * swept from the minimum to the maximum X and Y values. For each coordinate the sum of the distances
+     * to all Voronoi seeds calculated. If the sum is smaller than {@link Day06#maxTotalDistance}, the
+     * sizeOfRegionOfLocations is incremented and at the end returned.
+     *
+     * @return size of the region of coordinates with a maximum total distance to all Voronoi seeds smaller than {@link Day06#maxTotalDistance}
+     */
+    private int calculateSizeOfRegionOfLocations() {
         Coordinate sweepingCoordinate = new Coordinate(0, 0);
         int sizeOfRegionOfLocations = 0;
 
@@ -137,9 +169,12 @@ public class Day06 implements Days {
             }
 
         }
-        return "Size of the region containing all locations which have a total distance to all given coordinates of less than " + maxTotalDistance + ": " + sizeOfRegionOfLocations;
+        return sizeOfRegionOfLocations;
     }
 
+    /**
+     * Generates the Voronoi cells by parsing each coordinateString from {@link Day06#coordinateStringList}.
+     */
     private void generateVoronoiCells() {
         for (String coordinateSting : coordinateStringList) {
             Matcher matcher = Pattern.compile("(\\d+), (\\d+)").matcher(coordinateSting);
@@ -149,6 +184,9 @@ public class Day06 implements Days {
         }
     }
 
+    /**
+     * Defines the minimum and maximum X and Y values for the plane containing the Voronoi cells.
+     */
     private void setPlaneBoundries() {
         for (VoronoiCell voronoiCell : voronoiCellList) {
             minX = Math.min(voronoiCell.x, minX);
