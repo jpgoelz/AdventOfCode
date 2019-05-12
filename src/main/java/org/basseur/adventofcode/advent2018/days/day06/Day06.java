@@ -87,22 +87,19 @@ public class Day06 implements Days {
      * plane is swept from the minimum to maximum X and Y values. The distance to the corresponding
      * coordinate is determined. If there is only one cell with a minimum distance, the area of that
      * cell is incremented. If the coordinate is on the edge, that Voronoi cell is set to infinite
-     * so it will later be excluded.
+     * so it will later be excluded. Lastly, all finite areas are added to an array, which is then
+     * sorted and the last (maximum) value is returned. The area of all infinite cells is added as `0`.
      *
      * @return size of the largest finite Voronoi cell
      */
     private int findSizeOfLargestVoronoiCell() {
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
+        for (int x = minX - 20; x <= maxX + 20; x++) {
+            for (int y = minY - 20; y <= maxY + 20; y++) {
                 int minimalDistance = Integer.MAX_VALUE;
                 VoronoiCell closestVoronoiCell = null;
 
                 for (VoronoiCell voronoiCell : voronoiCellList) {
                     int currentDistance = voronoiCell.distanceTo(x, y);
-
-                    if (x == minX || x == maxX || y == minY || y == maxY) {
-                        voronoiCell.isInfinite = true;
-                    }
 
                     if (currentDistance == minimalDistance) {
                         closestVoronoiCell = null;
@@ -112,17 +109,23 @@ public class Day06 implements Days {
                         minimalDistance = currentDistance;
                         closestVoronoiCell = voronoiCell;
                     }
+
                 }
 
                 if (closestVoronoiCell != null) {
                     closestVoronoiCell.voronoiArea++;
+                    if (x == minX || x == maxX || y == minY || y == maxY) {
+                        closestVoronoiCell.isInfinite = true;
+                    }
                 }
             }
         }
 
         int[] areaSizes = new int[voronoiCellList.size()];
         for (int i = 0; i < voronoiCellList.size(); i++) {
-            areaSizes[i] = voronoiCellList.get(i).voronoiArea;
+            if (!voronoiCellList.get(i).isInfinite) {
+                areaSizes[i] = voronoiCellList.get(i).voronoiArea;
+            }
         }
 
         Arrays.sort(areaSizes);
