@@ -4,12 +4,12 @@ import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,7 @@ public class Day06Test {
 
     @Before
     public void setUp() {
+
         coordinatesStringList.add("1, 1");
         coordinatesStringList.add("1, 6");
         coordinatesStringList.add("8, 3");
@@ -52,8 +53,13 @@ public class Day06Test {
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Ignore
     @Test
     public void secondPart() {
+        ReflectionTestUtils.setField(day06, "maxTotalDistance", 32);
+
+        String expectedResult = "Size of the region containing all locations which have a total distance to all given coordinates of less than 32: 16";
+        String actualResult = day06.secondPart();
+
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }

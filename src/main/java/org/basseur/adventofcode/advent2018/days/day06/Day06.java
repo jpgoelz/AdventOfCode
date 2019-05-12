@@ -38,6 +38,8 @@ public class Day06 implements Days {
     private int minY = Integer.MAX_VALUE;
     /** Maximum of all Y values */
     private int maxY = Integer.MIN_VALUE;
+    /** Maximum total distance for the region containing all locations which have a total distance of less than maxTotalDistance */
+    private int maxTotalDistance = 10000;
 
     /**
      * Constructor of Day06.
@@ -49,13 +51,12 @@ public class Day06 implements Days {
     Day06(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
 
         this.coordinateStringList = fileReaders.readFileIntoStringList(FILE_LOCATION);
 
         generateVoronoiCells();
         setPlaneBoundries();
-
     }
 
 
@@ -71,18 +72,18 @@ public class Day06 implements Days {
 
     @Override
     public String firstPart() {
-        Coordinate coordinate = new Coordinate(0, 0);
+        Coordinate sweepingCoordinate = new Coordinate(0, 0);
 
         for (int x = minX; x <= maxX; x++) {
-            coordinate.x = x;
+            sweepingCoordinate.x = x;
 
             for (int y = minY; y <= maxY; y++) {
-                coordinate.y = y;
+                sweepingCoordinate.y = y;
                 int minimalDistance = Integer.MAX_VALUE;
                 VoronoiCell closestVoronoiCell = null;
 
                 for (VoronoiCell voronoiCell : voronoiCellList) {
-                    int currentDistance = voronoiCell.distanceTo(coordinate);
+                    int currentDistance = voronoiCell.distanceTo(sweepingCoordinate);
 
                     if (x == minX || x == maxX || y == minY || y == maxY) {
                         voronoiCell.isInfinite = true;
@@ -117,7 +118,26 @@ public class Day06 implements Days {
 
     @Override
     public String secondPart() {
-        return null;
+        Coordinate sweepingCoordinate = new Coordinate(0, 0);
+        int sizeOfRegionOfLocations = 0;
+
+        for (int x = minX; x <= maxX; x++) {
+            sweepingCoordinate.x = x;
+
+            for (int y = minY; y <= maxY; y++) {
+                sweepingCoordinate.y = y;
+                int totalDistance = 0;
+
+                for (VoronoiCell voronoiCell : voronoiCellList) {
+                    totalDistance += voronoiCell.distanceTo(sweepingCoordinate);
+                }
+                if (totalDistance < maxTotalDistance) {
+                    sizeOfRegionOfLocations++;
+                }
+            }
+
+        }
+        return "Size of the region containing all locations which have a total distance to all given coordinates of less than " + maxTotalDistance + ": " + sizeOfRegionOfLocations;
     }
 
     private void generateVoronoiCells() {
@@ -137,6 +157,4 @@ public class Day06 implements Days {
             maxY = Math.max(voronoiCell.y, maxY);
         }
     }
-
-
 }
