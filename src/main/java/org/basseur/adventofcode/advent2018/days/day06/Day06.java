@@ -93,6 +93,8 @@ public class Day06 implements Days {
      * @return size of the largest finite Voronoi cell
      */
     private int findSizeOfLargestVoronoiCell() {
+        resetVoronoiCells();
+
         for (int x = minX - 20; x <= maxX + 20; x++) {
             for (int y = minY - 20; y <= maxY + 20; y++) {
                 int minimalDistance = Integer.MAX_VALUE;
@@ -160,6 +162,14 @@ public class Day06 implements Days {
 
         }
         return sizeOfRegionOfLocations;
+    }
+
+    /** Resets the VoronoiCells for subsequent requests of the result */
+    private void resetVoronoiCells() {
+        for (VoronoiCell voronoiCell : voronoiCellList) {
+            voronoiCell.isInfinite = false;
+            voronoiCell.voronoiArea = 0;
+        }
     }
 
     /**
