@@ -72,12 +72,12 @@ public class Day06 implements Days {
 
     @Override
     public String firstPart() {
-        return "Size of the largest area that isn't infinite: " + findSizeOfLargestVoronoiCell();
+        return "Part 1 - Size of the largest area that isn't infinite: " + findSizeOfLargestVoronoiCell();
     }
 
     @Override
     public String secondPart() {
-        return "Size of the region containing all locations which have a total distance to all given coordinates of less than " + maxTotalDistance + ": " + calculateSizeOfRegionOfLocations();
+        return "Part 2 - Size of the region containing all locations which have a total distance to all given coordinates of less than " + maxTotalDistance + ": " + calculateSizeOfRegionOfLocations();
     }
 
     /**
@@ -159,12 +159,13 @@ public class Day06 implements Days {
                     sizeOfRegionOfLocations++;
                 }
             }
-
         }
         return sizeOfRegionOfLocations;
     }
 
-    /** Resets the VoronoiCells for subsequent requests of the result */
+    /**
+     * Resets the VoronoiCells for subsequent requests of the result
+     */
     private void resetVoronoiCells() {
         for (VoronoiCell voronoiCell : voronoiCellList) {
             voronoiCell.isInfinite = false;
