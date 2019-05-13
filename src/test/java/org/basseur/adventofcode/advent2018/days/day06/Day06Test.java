@@ -47,7 +47,7 @@ public class Day06Test {
 
     @Test
     public void firstPart() {
-        String expectedResult = "Size of the largest area that isn't infinite: 17";
+        String expectedResult = "Part 1 - Size of the largest area that isn't infinite: 17";
         String actualResult = day06.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
@@ -57,7 +57,7 @@ public class Day06Test {
     public void secondPart() {
         ReflectionTestUtils.setField(day06, "maxTotalDistance", 32);
 
-        String expectedResult = "Size of the region containing all locations which have a total distance to all given coordinates of less than 32: 16";
+        String expectedResult = "Part 2 - Size of the region containing all locations which have a total distance to all given coordinates of less than 32: 16";
         String actualResult = day06.secondPart();
 
         Assert.assertEquals(expectedResult, actualResult);
