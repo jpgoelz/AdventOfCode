@@ -4,11 +4,16 @@ import java.util.ArrayList;
 
 public class Step {
     /** Letter of this step */
-    private final String id;
+    public final char id;
     /** ArrayList of previous steps */
-    private ArrayList<String> previousSteps = new ArrayList<>();
+    private ArrayList<Character> previousSteps = new ArrayList<>();
 
-    public Step(String id) {
+    /**
+     * Constructs Step with
+     *
+     * @param id
+     */
+    public Step(Character id) {
         this.id = id;
     }
 
@@ -26,7 +31,7 @@ public class Step {
      *
      * @param prevId id of the previous step to be added
      */
-    public void addPrevious(String prevId) {
+    public void addPrevious(Character prevId) {
         previousSteps.add(prevId);
     }
 
@@ -35,7 +40,7 @@ public class Step {
      *
      * @param prevId id of the previous step to be removed
      */
-    public void removePrevious(String prevId) {
+    public void removePrevious(Character prevId) {
         previousSteps.remove(prevId);
     }
 }

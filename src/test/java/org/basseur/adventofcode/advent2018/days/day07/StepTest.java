@@ -14,21 +14,21 @@ public class StepTest {
 
     @Before
     public void setUp() {
-        step = new Step("A");
+        step = new Step('A');
     }
 
     @Test
     public void testAddRemoveAndHasPrevious() {
-        step.addPrevious("B");
+        step.addPrevious('B');
         Assert.assertTrue(step.hasPrevious());
 
-        step.removePrevious("B");
+        step.removePrevious('B');
         Assert.assertFalse(step.hasPrevious());
     }
 
     @Test
     public void testRemoveFromEmptyPreviousSteps() {
-        step.removePrevious("Z");
+        step.removePrevious('Z');
         Assert.assertFalse(step.hasPrevious());
     }
 }

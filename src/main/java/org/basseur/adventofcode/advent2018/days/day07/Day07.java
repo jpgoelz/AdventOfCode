@@ -6,8 +6,12 @@ import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Implementation for <i>Day 7: The Sum of Its Parts</i>.
@@ -24,6 +28,8 @@ public class Day07 implements Days {
 
     /** A list containing the instructions */
     private final List<String> instructions;
+    /** A {@code Map} containing all the {@link Step}s mapped to their IDs */
+    private HashMap<Character, Step> stepHashMap = new HashMap<>();
 
     /**
      * Constructor for Day07.
@@ -33,7 +39,7 @@ public class Day07 implements Days {
     @Autowired
     Day07(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
-        this.problemStatus.put("1", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
 
         this.instructions = fileReaders.readFileIntoStringList(FILE_LOCATION);
@@ -63,10 +69,55 @@ public class Day07 implements Days {
      * Primary Method for Day 7, Part 1.
      * <p>
      * Determines the order, in which the instructions should be completed.
+     * For this purpose {@link Day07#stepHashMap} is copied. The new HashMap is
+     * scanned for all {@link Step}s that have no previous steps in them. These
+     * are added to an ArrayList which then gets sorted alphabetically. The first
+     * item is the current step, which gets added to the output. Subsequently, this
+     * step gets removed from all {@link Step#previousSteps} and from the HashMap,
+     * as well as from the available Steps. This process gets repeated until the
+     * HashMap is empty.
      *
      * @return the ordered String of instructions
      */
     private String determineOrder() {
-        return "";
+        parseSteps();
+        ArrayList<Character> availableSteps = new ArrayList<>();
+        HashMap<Character, Step> steps = stepHashMap;
+        String order = "";
+
+        while (!steps.isEmpty()) {
+
+            steps.forEach((id, step) -> {
+                if (!step.hasPrevious()) {
+                    availableSteps.add(id);
+                }
+            });
+
+            Collections.sort(availableSteps);
+            Character currentStep = availableSteps.get(0);
+            order = order + currentStep;
+
+            steps.forEach((id, step) -> step.removePrevious(currentStep));
+            steps.remove(currentStep);
+            availableSteps.removeAll(Collections.singleton(currentStep));
+        }
+
+        return order;
+    }
+
+    /**
+     * Parses the {@link Day07#instructions} to create {@link Step}s and add previous IDs.
+     */
+    private void parseSteps() {
+        for (String instruction : instructions) {
+            Matcher matcher = Pattern.compile("Step (\\w) must be finished before step (\\w) can begin\\.").matcher(instruction);
+            if (matcher.find()) {
+                char firstId = matcher.group(1).charAt(0);
+                char secondId = matcher.group(2).charAt(0);
+                stepHashMap.putIfAbsent(firstId, new Step(firstId));
+                stepHashMap.putIfAbsent(secondId, new Step(secondId));
+                stepHashMap.get(secondId).addPrevious(firstId);
+            }
+        }
     }
 }

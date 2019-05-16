@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -30,6 +31,7 @@ public class Day07Test {
         instructions.add("Step D must be finished before step E can begin.");
         instructions.add("Step F must be finished before step E can begin.");
 
+        Mockito.when(fileReaders.readFileIntoStringList(Mockito.anyString())).thenReturn(instructions);
         day07 = new Day07(fileReaders);
     }
 
