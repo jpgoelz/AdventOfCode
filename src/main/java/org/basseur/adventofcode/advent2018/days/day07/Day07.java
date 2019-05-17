@@ -6,10 +6,7 @@ import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +26,7 @@ public class Day07 implements Days {
     /** A list containing the instructions */
     private final List<String> instructions;
     /** A {@code Map} containing all the {@link Step}s mapped to their IDs */
-    private HashMap<Character, Step> stepHashMap = new HashMap<>();
+    private Map<Character, Step> stepHashMap = new HashMap<>();
 
     /**
      * Constructor for Day07.
@@ -43,6 +40,8 @@ public class Day07 implements Days {
         this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
 
         this.instructions = fileReaders.readFileIntoStringList(FILE_LOCATION);
+
+        parseSteps();
     }
 
     @Override
@@ -66,7 +65,7 @@ public class Day07 implements Days {
     }
 
     /**
-     * Primary Method for Day 7, Part 1.
+     * Primary Method for Day 7, Part 1 and helper for Part 2.
      * <p>
      * Determines the order, in which the instructions should be completed.
      * For this purpose {@link Day07#stepHashMap} is copied. The new HashMap is
@@ -80,13 +79,11 @@ public class Day07 implements Days {
      * @return the ordered String of instructions
      */
     private String determineOrder() {
-        parseSteps();
-        ArrayList<Character> availableSteps = new ArrayList<>();
-        HashMap<Character, Step> steps = stepHashMap;
-        String order = "";
+        List<Character> availableSteps = new ArrayList<>();
+        Map<Character, Step> steps = getCopyOfStepHashMap();
+        StringBuilder order = new StringBuilder();
 
         while (!steps.isEmpty()) {
-
             steps.forEach((id, step) -> {
                 if (!step.hasPrevious()) {
                     availableSteps.add(id);
@@ -95,14 +92,14 @@ public class Day07 implements Days {
 
             Collections.sort(availableSteps);
             Character currentStep = availableSteps.get(0);
-            order = order + currentStep;
+            order.append(currentStep);
 
             steps.forEach((id, step) -> step.removePrevious(currentStep));
             steps.remove(currentStep);
             availableSteps.removeAll(Collections.singleton(currentStep));
         }
 
-        return order;
+        return order.toString();
     }
 
     /**
@@ -111,13 +108,28 @@ public class Day07 implements Days {
     private void parseSteps() {
         for (String instruction : instructions) {
             Matcher matcher = Pattern.compile("Step (\\w) must be finished before step (\\w) can begin\\.").matcher(instruction);
+
             if (matcher.find()) {
                 char firstId = matcher.group(1).charAt(0);
                 char secondId = matcher.group(2).charAt(0);
+
                 stepHashMap.putIfAbsent(firstId, new Step(firstId));
                 stepHashMap.putIfAbsent(secondId, new Step(secondId));
                 stepHashMap.get(secondId).addPrevious(firstId);
             }
         }
+    }
+
+    /**
+     * Creates and returns a deep copy of the {@link Day07#stepHashMap}
+     *
+     * @return a copy of the {@link Day07#stepHashMap}
+     */
+    private HashMap<Character, Step> getCopyOfStepHashMap() {
+        HashMap<Character, Step> copyOfStepHashMap = new HashMap<>();
+
+        stepHashMap.forEach((id, step) -> copyOfStepHashMap.put(id, new Step(step)));
+
+        return copyOfStepHashMap;
     }
 }

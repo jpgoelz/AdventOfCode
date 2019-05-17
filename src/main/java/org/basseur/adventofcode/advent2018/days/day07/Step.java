@@ -9,12 +9,32 @@ public class Step {
     private ArrayList<Character> previousSteps = new ArrayList<>();
 
     /**
-     * Constructs Step with
+     * Constructs Step with id.
      *
-     * @param id
+     * @param id the id of this Step
      */
     public Step(Character id) {
         this.id = id;
+    }
+
+    /**
+     * Constructs Step with id and previousSteps.
+     *
+     * @param id the id for this Step
+     * @param previousSteps the previous Steps for this Step
+     */
+    public Step(Character id, ArrayList<Character> previousSteps) {
+        this.id = id;
+        this.previousSteps.addAll(previousSteps);
+    }
+
+    /**
+     * Constructs Step as copy of another Step
+     *
+     * @param other the other Step to be copied
+     */
+    public Step(Step other) {
+        this(other.id, other.previousSteps);
     }
 
     /**
