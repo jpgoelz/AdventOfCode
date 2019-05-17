@@ -47,13 +47,15 @@ public class Day07Test {
     public void firstPart() {
         String expectedResult = "Part 1 - Order in which the steps in the instructions should be completed: CABDFE";
         String actualResult = day07.firstPart();
+        String actualResult2 = day07.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
+        Assert.assertEquals(expectedResult, actualResult2);
     }
 
     @Test
     public void secondPart() {
-        String expectedResult = "Part 2 - Length of the shortest polymer: 4";
+        String expectedResult = "Part 2 - Time required to complete all of the steps: 15 seconds";
         String actualResult = day07.secondPart();
 
         Assert.assertEquals(expectedResult, actualResult);

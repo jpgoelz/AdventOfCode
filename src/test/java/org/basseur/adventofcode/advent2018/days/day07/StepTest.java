@@ -31,4 +31,15 @@ public class StepTest {
         step.removePrevious('Z');
         Assert.assertFalse(step.hasPrevious());
     }
+
+    @Test
+    public void testCopiedStepIsNotJustReference() {
+        Step copiedStep = new Step(step);
+
+        step.addPrevious('B');
+
+        Assert.assertTrue(step.hasPrevious());
+        Assert.assertFalse(copiedStep.hasPrevious());
+
+    }
 }
