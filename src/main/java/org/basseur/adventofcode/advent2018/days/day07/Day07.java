@@ -37,7 +37,7 @@ public class Day07 implements Days {
     Day07(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("2", ProblemStatusEnum.IN_PROGRESS);
 
         this.instructions = fileReaders.readFileIntoStringList(FILE_LOCATION);
 
@@ -56,7 +56,7 @@ public class Day07 implements Days {
 
     @Override
     public String secondPart() {
-        return "";
+        return "Part 2 - Time required to complete all of the steps: " + determineTime() + " seconds";
     }
 
     @Override
@@ -100,6 +100,10 @@ public class Day07 implements Days {
         }
 
         return order.toString();
+    }
+
+    private int determineTime() {
+        return 0;
     }
 
     /**
