@@ -85,7 +85,7 @@ public class Day07 implements Days {
 
         while (!steps.isEmpty()) {
             steps.forEach((id, step) -> {
-                if (!step.hasPrevious()) {
+                if (!step.hasPrevious() && !availableSteps.contains(id)) {
                     availableSteps.add(id);
                 }
             });
@@ -96,7 +96,7 @@ public class Day07 implements Days {
 
             steps.forEach((id, step) -> step.removePrevious(currentStep));
             steps.remove(currentStep);
-            availableSteps.removeAll(Collections.singleton(currentStep));
+            availableSteps.remove(currentStep);
         }
 
         return order.toString();
