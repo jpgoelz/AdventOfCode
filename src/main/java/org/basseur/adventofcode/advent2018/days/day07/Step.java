@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Step {
     /** Letter of this step */
     public final char id;
-    /** ArrayList of previous steps */
+    /** List of previous steps */
     private ArrayList<Character> previousSteps = new ArrayList<>();
 
     /**

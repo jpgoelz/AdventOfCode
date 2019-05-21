@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,9 @@ public class Day07Test {
 
     @Test
     public void secondPart() {
+        ReflectionTestUtils.setField(day07, "workers", 2);
+        ReflectionTestUtils.setField(day07, "minTimePerTask", 0);
+
         String expectedResult = "Part 2 - Time required to complete all of the steps: 15 seconds";
         String actualResult = day07.secondPart();
 

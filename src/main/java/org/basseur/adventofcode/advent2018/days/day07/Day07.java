@@ -20,13 +20,18 @@ public class Day07 implements Days {
 
     /** The location of the puzzle input file */
     private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day07/Input.txt";
+    /** The difference between the integer value of a char and seconds to finish a step, e.g. `(int)char 'A' = 65`, but A takes 1 extra second. */
+    private static int DIFFERENCE_BETWEEN_CHAR_AND_SECONDS = 64;
     /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
-
     /** A list containing the instructions */
     private final List<String> instructions;
     /** A {@code Map} containing all the {@link Step}s mapped to their IDs */
     private Map<Character, Step> stepHashMap = new HashMap<>();
+    /** Number of available Workers in Part 2 */
+    private int workers = 5;
+    /** Minimum time per Task */
+    private int minTimePerTask = 60;
 
     /**
      * Constructor for Day07.
@@ -37,7 +42,7 @@ public class Day07 implements Days {
     Day07(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.IN_PROGRESS);
+        this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
 
         this.instructions = fileReaders.readFileIntoStringList(FILE_LOCATION);
 
@@ -65,10 +70,10 @@ public class Day07 implements Days {
     }
 
     /**
-     * Primary Method for Day 7, Part 1 and helper for Part 2.
+     * Primary Method for Day 7, Part 1.
      * <p>
      * Determines the order, in which the instructions should be completed.
-     * For this purpose {@link Day07#stepHashMap} is copied. The new HashMap is
+     * For this purpose {@link #stepHashMap} is copied. The new HashMap is
      * scanned for all {@link Step}s that have no previous steps in them. These
      * are added to an ArrayList which then gets sorted alphabetically. The first
      * item is the current step, which gets added to the output. Subsequently, this
@@ -79,35 +84,97 @@ public class Day07 implements Days {
      * @return the ordered String of instructions
      */
     private String determineOrder() {
-        List<Character> availableSteps = new ArrayList<>();
+        List<Character> availableStepsIds = new ArrayList<>();
         Map<Character, Step> steps = getCopyOfStepHashMap();
         StringBuilder order = new StringBuilder();
 
         while (!steps.isEmpty()) {
             steps.forEach((id, step) -> {
-                if (!step.hasPrevious() && !availableSteps.contains(id)) {
-                    availableSteps.add(id);
+                if (!step.hasPrevious() && !availableStepsIds.contains(id)) {
+                    availableStepsIds.add(id);
                 }
             });
 
-            Collections.sort(availableSteps);
-            Character currentStep = availableSteps.get(0);
-            order.append(currentStep);
+            Collections.sort(availableStepsIds);
+            Character currentStepId = availableStepsIds.get(0);
+            order.append(currentStepId);
 
-            steps.forEach((id, step) -> step.removePrevious(currentStep));
-            steps.remove(currentStep);
-            availableSteps.remove(currentStep);
+            steps.forEach((id, step) -> step.removePrevious(currentStepId));
+            steps.remove(currentStepId);
+            availableStepsIds.remove(currentStepId);
         }
 
         return order.toString();
     }
 
+    /**
+     * Primary method for Day 7, Part 2.
+     * <p>
+     * Determines the time it takes to complete all tasks with the number of workers given in {@link #workers}.
+     * For this purpose, {@link #stepHashMap} is copied. In a while loop, first the available steps are determined.
+     * Secondly, each available step is given to a worker, if one is available. The time it takes for the step to
+     * be completed is calculated in this step and stored with the respective ID. In the third step, the time left
+     * is reduced. If there is just one second left, the step is removed from the map of Steps, from the list of
+     * previous steps in each other step and from the list of steps in progress. Lastly the time taken is increased
+     * by 1. If there are no more steps left, the while loop ends and the total time taken is returned.
+     *
+     * @return time it takes to complete all the tasks
+     */
     private int determineTime() {
-        return 0;
+        Map<Character, Step> steps = getCopyOfStepHashMap();
+        int availableWorkers = workers;
+
+        List<Character> availableSteps = new ArrayList<>();
+        Map<Character, Integer> stepsInProgress = new HashMap<>();
+
+        int timeTaken = 0;
+
+        while (!steps.isEmpty()) {
+            steps.forEach((id, step) -> {
+                if (!(step.hasPrevious() || availableSteps.contains(id) || stepsInProgress.containsKey(id))) {
+                    availableSteps.add(id);
+                }
+            });
+
+            List<Character> stepsToRemoveFromAvailable = new ArrayList<>();
+            for (Character id : availableSteps) {
+                if (availableWorkers > 0) {
+                    int timeForThisId = id - DIFFERENCE_BETWEEN_CHAR_AND_SECONDS;
+                    int timeToFinish = minTimePerTask + timeForThisId;
+
+                    stepsInProgress.put(id, timeToFinish);
+                    availableWorkers--;
+
+                    stepsToRemoveFromAvailable.add(id);
+                }
+            }
+            availableSteps.removeAll(stepsToRemoveFromAvailable);
+
+            List<Character> stepsToRemoveFromInProgress = new ArrayList<>();
+            for (Map.Entry<Character, Integer> stepInProgress : stepsInProgress.entrySet()) {
+                int timeLeft = stepInProgress.getValue();
+                char currentStepId = stepInProgress.getKey();
+
+                if (timeLeft > 1) {
+                    --timeLeft;
+                    stepInProgress.setValue(timeLeft);
+                } else {
+                    steps.remove(currentStepId);
+                    steps.forEach((id, step) -> step.removePrevious(currentStepId));
+                    stepsToRemoveFromInProgress.add(currentStepId);
+                    availableWorkers++;
+                }
+            }
+            stepsInProgress.keySet().removeAll(stepsToRemoveFromInProgress);
+
+            timeTaken++;
+        }
+
+        return timeTaken;
     }
 
     /**
-     * Parses the {@link Day07#instructions} to create {@link Step}s and add previous IDs.
+     * Parses the {@link #instructions} to create {@link Step}s and add previous IDs.
      */
     private void parseSteps() {
         for (String instruction : instructions) {
@@ -125,9 +192,9 @@ public class Day07 implements Days {
     }
 
     /**
-     * Creates and returns a deep copy of the {@link Day07#stepHashMap}
+     * Creates and returns a deep copy of the {@link #stepHashMap}
      *
-     * @return a copy of the {@link Day07#stepHashMap}
+     * @return a copy of the {@link #stepHashMap}
      */
     private HashMap<Character, Step> getCopyOfStepHashMap() {
         HashMap<Character, Step> copyOfStepHashMap = new HashMap<>();
