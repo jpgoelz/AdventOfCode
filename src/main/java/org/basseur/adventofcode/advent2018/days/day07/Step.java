@@ -40,7 +40,7 @@ public class Step {
     /**
      * Returns {@code true} if this step has previous steps
      *
-     * @return {@code true} if this Step has previous steps, {@code false} otherwise
+     * @return {@code true} if this Step has previous steps, {@code false} otherwise.
      */
     public boolean hasPrevious() {
         return previousSteps.size() > 0;
