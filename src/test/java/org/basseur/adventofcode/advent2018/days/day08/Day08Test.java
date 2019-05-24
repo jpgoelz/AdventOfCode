@@ -4,7 +4,6 @@ import org.basseur.adventofcode.advent2018.days.Days;
 import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -41,10 +40,9 @@ public class Day08Test {
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Ignore
     @Test
     public void secondPart() {
-        String expectedResult = "Part 2 - ";
+        String expectedResult = "Part 2 - The value of the root node is: 66";
         String actualResult = day08.secondPart();
 
         Assert.assertEquals(expectedResult, actualResult);
