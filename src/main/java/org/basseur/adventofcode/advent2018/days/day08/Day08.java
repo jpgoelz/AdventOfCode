@@ -6,7 +6,6 @@ import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -25,9 +24,13 @@ public class Day08 implements Days {
     /** The string of nodes */
     private final Integer[] treeData;
 
+    /** The main node */
+    private Node mainNode;
+
     /**
      * Constructor of Day08.
      * Causes the input file to be stored in the {@link #treeData} array.
+     * Then creates the main node which recursively creates all its child nodes.
      *
      * @param fileReaders {@code @Autowired} fileReader
      */
@@ -35,9 +38,11 @@ public class Day08 implements Days {
     Day08(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
 
         this.treeData = fileReaders.readFileIntoArrayOfIntegers(FILE_LOCATION);
+
+        mainNode = new Node(treeData);
     }
 
     @Override
@@ -47,63 +52,16 @@ public class Day08 implements Days {
 
     @Override
     public String firstPart() {
-        return "Part 1 - Sum of all metadata entries: " + getSumAndLengthOfNodes(treeData).sum;
+        return "Part 1 - Sum of all metadata entries: " + mainNode.getSumOfMetadata();
     }
 
     @Override
     public String secondPart() {
-        return "Part 2 - ";
+        return "Part 2 - The value of the root node is: " + mainNode.getNodeValue();
     }
 
     @Override
     public HashMap<String, ProblemStatusEnum> getProblemStatus() {
         return problemStatus;
-    }
-
-    /**
-     * Primary method for Day 8, Part 1.
-     * <p>
-     * It calculates the sum of all metadata entries. For this purpose in a while loop all sub nodes are processed
-     * recursively. If there is no sub node left to process, the metadata is calculated and added to the sum returned
-     * from the sub nodes. The length of the nodes is tracked to know, where the next sub node starts.
-     *
-     * @param nodes an array of integers that represent a tree data structure
-     * @return a result object containing the sum of all metadata entries and the length of the node
-     */
-    private Result getSumAndLengthOfNodes(Integer[] nodes) {
-        final int headerLength = 2;
-
-        int amountOfUnprocessedSubNodes = nodes[0];
-        int metadataLength = nodes[1];
-
-        Result result = new Result();
-        result.length = headerLength + metadataLength;
-
-        int currentSubNodeStart = headerLength;
-
-        while (amountOfUnprocessedSubNodes > 0) {
-            Result resultOfSubNode = getSumAndLengthOfNodes(Arrays.copyOfRange(nodes, currentSubNodeStart, nodes.length));
-
-            result.sum += resultOfSubNode.sum;
-            result.length += resultOfSubNode.length;
-
-            currentSubNodeStart += resultOfSubNode.length;
-
-            amountOfUnprocessedSubNodes--;
-        }
-
-        int metadataStart = currentSubNodeStart;
-
-        for (int i = 0; i < metadataLength; i++) {
-            result.sum += nodes[metadataStart + i];
-        }
-
-        return result;
-    }
-
-    /** A POJO (plain old java object) class to return the length and sum of a sub node. */
-    private class Result {
-        int sum = 0;
-        int length = 0;
     }
 }
