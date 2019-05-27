@@ -6,7 +6,12 @@ import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Implementation for <i>Day 9: Marble Mania</i>.
@@ -33,7 +38,7 @@ public class Day09 implements Days {
     @Autowired
     Day09(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
-        this.problemStatus.put("1", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
 
         this.marbleGameString = String.join("", fileReaders.readFileIntoStringList(FILE_LOCATION));
@@ -63,10 +68,65 @@ public class Day09 implements Days {
      * Primary method for Day 5, Part 1.
      * <p>
      *
+     *
      * @return the score of the winning Elf
      */
     private int calculateScore() {
-        return 0;
+        int players = 0;
+        int finalMarble = 0;
+
+        List<Integer> playerPoints = new ArrayList<>();
+        List<Integer> circleOfMarbles = new ArrayList<>();
+
+        Matcher matcher = Pattern.compile("(\\d+) players; last marble is worth (\\d+) points").matcher(marbleGameString);
+        if (matcher.find()) {
+            players = Integer.parseInt(matcher.group(1));
+            finalMarble = Integer.parseInt(matcher.group(2));
+        }
+
+        // Initialize all players
+        for (int i = 0; i < players; i++) {
+            playerPoints.add(0);
+        }
+
+        int currentPlayer = 0;
+        int lastPosition = 0;
+        circleOfMarbles.add(0);
+        for (int marble = 1; marble <= finalMarble; marble++) {
+            int nextPosition;
+
+            if (marble % 23 != 0) {
+                nextPosition = lastPosition + 2;
+
+                if (nextPosition > circleOfMarbles.size()) {
+                    nextPosition = nextPosition - circleOfMarbles.size();
+                }
+
+                circleOfMarbles.add(nextPosition, marble);
+
+                lastPosition = nextPosition;
+            } else {
+                playerPoints.set(currentPlayer, playerPoints.get(currentPlayer) + marble);
+                nextPosition = lastPosition - 7;
+
+                if (nextPosition < 0) {
+                    nextPosition = nextPosition + circleOfMarbles.size();
+                }
+
+                playerPoints.set(currentPlayer, playerPoints.get(currentPlayer) + circleOfMarbles.get(nextPosition));
+                circleOfMarbles.remove(nextPosition);
+
+                lastPosition = nextPosition;
+            }
+
+            currentPlayer++;
+            if (currentPlayer == players) {
+                currentPlayer = 0;
+            }
+
+        }
+
+        return Collections.max(playerPoints);
     }
 
     /**
