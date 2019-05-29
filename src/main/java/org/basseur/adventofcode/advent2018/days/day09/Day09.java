@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -39,7 +39,7 @@ public class Day09 implements Days {
     Day09(FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
-        this.problemStatus.put("2", ProblemStatusEnum.UNSOLVED);
+        this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
 
         this.marbleGameString = String.join("", fileReaders.readFileIntoStringList(FILE_LOCATION));
     }
@@ -51,12 +51,20 @@ public class Day09 implements Days {
 
     @Override
     public String firstPart() {
-        return "Part 1 - The winning Elf's score: " + calculateScore();
+        long start = System.currentTimeMillis();
+        long score = calculateScore(1);
+        long end = System.currentTimeMillis();
+        System.out.println("Duration: " + (end - start) + " ms");
+        return "Part 1 - The winning Elf's score: " + score;
     }
 
     @Override
     public String secondPart() {
-        return "Part 2 - : " + primaryForPartTwo();
+        long start = System.currentTimeMillis();
+        long score = calculateScore(100);
+        long end = System.currentTimeMillis();
+        System.out.println("Duration: " + (end - start) + " ms");
+        return "Part 2 - The winning Elf's score: " + score;
     }
 
     @Override
@@ -65,77 +73,70 @@ public class Day09 implements Days {
     }
 
     /**
-     * Primary method for Day 5, Part 1.
+     * Primary method for Day 5, both parts.
      * <p>
+     * Adds all the marbles to the circle, increasing the position by 2.
+     * Every 23rd marble is not added to the circle but to the player on turns score.
+     * At the same time the marble 7 positions before the last addition is added to
+     * the score as well and removed from the circle.
      *
-     *
+     * @param factor factor by which the number of marbles is multiplied
      * @return the score of the winning Elf
      */
-    private int calculateScore() {
+    private Long calculateScore(int factor) {
+
         int players = 0;
         int finalMarble = 0;
-
-        List<Integer> playerPoints = new ArrayList<>();
         List<Integer> circleOfMarbles = new ArrayList<>();
 
         Matcher matcher = Pattern.compile("(\\d+) players; last marble is worth (\\d+) points").matcher(marbleGameString);
         if (matcher.find()) {
             players = Integer.parseInt(matcher.group(1));
-            finalMarble = Integer.parseInt(matcher.group(2));
+            finalMarble = Integer.parseInt(matcher.group(2)) * factor;
         }
 
-        // Initialize all players
-        for (int i = 0; i < players; i++) {
-            playerPoints.add(0);
-        }
+        int[] playerPoints = new int[players];
 
         int currentPlayer = 0;
         int lastPosition = 0;
         circleOfMarbles.add(0);
         for (int marble = 1; marble <= finalMarble; marble++) {
-            int nextPosition;
+
+            int circleSize = circleOfMarbles.size();
+            int position;
 
             if (marble % 23 != 0) {
-                nextPosition = lastPosition + 2;
 
-                if (nextPosition > circleOfMarbles.size()) {
-                    nextPosition = nextPosition - circleOfMarbles.size();
+                position = lastPosition + 2;
+
+                if (position > circleSize) {
+                    position -= circleSize;
                 }
 
-                circleOfMarbles.add(nextPosition, marble);
+                circleOfMarbles.add(position, marble);
 
-                lastPosition = nextPosition;
             } else {
-                playerPoints.set(currentPlayer, playerPoints.get(currentPlayer) + marble);
-                nextPosition = lastPosition - 7;
 
-                if (nextPosition < 0) {
-                    nextPosition = nextPosition + circleOfMarbles.size();
+                position = lastPosition - 7;
+
+                if (position < 0) {
+                    position += circleSize;
                 }
 
-                playerPoints.set(currentPlayer, playerPoints.get(currentPlayer) + circleOfMarbles.get(nextPosition));
-                circleOfMarbles.remove(nextPosition);
+                playerPoints[currentPlayer] += marble + circleOfMarbles.remove(position);
 
-                lastPosition = nextPosition;
             }
+
+            lastPosition = position;
 
             currentPlayer++;
             if (currentPlayer == players) {
                 currentPlayer = 0;
             }
-
         }
 
-        return Collections.max(playerPoints);
-    }
+        Arrays.sort(playerPoints);
 
-    /**
-     * Primary method for Day 5, Part 2.
-     * <p>
-     *
-     * @return unknown
-     */
-    private int primaryForPartTwo() {
-        return 0;
+        return (long) playerPoints[playerPoints.length - 1];
     }
 }
