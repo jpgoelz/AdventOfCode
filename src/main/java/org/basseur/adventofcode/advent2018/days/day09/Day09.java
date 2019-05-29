@@ -51,19 +51,19 @@ public class Day09 implements Days {
 
     @Override
     public String firstPart() {
-        long start = System.currentTimeMillis();
+//        long start = System.currentTimeMillis();
         long score = calculateScore(1);
-        long end = System.currentTimeMillis();
-        System.out.println("Duration: " + (end - start) + " ms");
+//        long end = System.currentTimeMillis();
+//        System.out.println("Duration: " + (end - start) + " ms");
         return "Part 1 - The winning Elf's score: " + score;
     }
 
     @Override
     public String secondPart() {
-        long start = System.currentTimeMillis();
+//        long start = System.currentTimeMillis();
         long score = calculateScore(100);
-        long end = System.currentTimeMillis();
-        System.out.println("Duration: " + (end - start) + " ms");
+//        long end = System.currentTimeMillis();
+//        System.out.println("Duration: " + (end - start) + " ms");
         return "Part 2 - The winning Elf's score: " + score;
     }
 
