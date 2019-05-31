@@ -6,10 +6,7 @@ import org.basseur.adventofcode.advent2018.utils.FileReaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,20 +48,12 @@ public class Day09 implements Days {
 
     @Override
     public String firstPart() {
-//        long start = System.currentTimeMillis();
-        long score = calculateScore(1);
-//        long end = System.currentTimeMillis();
-//        System.out.println("Duration: " + (end - start) + " ms");
-        return "Part 1 - The winning Elf's score: " + score;
+        return "Part 1 - The winning Elf's score: " + calculateScore(1);
     }
 
     @Override
     public String secondPart() {
-//        long start = System.currentTimeMillis();
-        long score = calculateScore(100);
-//        long end = System.currentTimeMillis();
-//        System.out.println("Duration: " + (end - start) + " ms");
-        return "Part 2 - The winning Elf's score: " + score;
+        return "Part 2 - The winning Elf's score: " + calculateScore(100);
     }
 
     @Override
@@ -75,68 +64,51 @@ public class Day09 implements Days {
     /**
      * Primary method for Day 5, both parts.
      * <p>
-     * Adds all the marbles to the circle, increasing the position by 2.
-     * Every 23rd marble is not added to the circle but to the player on turns score.
-     * At the same time the marble 7 positions before the last addition is added to
-     * the score as well and removed from the circle.
+     * Calculates the winning elf's points using a circular deque. This allows to rotate the circle clockwise
+     * or counterclockwise and perform an action on the current position.
+     * <p>
+     * First, the input String is parsed to get the number of players and the last marble.
+     * Second, all the marbles are added to the circle rotating two steps clockwise first each step.
+     * Every 23rd marble, however, the circle is rotatet by seven steps counterclockwise. The marble on that position
+     * is added to the players score as well as the current marble, which is not added to the circle.
+     * Finally, the highest player score is determined and returned.
      *
      * @param factor factor by which the number of marbles is multiplied
-     * @return the score of the winning Elf
+     * @return the highest player score
      */
-    private Long calculateScore(int factor) {
+    private long calculateScore(int factor) {
 
         int players = 0;
-        int finalMarble = 0;
-        List<Integer> circleOfMarbles = new ArrayList<>();
+        int lastMarble = 0;
+        long[] playerScores;
+        long playerScoresMax = 0;
+        CircleDeque<Integer> marbleCircle = new CircleDeque<>();
 
         Matcher matcher = Pattern.compile("(\\d+) players; last marble is worth (\\d+) points").matcher(marbleGameString);
         if (matcher.find()) {
             players = Integer.parseInt(matcher.group(1));
-            finalMarble = Integer.parseInt(matcher.group(2)) * factor;
+            lastMarble = Integer.parseInt(matcher.group(2)) * factor;
+
         }
 
-        int[] playerPoints = new int[players];
+        playerScores = new long[players];
 
-        int currentPlayer = 0;
-        int lastPosition = 0;
-        circleOfMarbles.add(0);
-        for (int marble = 1; marble <= finalMarble; marble++) {
-
-            int circleSize = circleOfMarbles.size();
-            int position;
-
-            if (marble % 23 != 0) {
-
-                position = lastPosition + 2;
-
-                if (position > circleSize) {
-                    position -= circleSize;
-                }
-
-                circleOfMarbles.add(position, marble);
-
+        for (int marble = 0; marble <= lastMarble; marble++) {
+            if (marble % 23 != 0 || marble == 0) {
+                marbleCircle.rotate(2);
+                marbleCircle.add(marble);
             } else {
-
-                position = lastPosition - 7;
-
-                if (position < 0) {
-                    position += circleSize;
-                }
-
-                playerPoints[currentPlayer] += marble + circleOfMarbles.remove(position);
-
-            }
-
-            lastPosition = position;
-
-            currentPlayer++;
-            if (currentPlayer == players) {
-                currentPlayer = 0;
+                marbleCircle.rotate(-7);
+                playerScores[marble % players] += marble + marbleCircle.removeLast();
             }
         }
 
-        Arrays.sort(playerPoints);
+        for (long playerScore : playerScores) {
+            if (playerScore > playerScoresMax) {
+                playerScoresMax = playerScore;
+            }
+        }
 
-        return (long) playerPoints[playerPoints.length - 1];
+        return playerScoresMax;
     }
 }
