@@ -29,10 +29,10 @@ public class Node {
         }
 
         metadata = new int[metadataLength];
+
         int metadataStart = getLength() - metadataLength;
-        for (int i = 0; i < metadataLength; i++) {
-            metadata[i] = nodes[i + metadataStart];
-        }
+
+        System.arraycopy(nodes, metadataStart, metadata, 0, metadataLength);
     }
 
     /**

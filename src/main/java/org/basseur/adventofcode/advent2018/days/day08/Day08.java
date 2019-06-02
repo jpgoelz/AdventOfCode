@@ -21,7 +21,7 @@ public class Day08 implements Days {
     /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 
-    /** The string of nodes */
+    /** The array of nodes */
     private final Integer[] treeData;
 
     /** The main node */
