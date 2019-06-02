@@ -6,7 +6,7 @@ public class Node {
     /** The length of the header the containing amount of child nodes and the length of metadata */
     private static final int headerLength = 2;
     /** The metadata of this node */
-    private int[] metadata;
+    private Integer[] metadata;
     /** The child nodes of this node */
     private Node[] childNodes;
 
@@ -28,11 +28,11 @@ public class Node {
             currentChildNodeStart += childNodes[i].getLength();
         }
 
-        metadata = new int[metadataLength];
+        metadata = new Integer[metadataLength];
+
         int metadataStart = getLength() - metadataLength;
-        for (int i = 0; i < metadataLength; i++) {
-            metadata[i] = nodes[i + metadataStart];
-        }
+
+        System.arraycopy(nodes, metadataStart, metadata, 0, metadataLength);
     }
 
     /**
