@@ -70,16 +70,25 @@ public class Day10Test {
 
     @Test
     public void firstPart() {
-        String expectedResult = "Part 1 - The message in the sky reads: Hi";
+
+        String expectedResult = "Part 1 - The message in the sky reads: " + System.lineSeparator() +
+                "▓░░░▓░░▓▓▓" + System.lineSeparator() +
+                "▓░░░▓░░░▓░" + System.lineSeparator() +
+                "▓░░░▓░░░▓░" + System.lineSeparator() +
+                "▓▓▓▓▓░░░▓░" + System.lineSeparator() +
+                "▓░░░▓░░░▓░" + System.lineSeparator() +
+                "▓░░░▓░░░▓░" + System.lineSeparator() +
+                "▓░░░▓░░░▓░" + System.lineSeparator() +
+                "▓░░░▓░░▓▓▓" + System.lineSeparator();
+
         String actualResult = day10.firstPart();
 
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Ignore("Not implemented yet.")
     @Test
     public void secondPart() {
-        String expectedResult = "Part 2";
+        String expectedResult = "Part 2 - Seconds, the elves would have needed to wait: 3";
         String actualResult = day10.secondPart();
 
         Assert.assertEquals(expectedResult, actualResult);
