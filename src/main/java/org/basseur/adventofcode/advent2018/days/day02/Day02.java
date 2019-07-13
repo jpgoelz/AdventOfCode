@@ -18,8 +18,7 @@ import java.util.List;
 public class Day02 implements Days {
 
     /** The location of the puzzle input file */
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day02/Input.txt";
-    /** A list containing all the box IDs */
+    private static final String FILE_LOCATION = "/puzzleInputs/Input02.txt";
     private final List<String> boxIds;
 
     /** The puzzle status {@code HashMap} */

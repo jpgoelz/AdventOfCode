@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class Day08 implements Days {
 
     /** The location of the puzzle input file */
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day08/Input.txt";
+    private static final String FILE_LOCATION = "/puzzleInputs/Input08.txt";
     /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 

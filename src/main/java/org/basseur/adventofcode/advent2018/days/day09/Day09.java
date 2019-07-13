@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class Day09 implements Days {
 
     /** The location of the puzzle input file */
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day09/Input.txt";
+    private static final String FILE_LOCATION = "/puzzleInputs/Input09.txt";
     /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
 
