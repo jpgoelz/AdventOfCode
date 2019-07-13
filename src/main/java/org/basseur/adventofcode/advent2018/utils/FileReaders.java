@@ -1,7 +1,5 @@
 package org.basseur.adventofcode.advent2018.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -17,9 +15,6 @@ import java.util.Scanner;
  */
 @Component
 public class FileReaders {
-
-    @Autowired
-    ResourceLoader resourceloader;
 
     /**
      * Parses the input file line by line into an array of {@code Integer}s and returns it.
