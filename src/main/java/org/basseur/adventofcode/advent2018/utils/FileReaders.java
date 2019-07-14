@@ -2,8 +2,7 @@ package org.basseur.adventofcode.advent2018.utils;
 
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +23,8 @@ public class FileReaders {
      * @return an array of integers
      */
     public Integer[] readFileIntoArrayOfIntegers(String filename) {
-        Scanner scanner = openFileReturnScanner(filename);
+        InputStream fileInputStream = FileReaders.class.getResourceAsStream(filename);
+        Scanner scanner = openFileReturnScanner(fileInputStream);
         List<Integer> integerList = new ArrayList<>();
         while (Objects.requireNonNull(scanner).hasNext()) {
             integerList.add(Integer.parseInt(scanner.next()));
@@ -40,7 +40,8 @@ public class FileReaders {
      * @return a {@code List} of {@code String}s
      */
     public List<String> readFileIntoStringList(String filename) {
-        Scanner scanner = openFileReturnScanner(filename);
+        InputStream fileInputStream = FileReaders.class.getResourceAsStream(filename);
+        Scanner scanner = openFileReturnScanner(fileInputStream);
         List<String> stringList = new ArrayList<>();
         while (Objects.requireNonNull(scanner).hasNextLine()) {
             stringList.add(scanner.nextLine());
@@ -53,16 +54,11 @@ public class FileReaders {
     /**
      * Opens a file and returns a {@code Scanner}.
      *
-     * @param filename path to the file
+     * @param fileInputStream path to the file
      * @return a {@code Scanner} of the input file
      */
-    private Scanner openFileReturnScanner(String filename) {
-        File file = new File(filename);
-        try {
-            return new Scanner(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found!", e);
-        }
+    private Scanner openFileReturnScanner(InputStream fileInputStream) {
+        return new Scanner(fileInputStream);
     }
 
 }
