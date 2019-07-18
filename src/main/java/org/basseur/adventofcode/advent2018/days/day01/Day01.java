@@ -20,7 +20,7 @@ import java.util.Set;
 public class Day01 implements Days {
 
     /** The location of the puzzle input file */
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day01/Input.txt";
+    private static final String FILE_LOCATION = "/puzzleInputs/Input01.txt";
     /** An array containing all the frequencies */
     private final Integer[] frequencies;
 
