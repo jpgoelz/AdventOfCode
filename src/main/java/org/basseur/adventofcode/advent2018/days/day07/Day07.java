@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class Day07 implements Days {
 
     /** The location of the puzzle input file */
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day07/Input.txt";
+    private static final String FILE_LOCATION = "/puzzleInputs/Input07.txt";
     /** The difference between the integer value of a char and seconds to finish a step, e.g. `(int)char 'A' = 65`, but A takes 1 extra second. */
     private static int DIFFERENCE_BETWEEN_CHAR_AND_SECONDS = 64;
     /** The puzzle status {@code HashMap} */
