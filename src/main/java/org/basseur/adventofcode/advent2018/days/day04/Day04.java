@@ -24,8 +24,7 @@ import java.util.stream.IntStream;
 public class Day04 implements Days {
 
     /** The location of the puzzle input file */
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day04/Input.txt";
-    /** A list containing all the guard records */
+    private static final String FILE_LOCATION = "/puzzleInputs/Input04.txt";
     private final List<String> guardRecords;
     /** A {@code Map} containing all the {@link Guard}s mapped to their IDs */
     private final Map<Integer, Guard> guardHashMap = new HashMap<>();
@@ -58,6 +57,11 @@ public class Day04 implements Days {
     }
 
     @Override
+    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
+        return problemStatus;
+    }
+
+    @Override
     public String firstPart() {
         return "Part 1 - The ID of the guard multiplied by the minute: " + idMultipliedByMinute(1);
     }
@@ -65,11 +69,6 @@ public class Day04 implements Days {
     @Override
     public String secondPart() {
         return "Part 2 - The ID of the guard multiplied by the minute: " + idMultipliedByMinute(2);
-    }
-
-    @Override
-    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
-        return problemStatus;
     }
 
     /**

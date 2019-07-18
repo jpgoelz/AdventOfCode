@@ -20,8 +20,7 @@ import java.util.List;
 public class Day05 implements Days {
 
     /** The location of the puzzle input file */
-    private static final String FILE_LOCATION = "src/main/java/org/basseur/adventofcode/advent2018/days/day05/Input.txt";
-    /** The puzzle status {@code HashMap} */
+    private static final String FILE_LOCATION = "/puzzleInputs/Input05.txt";
     private final HashMap<String, ProblemStatusEnum> problemStatus;
     /** The polymer string */
     private final String polymerString;
@@ -47,6 +46,11 @@ public class Day05 implements Days {
     }
 
     @Override
+    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
+        return problemStatus;
+    }
+
+    @Override
     public String firstPart() {
         return "Part 1 - Length of remaining polymer: " + unitsRemaining(polymerString);
     }
@@ -56,17 +60,12 @@ public class Day05 implements Days {
         return "Part 2 - Length of the shortest polymer: " + shortestPossiblePolymer();
     }
 
-    @Override
-    public HashMap<String, ProblemStatusEnum> getProblemStatus() {
-        return problemStatus;
-    }
-
     /**
      * Primary method for Day 5, Part 1 and helper method for Part 2.
      * <p>
      * Finds and returns the number of units remaining after fully reacting the polymer.
-     * For this each letter combination of <i>aA</i> and <i>Aa</i> is removed. Removal
-     * results in a shorter string. In that case the for-loop is reset to {@code 'A'-1},
+     * For this purpose each letter combination of e.g. <i>aA</i> and <i>Aa</i> is removed.
+     * Removal results in a shorter string. In that case the for-loop is reset to {@code 'A'-1},
      * because it will get incremented to {@code 'A'} by the loop. If no letters have
      * been removed, {@code replaced} stays at {@code false} and the length of the String
      * can be returned.
@@ -79,11 +78,11 @@ public class Day05 implements Days {
         boolean replaced = true;
 
         while (replaced)
-            for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
+            for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
                 int initialLength = resultingPolymerString.length();
 
-                String upperLower = alphabet + Character.toString(alphabet).toLowerCase();
-                String lowerUpper = Character.toString(alphabet).toLowerCase() + alphabet;
+                String lowerUpper = alphabet + Character.toString(alphabet).toUpperCase();
+                String upperLower = Character.toString(alphabet).toUpperCase() + alphabet;
 
                 resultingPolymerString = resultingPolymerString.replaceAll(upperLower, "");
                 resultingPolymerString = resultingPolymerString.replaceAll(lowerUpper, "");
@@ -92,7 +91,7 @@ public class Day05 implements Days {
                     replaced = false;
                 } else {
                     replaced = true;
-                    alphabet = 'A' - 1;
+                    alphabet = 'a' - 1;
                 }
             }
         return resultingPolymerString.length();
