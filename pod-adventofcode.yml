@@ -9,4 +9,5 @@ spec:
     - name: adventofcode
       image: mfbieber/adventofcode
       ports:
-        - containerPort: 8080
+        - name: aoc-port
+          containerPort: 8080
