@@ -16,8 +16,7 @@ const styles = {
     maxWidth: 300,
     minHeight: 300,
     margin: 10,
-    position: "relative",
-    backgroundColor: "#ec507f"
+    position: "relative"
   },
   actions: {
     position: "absolute",
