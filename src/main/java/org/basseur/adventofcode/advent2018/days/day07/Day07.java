@@ -169,7 +169,7 @@ public class Day07 implements Days {
                     availableWorkers++;
                 }
             }
-            stepsInProgress.keySet().removeAll(stepsToRemoveFromInProgress);
+            stepsToRemoveFromInProgress.forEach(stepsInProgress.keySet()::remove);
 
             timeTaken++;
         }
