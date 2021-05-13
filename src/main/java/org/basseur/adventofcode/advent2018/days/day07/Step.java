@@ -6,7 +6,7 @@ public class Step {
     /** Letter of this step */
     public final char id;
     /** List of previous steps */
-    private ArrayList<Character> previousSteps = new ArrayList<>();
+    private final ArrayList<Character> previousSteps = new ArrayList<>();
 
     /**
      * Constructs Step with id.
