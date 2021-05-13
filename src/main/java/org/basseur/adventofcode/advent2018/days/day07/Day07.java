@@ -20,21 +20,27 @@ public class Day07 implements Days {
 
     /** The location of the puzzle input file */
     private static final String FILE_LOCATION = "/puzzleInputs/Input07.txt";
+
     /**
      * The difference between the integer value of a char and seconds to finish a step, e.g. `(int)char 'A' = 65`, but A
      * takes 1 extra second.
      */
-    private static int DIFFERENCE_BETWEEN_CHAR_AND_SECONDS = 64;
+    private static final int DIFFERENCE_BETWEEN_CHAR_AND_SECONDS = 64;
+
     /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
+
     /** A list containing the instructions */
     private final List<String> instructions;
+
     /** A {@code Map} containing all the {@link Step}s mapped to their IDs */
-    private Map<Character, Step> stepsMap = new HashMap<>();
+    private final Map<Character, Step> stepsMap = new HashMap<>();
+
     /** Number of available Workers in Part 2 */
-    private int workers = 5;
+    private final int workers = 5;
+
     /** Minimum time per Task */
-    private int minTimePerTask = 60;
+    private final int minTimePerTask = 60;
 
     /**
      * Constructor for Day07.
