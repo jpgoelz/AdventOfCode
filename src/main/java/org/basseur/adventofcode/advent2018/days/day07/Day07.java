@@ -48,7 +48,7 @@ public class Day07 implements Days {
      * @param fileReaders {@code @Autowired} fileReader
      */
     @Autowired
-    Day07(FileReaders fileReaders) {
+    Day07(final FileReaders fileReaders) {
         this.problemStatus = new HashMap<>();
         this.problemStatus.put("1", ProblemStatusEnum.SOLVED);
         this.problemStatus.put("2", ProblemStatusEnum.SOLVED);
@@ -90,9 +90,9 @@ public class Day07 implements Days {
      * @return the ordered String of instructions
      */
     private String determineOrder() {
-        List<Character> availableStepsIds = new ArrayList<>();
-        List<Step> steps = getLocalCopyOfStepsMapAsArrayList();
-        StringBuilder order = new StringBuilder();
+        final List<Character> availableStepsIds = new ArrayList<>();
+        final List<Step> steps = getLocalCopyOfStepsMapAsArrayList();
+        final StringBuilder order = new StringBuilder();
 
         while (!steps.isEmpty()) {
             steps.forEach((step) -> {
@@ -102,7 +102,7 @@ public class Day07 implements Days {
             });
 
             Collections.sort(availableStepsIds);
-            Character currentStepId = availableStepsIds.get(0);
+            final Character currentStepId = availableStepsIds.get(0);
             order.append(currentStepId);
 
             removeStepFromListAndPreviousSteps(steps, currentStepId);
@@ -126,11 +126,11 @@ public class Day07 implements Days {
      * @return time it takes to complete all the tasks
      */
     private int determineTime() {
-        List<Step> steps = getLocalCopyOfStepsMapAsArrayList();
+        final List<Step> steps = getLocalCopyOfStepsMapAsArrayList();
         int availableWorkers = workers;
 
-        List<Character> availableSteps = new ArrayList<>();
-        Map<Character, Integer> stepsInProgress = new HashMap<>();
+        final List<Character> availableSteps = new ArrayList<>();
+        final Map<Character, Integer> stepsInProgress = new HashMap<>();
 
         int timeTaken = 0;
 
@@ -141,11 +141,11 @@ public class Day07 implements Days {
                 }
             });
 
-            List<Character> stepsToRemoveFromAvailable = new ArrayList<>();
-            for (Character id : availableSteps) {
+            final List<Character> stepsToRemoveFromAvailable = new ArrayList<>();
+            for (final Character id : availableSteps) {
                 if (availableWorkers > 0) {
-                    int timeForThisId = id - DIFFERENCE_BETWEEN_CHAR_AND_SECONDS;
-                    int timeToFinish = minTimePerTask + timeForThisId;
+                    final int timeForThisId = id - DIFFERENCE_BETWEEN_CHAR_AND_SECONDS;
+                    final int timeToFinish = minTimePerTask + timeForThisId;
 
                     stepsInProgress.put(id, timeToFinish);
                     availableWorkers--;
@@ -155,10 +155,10 @@ public class Day07 implements Days {
             }
             availableSteps.removeAll(stepsToRemoveFromAvailable);
 
-            List<Character> stepsToRemoveFromInProgress = new ArrayList<>();
-            for (Map.Entry<Character, Integer> stepInProgress : stepsInProgress.entrySet()) {
+            final List<Character> stepsToRemoveFromInProgress = new ArrayList<>();
+            for (final Map.Entry<Character, Integer> stepInProgress : stepsInProgress.entrySet()) {
                 int timeLeft = stepInProgress.getValue();
-                char currentStepId = stepInProgress.getKey();
+                final char currentStepId = stepInProgress.getKey();
 
                 if (timeLeft > 1) {
                     --timeLeft;
@@ -181,12 +181,12 @@ public class Day07 implements Days {
      * Parses the {@link #instructions} to create {@link Step}s and add previous IDs.
      */
     private void parseSteps() {
-        for (String instruction : instructions) {
-            Matcher matcher = Pattern.compile("Step (\\w) must be finished before step (\\w) can begin\\.").matcher(instruction);
+        for (final String instruction : instructions) {
+            final Matcher matcher = Pattern.compile("Step (\\w) must be finished before step (\\w) can begin\\.").matcher(instruction);
 
             if (matcher.find()) {
-                char firstId = matcher.group(1).charAt(0);
-                char secondId = matcher.group(2).charAt(0);
+                final char firstId = matcher.group(1).charAt(0);
+                final char secondId = matcher.group(2).charAt(0);
 
                 stepsMap.putIfAbsent(firstId, new Step(firstId));
                 stepsMap.putIfAbsent(secondId, new Step(secondId));
@@ -214,9 +214,9 @@ public class Day07 implements Days {
      * @param stepsList list of Steps to remove from
      * @param currentStepId ID of step to remove
      */
-    private void removeStepFromListAndPreviousSteps(List<Step> stepsList, char currentStepId) {
-        for (Iterator<Step> steps = stepsList.iterator(); steps.hasNext(); ) {
-            Step step = steps.next();
+    private void removeStepFromListAndPreviousSteps(final List<Step> stepsList, final char currentStepId) {
+        for (final Iterator<Step> steps = stepsList.iterator(); steps.hasNext(); ) {
+            final Step step = steps.next();
             step.removePrevious(currentStepId);
             if (step.id == currentStepId) {
                 steps.remove();
