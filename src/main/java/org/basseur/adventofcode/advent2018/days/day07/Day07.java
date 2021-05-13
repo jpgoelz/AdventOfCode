@@ -20,7 +20,10 @@ public class Day07 implements Days {
 
     /** The location of the puzzle input file */
     private static final String FILE_LOCATION = "/puzzleInputs/Input07.txt";
-    /** The difference between the integer value of a char and seconds to finish a step, e.g. `(int)char 'A' = 65`, but A takes 1 extra second. */
+    /**
+     * The difference between the integer value of a char and seconds to finish a step, e.g. `(int)char 'A' = 65`, but A
+     * takes 1 extra second.
+     */
     private static int DIFFERENCE_BETWEEN_CHAR_AND_SECONDS = 64;
     /** The puzzle status {@code HashMap} */
     private final HashMap<String, ProblemStatusEnum> problemStatus;
@@ -72,14 +75,11 @@ public class Day07 implements Days {
     /**
      * Primary Method for Day 7, Part 1.
      * <p>
-     * Determines the order, in which the instructions should be completed.
-     * For this purpose {@link #stepsMap} is copied into a list. The new HashMap is
-     * scanned for all {@link Step}s that have no previous steps in them. These
-     * are added to an ArrayList which then gets sorted alphabetically. The first
-     * item is the current step, which gets added to the output. Subsequently, this
-     * step gets removed from all {@link Step#previousSteps} and from the HashMap,
-     * as well as from the available Steps. This process gets repeated until the
-     * HashMap is empty.
+     * Determines the order, in which the instructions should be completed. For this purpose {@link #stepsMap} is copied
+     * into a list. The new HashMap is scanned for all {@link Step}s that have no previous steps in them. These are
+     * added to an ArrayList which then gets sorted alphabetically. The first item is the current step, which gets added
+     * to the output. Subsequently, this step gets removed from all previous steps and from the HashMap, as well as from
+     * the available Steps. This process gets repeated until the HashMap is empty.
      *
      * @return the ordered String of instructions
      */
@@ -109,13 +109,13 @@ public class Day07 implements Days {
     /**
      * Primary method for Day 7, Part 2.
      * <p>
-     * Determines the time it takes to complete all tasks with the number of workers given in {@link #workers}.
-     * For this purpose, {@link #stepsMap} is copied into a list. In a while loop, first the available steps are determined.
-     * Secondly, each available step is given to a worker, if one is available. The time it takes for the step to
-     * be completed is calculated in this step and stored with the respective ID. In the third step, the time left
-     * is reduced. If there is just one second left, the step is removed from the map of Steps, from the list of
-     * previous steps in each other step and from the list of steps in progress. Lastly the time taken is increased
-     * by 1. If there are no more steps left, the while loop ends and the total time taken is returned.
+     * Determines the time it takes to complete all tasks with the number of workers given in {@link #workers}. For this
+     * purpose, {@link #stepsMap} is copied into a list. In a while loop, first the available steps are determined.
+     * Secondly, each available step is given to a worker, if one is available. The time it takes for the step to be
+     * completed is calculated in this step and stored with the respective ID. In the third step, the time left is
+     * reduced. If there is just one second left, the step is removed from the map of Steps, from the list of previous
+     * steps in each other step and from the list of steps in progress. Lastly the time taken is increased by 1. If
+     * there are no more steps left, the while loop ends and the total time taken is returned.
      *
      * @return time it takes to complete all the tasks
      */
