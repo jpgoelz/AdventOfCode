@@ -200,8 +200,8 @@ public class Day07 implements Days {
      *
      * @return a copy of the {@link #stepsMap} as an ArrayList.
      */
-    private ArrayList<Step> getLocalCopyOfStepsMapAsArrayList() {
-        ArrayList<Step> copyOfStepHashMap = new ArrayList<>();
+    private List<Step> getLocalCopyOfStepsMapAsArrayList() {
+        final List<Step> copyOfStepHashMap = new ArrayList<>();
 
         stepsMap.forEach((id, step) -> copyOfStepHashMap.add(new Step(step)));
 
